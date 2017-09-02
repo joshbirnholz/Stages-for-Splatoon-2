@@ -46,7 +46,6 @@
 		54712C501F549F8F004B9249 /* UpcomingStagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2D6301F532894001D585E /* UpcomingStagesViewController.swift */; };
 		54712C521F549F94004B9249 /* SalmonRunTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FBF13E1F53CB5000D3ABC3 /* SalmonRunTableViewController.swift */; };
 		54712C531F549F96004B9249 /* SalmonRunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */; };
-		54712C551F549F9A004B9249 /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 		54712C571F549F9F004B9249 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54F2D6351F532894001D585E /* Assets.xcassets */; };
 		54712C5C1F549FCE004B9249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54712C5A1F549FC6004B9249 /* Main.storyboard */; };
 		54712C5D1F54FD46004B9249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54712C5B1F549FC6004B9249 /* LaunchScreen.storyboard */; };
@@ -78,6 +77,7 @@
 		54C776FF1F570B0A002F06E0 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
 		54C777011F570B0B002F06E0 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
 		54F377C61F57D5200013776D /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
+		54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -211,6 +211,11 @@
 		54F2D6351F532894001D585E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54F2D63A1F532894001D585E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54F2D6681F5328A2001D585E /* Schedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Schedule.swift; sourceTree = "<group>"; };
+		54F377C91F5A61C20013776D /* widget-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "widget-1.png"; sourceTree = "<group>"; };
+		54F377CA1F5A61E40013776D /* phone-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone-1.png"; sourceTree = "<group>"; };
+		54F377CE1F5A62C70013776D /* watch-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch-1.png"; sourceTree = "<group>"; };
+		54F377CF1F5A62C70013776D /* watch-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "watch-2.png"; sourceTree = "<group>"; };
+		54F377D01F5A63010013776D /* phone-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone-2.png"; sourceTree = "<group>"; };
 		54FBF13C1F536FC000D3ABC3 /* CurrentStagesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentStagesTableViewController.swift; sourceTree = "<group>"; };
 		54FBF13E1F53CB5000D3ABC3 /* SalmonRunTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonRunTableViewController.swift; sourceTree = "<group>"; };
 		54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonRunCell.swift; sourceTree = "<group>"; };
@@ -356,6 +361,7 @@
 		54F2D6221F532893001D585E = {
 			isa = PBXGroup;
 			children = (
+				54F377C81F5A61A40013776D /* Misc */,
 				54F2D62D1F532894001D585E /* Splatoon 2 Stages */,
 				543E60631F5671C4007DA88D /* Shared */,
 				543E602D1F566FF6007DA88D /* Regular Battle Stages */,
@@ -399,6 +405,18 @@
 				54F2D63A1F532894001D585E /* Info.plist */,
 			);
 			path = "Splatoon 2 Stages";
+			sourceTree = "<group>";
+		};
+		54F377C81F5A61A40013776D /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				54F377CE1F5A62C70013776D /* watch-1.png */,
+				54F377CF1F5A62C70013776D /* watch-2.png */,
+				54F377CA1F5A61E40013776D /* phone-1.png */,
+				54F377C91F5A61C20013776D /* widget-1.png */,
+				54F377D01F5A63010013776D /* phone-2.png */,
+			);
+			path = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -743,8 +761,8 @@
 				543E60441F5670CE007DA88D /* WidgetStagesViewController.swift in Sources */,
 				543E60431F5670CE007DA88D /* StagesCell.swift in Sources */,
 				54712C4F1F549F8D004B9249 /* CurrentStagesTableViewController.swift in Sources */,
+				54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */,
 				54712C501F549F8F004B9249 /* UpcomingStagesViewController.swift in Sources */,
-				54712C551F549F9A004B9249 /* UIImage+Scaled.swift in Sources */,
 				54712C4D1F549F88004B9249 /* AppDelegate.swift in Sources */,
 				54712C521F549F94004B9249 /* SalmonRunTableViewController.swift in Sources */,
 				54712C4E1F549F8A004B9249 /* SplatoonTabBarController.swift in Sources */,

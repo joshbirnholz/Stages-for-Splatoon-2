@@ -81,7 +81,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 			return 0
 		}
 		
-		if runs.runs.count >= 2 {
+		if runs.runs.count > 2 {
 			extensionContext?.widgetLargestAvailableDisplayMode = .expanded
 		} else {
 			extensionContext?.widgetLargestAvailableDisplayMode = .compact
