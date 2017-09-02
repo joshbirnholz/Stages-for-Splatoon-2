@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ic6-7S-myZ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Splatoon2.ttf">
+            <string>Splatoon2</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Salmon Run-->
+        <scene sceneID="mas-L3-nMi">
+            <objects>
+                <tableViewController storyboardIdentifier="SalmonRun" id="ic6-7S-myZ" customClass="SalmonRunTableViewController" customModule="Salmon_Run_Schedule" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="0T6-xK-w8T">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SalmonRunCell" rowHeight="52" id="MLh-FT-3Tf" customClass="SalmonRunCell" customModule="Salmon_Run_Schedule" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MLh-FT-3Tf" id="paq-z2-Xwr">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mek-MF-wTi">
+                                            <rect key="frame" x="4" y="4" width="367" height="44"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8/26, 8:00 PM - 8/28, 2:00 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="DKQ-LG-AoZ">
+                                                    <rect key="frame" x="41" y="0.0" width="266" height="44"/>
+                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Salmon Tab Selected" translatesAutoresizingMaskIntoConstraints="NO" id="GO8-km-cdA">
+                                                    <rect key="frame" x="8" y="13.5" width="25" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="0V5-mD-ILl"/>
+                                                        <constraint firstAttribute="width" secondItem="GO8-km-cdA" secondAttribute="height" multiplier="22:15.23" id="S0F-KY-WUY"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="GO8-km-cdA" firstAttribute="leading" secondItem="Mek-MF-wTi" secondAttribute="leading" constant="8" id="334-7q-Z6H"/>
+                                                <constraint firstItem="DKQ-LG-AoZ" firstAttribute="leading" secondItem="GO8-km-cdA" secondAttribute="trailing" constant="8" id="3LK-rA-yJu"/>
+                                                <constraint firstAttribute="bottom" secondItem="DKQ-LG-AoZ" secondAttribute="bottom" id="NR9-nw-68b"/>
+                                                <constraint firstItem="GO8-km-cdA" firstAttribute="centerY" secondItem="Mek-MF-wTi" secondAttribute="centerY" id="boa-G0-fIT"/>
+                                                <constraint firstItem="DKQ-LG-AoZ" firstAttribute="top" secondItem="Mek-MF-wTi" secondAttribute="top" id="rW7-q0-LNd"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E17-sL-hPZ">
+                                            <rect key="frame" x="319" y="12" width="52" height="28"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="kTc-BQ-LXM">
+                                                    <rect key="frame" x="4" y="4" width="44" height="20"/>
+                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.98676377530000003" green="0.2715459905" blue="0.033880121110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="52" id="awl-6I-wuS"/>
+                                                <constraint firstItem="kTc-BQ-LXM" firstAttribute="top" secondItem="E17-sL-hPZ" secondAttribute="top" constant="4" id="fov-WL-vaX"/>
+                                                <constraint firstAttribute="trailing" secondItem="kTc-BQ-LXM" secondAttribute="trailing" constant="4" id="gbN-1n-pqh"/>
+                                                <constraint firstItem="kTc-BQ-LXM" firstAttribute="leading" secondItem="E17-sL-hPZ" secondAttribute="leading" constant="4" id="oog-z8-LwA"/>
+                                                <constraint firstAttribute="bottom" secondItem="kTc-BQ-LXM" secondAttribute="bottom" constant="4" id="ruD-kJ-vmt"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="E17-sL-hPZ" firstAttribute="top" secondItem="Mek-MF-wTi" secondAttribute="top" constant="8" id="Q2N-IQ-3UV"/>
+                                        <constraint firstAttribute="bottom" secondItem="Mek-MF-wTi" secondAttribute="bottom" constant="4" id="cOF-Xz-qfa"/>
+                                        <constraint firstAttribute="trailing" secondItem="Mek-MF-wTi" secondAttribute="trailing" constant="4" id="em2-Fs-bv5"/>
+                                        <constraint firstItem="Mek-MF-wTi" firstAttribute="top" secondItem="paq-z2-Xwr" secondAttribute="top" constant="4" id="i71-0g-bON"/>
+                                        <constraint firstItem="E17-sL-hPZ" firstAttribute="leading" secondItem="DKQ-LG-AoZ" secondAttribute="trailing" constant="8" id="k6X-Li-Dm7"/>
+                                        <constraint firstItem="E17-sL-hPZ" firstAttribute="bottom" secondItem="Mek-MF-wTi" secondAttribute="bottom" constant="-8" id="s0b-WV-ggc"/>
+                                        <constraint firstAttribute="trailing" secondItem="E17-sL-hPZ" secondAttribute="trailing" constant="4" id="wro-gE-8sC"/>
+                                        <constraint firstItem="Mek-MF-wTi" firstAttribute="leading" secondItem="paq-z2-Xwr" secondAttribute="leading" constant="4" id="wxZ-cH-TIC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="badgeLabel" destination="kTc-BQ-LXM" id="r8K-me-Ydd"/>
+                                    <outlet property="badgeView" destination="E17-sL-hPZ" id="lmK-9c-HLv"/>
+                                    <outlet property="bubbleView" destination="Mek-MF-wTi" id="uk1-TN-7IU"/>
+                                    <outlet property="timeLabel" destination="DKQ-LG-AoZ" id="dDg-rg-w9i"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="ic6-7S-myZ" id="JTZ-8l-Bqe"/>
+                            <outlet property="delegate" destination="ic6-7S-myZ" id="oie-t3-sh0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Salmon Run" largeTitleDisplayMode="always" id="TCY-z7-yJ2"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Heu-f4-m2e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245.5999999999999" y="106.59670164917542"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Salmon Tab Selected" width="30" height="21"/>
+    </resources>
+</document>

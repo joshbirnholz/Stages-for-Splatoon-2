@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Bbe-XU-Ww0">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Splatoon2.ttf">
+            <string>Splatoon2</string>
+        </array>
+        <array key="paintball.ttf">
+            <string>JapanYoshiSplatoon</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Ranked Battle-->
+        <scene sceneID="q7L-JO-pST">
+            <objects>
+                <tableViewController storyboardIdentifier="UpcomingStages" id="Bbe-XU-Ww0" customClass="WidgetViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="xgv-A5-az2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StagesCell" rowHeight="200" id="Y1h-Eg-cUh" customClass="StagesCell" customModule="Salmon_Run_Schedule" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Y1h-Eg-cUh" id="VNI-ee-cPt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="yGo-Ln-K0N">
+                                            <rect key="frame" x="8" y="4" width="359" height="188"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="50X-ah-PX8">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="40"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" tag="200" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lpQ-8l-Bkx">
+                                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="lpQ-8l-Bkx" secondAttribute="height" multiplier="1:1" id="Fw3-aT-19h"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Turf War" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="z8Z-LH-UjD">
+                                                            <rect key="frame" x="45" y="0.0" width="73" height="40"/>
+                                                            <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="8/28 12:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="WbK-9O-kOo">
+                                                            <rect key="frame" x="123" y="0.0" width="236" height="40"/>
+                                                            <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="0T9-Ee-PlH">
+                                                    <rect key="frame" x="0.0" y="44" width="359" height="144"/>
+                                                    <subviews>
+                                                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dv5-7y-iro">
+                                                            <rect key="frame" x="0.0" y="0.0" width="177.5" height="144"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zPo-FE-1t5">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="177.5" height="144"/>
+                                                                </imageView>
+                                                                <view tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ThY-iV-WYU">
+                                                                    <rect key="frame" x="125" y="124" width="50.5" height="18"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o19-13-6r3">
+                                                                            <rect key="frame" x="4" y="-4" width="42.5" height="26"/>
+                                                                            <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="13"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="bottom" secondItem="o19-13-6r3" secondAttribute="bottom" constant="-4" id="BiN-2R-PIE"/>
+                                                                        <constraint firstItem="o19-13-6r3" firstAttribute="top" secondItem="ThY-iV-WYU" secondAttribute="top" constant="-4" id="MD4-9Y-sMh"/>
+                                                                        <constraint firstItem="o19-13-6r3" firstAttribute="leading" secondItem="ThY-iV-WYU" secondAttribute="leading" constant="4" id="VwX-Zb-Mpl"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="o19-13-6r3" secondAttribute="trailing" constant="4" id="qtl-iR-305"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="zPo-FE-1t5" secondAttribute="bottom" id="B10-og-l62"/>
+                                                                <constraint firstItem="zPo-FE-1t5" firstAttribute="top" secondItem="Dv5-7y-iro" secondAttribute="top" id="Bwu-Fg-cwM"/>
+                                                                <constraint firstAttribute="bottom" secondItem="ThY-iV-WYU" secondAttribute="bottom" constant="2" id="E1i-WP-iVp"/>
+                                                                <constraint firstAttribute="trailing" secondItem="ThY-iV-WYU" secondAttribute="trailing" constant="2" id="Xgg-ty-00Z"/>
+                                                                <constraint firstItem="zPo-FE-1t5" firstAttribute="leading" secondItem="Dv5-7y-iro" secondAttribute="leading" id="b4s-3D-8gI"/>
+                                                                <constraint firstAttribute="trailing" secondItem="zPo-FE-1t5" secondAttribute="trailing" id="mE6-gB-0ml"/>
+                                                            </constraints>
+                                                        </view>
+                                                        <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mdn-5e-16n">
+                                                            <rect key="frame" x="181.5" y="0.0" width="177.5" height="144"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mhw-ge-Hbi">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="177.5" height="144"/>
+                                                                </imageView>
+                                                                <view tag="101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Ri-Dj-HbW">
+                                                                    <rect key="frame" x="125.5" y="124" width="50" height="18"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NgD-py-y7g">
+                                                                            <rect key="frame" x="4" y="-4" width="42" height="26"/>
+                                                                            <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="13"/>
+                                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="NgD-py-y7g" secondAttribute="trailing" constant="4" id="V88-gR-v4D"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="NgD-py-y7g" secondAttribute="bottom" constant="-4" id="X1c-jz-7ug"/>
+                                                                        <constraint firstItem="NgD-py-y7g" firstAttribute="leading" secondItem="7Ri-Dj-HbW" secondAttribute="leading" constant="4" id="ZNq-aZ-Xfd"/>
+                                                                        <constraint firstItem="NgD-py-y7g" firstAttribute="top" secondItem="7Ri-Dj-HbW" secondAttribute="top" constant="-4" id="w07-F3-5DS"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="7Ri-Dj-HbW" secondAttribute="bottom" constant="2" id="6lI-lI-ioe"/>
+                                                                <constraint firstItem="Mhw-ge-Hbi" firstAttribute="top" secondItem="mdn-5e-16n" secondAttribute="top" id="Seh-ZR-edz"/>
+                                                                <constraint firstItem="Mhw-ge-Hbi" firstAttribute="leading" secondItem="mdn-5e-16n" secondAttribute="leading" id="hep-VK-1J3"/>
+                                                                <constraint firstAttribute="bottom" secondItem="Mhw-ge-Hbi" secondAttribute="bottom" id="lbf-ig-5nZ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="7Ri-Dj-HbW" secondAttribute="trailing" constant="2" id="onK-5v-cVQ"/>
+                                                                <constraint firstAttribute="trailing" secondItem="Mhw-ge-Hbi" secondAttribute="trailing" id="ven-Tx-iuK"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="0T9-Ee-PlH" firstAttribute="leading" secondItem="yGo-Ln-K0N" secondAttribute="leading" id="0y5-9N-Sta"/>
+                                                <constraint firstAttribute="trailing" secondItem="50X-ah-PX8" secondAttribute="trailing" id="MJg-AJ-1nG"/>
+                                                <constraint firstItem="50X-ah-PX8" firstAttribute="leading" secondItem="yGo-Ln-K0N" secondAttribute="leading" id="WOG-42-Js2"/>
+                                                <constraint firstItem="50X-ah-PX8" firstAttribute="height" secondItem="yGo-Ln-K0N" secondAttribute="height" multiplier="0.2" constant="2" id="WzP-uu-Bem"/>
+                                                <constraint firstAttribute="trailing" secondItem="0T9-Ee-PlH" secondAttribute="trailing" id="ygv-o1-l3X"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="yGo-Ln-K0N" firstAttribute="leading" secondItem="VNI-ee-cPt" secondAttribute="leading" constant="8" id="BLg-8K-aDJ"/>
+                                        <constraint firstAttribute="bottom" secondItem="yGo-Ln-K0N" secondAttribute="bottom" constant="8" id="Cb1-KY-0QS"/>
+                                        <constraint firstAttribute="trailing" secondItem="yGo-Ln-K0N" secondAttribute="trailing" constant="8" id="U1F-JB-ZLz"/>
+                                        <constraint firstItem="yGo-Ln-K0N" firstAttribute="top" secondItem="VNI-ee-cPt" secondAttribute="top" constant="4" id="vMg-9t-B2M"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="modeLabel" destination="z8Z-LH-UjD" id="t3M-Ya-xaB"/>
+                                    <outlet property="stageAImageView" destination="zPo-FE-1t5" id="Rwv-Eg-Mbq"/>
+                                    <outlet property="stageANameLabel" destination="o19-13-6r3" id="rET-W0-OuE"/>
+                                    <outlet property="stageBImageView" destination="Mhw-ge-Hbi" id="vFa-GZ-SSF"/>
+                                    <outlet property="stageBNameLabel" destination="NgD-py-y7g" id="hmF-Ty-6s6"/>
+                                    <outlet property="timeLabel" destination="WbK-9O-kOo" id="j8M-j9-dcy"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Bbe-XU-Ww0" id="war-NP-KzK"/>
+                            <outlet property="delegate" destination="Bbe-XU-Ww0" id="RZO-7f-5f0"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ranked Battle" largeTitleDisplayMode="always" id="lan-2p-gRW"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ss7-3K-hAI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556" y="106.59670164917542"/>
+        </scene>
+    </scenes>
+</document>

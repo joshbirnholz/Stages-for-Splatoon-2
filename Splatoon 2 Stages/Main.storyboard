@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X35-yG-Tev">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Splatoon2.ttf">
+            <string>Splatoon2</string>
+        </array>
+        <array key="paintball.ttf">
+            <string>JapanYoshiSplatoon</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Current Stages-->
+        <scene sceneID="oqf-Ha-daZ">
+            <objects>
+                <tableViewController storyboardIdentifier="CurrentStages" id="S1C-Fs-SUZ" customClass="CurrentStagesTableViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7a2-A4-gbR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StagesCell" rowHeight="169" id="Vhg-0c-5Ko" customClass="StagesCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="169"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vhg-0c-5Ko" id="Fn1-mT-WnN">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LsK-eR-MsM">
+                                            <rect key="frame" x="8" y="8" width="359" height="161"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Sh-Es-7uH">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="25"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Regular Battle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1D8-B9-Cfa">
+                                                            <rect key="frame" x="0.0" y="0.0" width="179.5" height="25"/>
+                                                            <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Turf War" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sJb-IM-GUZ">
+                                                            <rect key="frame" x="179.5" y="0.0" width="179.5" height="25"/>
+                                                            <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="sJb-IM-GUZ" firstAttribute="width" secondItem="4Sh-Es-7uH" secondAttribute="width" multiplier="0.5" id="aGo-Gs-A18"/>
+                                                        <constraint firstItem="1D8-B9-Cfa" firstAttribute="width" secondItem="4Sh-Es-7uH" secondAttribute="width" multiplier="0.5" id="hKW-c1-FEu"/>
+                                                    </constraints>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="h9i-6M-Y5Q">
+                                                    <rect key="frame" x="0.0" y="29" width="343" height="132"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-a5-Nf5">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167.5" height="132"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Mm-C5-rRd">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="167.5" height="94"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="8Mm-C5-rRd" secondAttribute="height" multiplier="16:9" id="Ljo-zP-REh"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UcW-D7-dFa">
+                                                                    <rect key="frame" x="56.5" y="98" width="55" height="34"/>
+                                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="atv-rt-NyY">
+                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="132"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cGQ-rS-jvL">
+                                                                    <rect key="frame" x="6" y="0.0" width="159.5" height="90"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="cGQ-rS-jvL" secondAttribute="height" multiplier="16:9" id="hej-Dp-Fug"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="eBb-kJ-7sD">
+                                                                    <rect key="frame" x="58.5" y="94" width="55" height="38"/>
+                                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="ULD-a5-Nf5" firstAttribute="width" secondItem="h9i-6M-Y5Q" secondAttribute="width" multiplier="0.5" constant="-4" id="dHH-FJ-Wve"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="4Sh-Es-7uH" firstAttribute="leading" secondItem="LsK-eR-MsM" secondAttribute="leading" id="CeA-ay-sB4"/>
+                                                <constraint firstAttribute="trailing" secondItem="4Sh-Es-7uH" secondAttribute="trailing" id="xa3-6d-URY"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="LsK-eR-MsM" firstAttribute="leading" secondItem="Fn1-mT-WnN" secondAttribute="leading" constant="8" id="Zfm-qL-bJQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="LsK-eR-MsM" secondAttribute="trailing" constant="8" id="e79-lM-4hd"/>
+                                        <constraint firstAttribute="bottom" secondItem="LsK-eR-MsM" secondAttribute="bottom" id="pOj-0f-ahp"/>
+                                        <constraint firstItem="LsK-eR-MsM" firstAttribute="top" secondItem="Fn1-mT-WnN" secondAttribute="top" constant="8" id="sDq-Eh-YFF"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="modeLabel" destination="1D8-B9-Cfa" id="yTd-Ea-gt2"/>
+                                    <outlet property="stageAImageView" destination="8Mm-C5-rRd" id="gjV-06-Wb0"/>
+                                    <outlet property="stageANameLabel" destination="UcW-D7-dFa" id="1AG-Jn-gPR"/>
+                                    <outlet property="stageBImageView" destination="cGQ-rS-jvL" id="vyB-DT-mGr"/>
+                                    <outlet property="stageBNameLabel" destination="eBb-kJ-7sD" id="Ubc-ad-L5T"/>
+                                    <outlet property="timeLabel" destination="sJb-IM-GUZ" id="3nt-Sl-kS7"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="S1C-Fs-SUZ" id="yRF-c6-7bg"/>
+                            <outlet property="delegate" destination="S1C-Fs-SUZ" id="MHk-Js-jIP"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Current Stages" largeTitleDisplayMode="always" id="yfP-Tg-Xsd"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ijQ-uR-MDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-164" y="107"/>
+        </scene>
+        <!--Splatoon Tab Bar Controller-->
+        <scene sceneID="Wfy-xu-4xp">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="X35-yG-Tev" customClass="SplatoonTabBarController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="1ek-W0-lVT">
+                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MPz-SD-0eY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-862" y="107"/>
+        </scene>
+        <!--Ranked Battle-->
+        <scene sceneID="nz4-c3-KeF">
+            <objects>
+                <tableViewController storyboardIdentifier="UpcomingStages" id="fOu-Yb-q8o" customClass="UpcomingStagesViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7pc-za-z2t">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StagesCell" rowHeight="169" id="1Jf-PI-6cY" customClass="StagesCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="169"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Jf-PI-6cY" id="CnW-s3-Hoe">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="169"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2sz-ZT-y9v">
+                                            <rect key="frame" x="8" y="0.0" width="359" height="161"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oc0-nI-3D1">
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="29"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Turf War" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d7e-xv-5Hb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="179.5" height="29"/>
+                                                            <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="8/28 12:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hNm-6J-MGr">
+                                                            <rect key="frame" x="179.5" y="0.0" width="179.5" height="29"/>
+                                                            <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="hNm-6J-MGr" firstAttribute="width" secondItem="Oc0-nI-3D1" secondAttribute="width" multiplier="0.5" id="bge-QZ-wyK"/>
+                                                        <constraint firstItem="d7e-xv-5Hb" firstAttribute="width" secondItem="Oc0-nI-3D1" secondAttribute="width" multiplier="0.5" id="sU8-Dk-9R5"/>
+                                                    </constraints>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="LSj-6M-HB3">
+                                                    <rect key="frame" x="0.0" y="33" width="343" height="128"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cgI-yd-Dfs">
+                                                            <rect key="frame" x="0.0" y="0.0" width="167.5" height="128"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZFN-c8-8ER">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="167.5" height="94"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="ZFN-c8-8ER" secondAttribute="height" multiplier="16:9" id="AGm-VG-oyA"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Qp1-dE-rdJ">
+                                                                    <rect key="frame" x="56.5" y="98" width="55" height="30"/>
+                                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OQi-1y-Pnf">
+                                                            <rect key="frame" x="171.5" y="0.0" width="171.5" height="128"/>
+                                                            <subviews>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9u0-m6-XwP">
+                                                                    <rect key="frame" x="6" y="0.0" width="159.5" height="90"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="9u0-m6-XwP" secondAttribute="height" multiplier="16:9" id="6gR-F1-Nqi"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="H8C-VS-ek8">
+                                                                    <rect key="frame" x="58.5" y="94" width="55" height="34"/>
+                                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="cgI-yd-Dfs" firstAttribute="width" secondItem="LSj-6M-HB3" secondAttribute="width" multiplier="0.5" constant="-4" id="VCX-RO-37U"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="Oc0-nI-3D1" secondAttribute="trailing" id="WNV-9h-lQM"/>
+                                                <constraint firstItem="Oc0-nI-3D1" firstAttribute="leading" secondItem="2sz-ZT-y9v" secondAttribute="leading" id="cF7-8N-svq"/>
+                                            </constraints>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="2sz-ZT-y9v" secondAttribute="bottom" constant="8" id="UeH-tF-WID"/>
+                                        <constraint firstAttribute="trailing" secondItem="2sz-ZT-y9v" secondAttribute="trailing" constant="8" id="hCr-Oh-nBJ"/>
+                                        <constraint firstItem="2sz-ZT-y9v" firstAttribute="leading" secondItem="CnW-s3-Hoe" secondAttribute="leading" constant="8" id="kXm-ye-GPg"/>
+                                        <constraint firstItem="2sz-ZT-y9v" firstAttribute="top" secondItem="CnW-s3-Hoe" secondAttribute="top" id="zPz-kE-ybG"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="modeLabel" destination="d7e-xv-5Hb" id="7IC-5o-JVc"/>
+                                    <outlet property="stageAImageView" destination="ZFN-c8-8ER" id="5Oj-5C-hxb"/>
+                                    <outlet property="stageANameLabel" destination="Qp1-dE-rdJ" id="vsj-ZH-DW1"/>
+                                    <outlet property="stageBImageView" destination="9u0-m6-XwP" id="fe1-ss-mFf"/>
+                                    <outlet property="stageBNameLabel" destination="H8C-VS-ek8" id="hMo-B7-XtG"/>
+                                    <outlet property="timeLabel" destination="hNm-6J-MGr" id="FqB-zZ-iPZ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fOu-Yb-q8o" id="lSw-hL-hYW"/>
+                            <outlet property="delegate" destination="fOu-Yb-q8o" id="Bou-op-D1K"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ranked Battle" largeTitleDisplayMode="always" id="MPT-s2-ivi"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bFs-vf-nem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="556" y="107"/>
+        </scene>
+        <!--Salmon Run-->
+        <scene sceneID="orL-rG-SVS">
+            <objects>
+                <tableViewController storyboardIdentifier="SalmonRun" id="I7D-qk-enJ" customClass="SalmonRunTableViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Etq-2U-Zar">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SalmonRunCell" rowHeight="52" id="M0j-I8-Y3G" customClass="SalmonRunCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="52"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M0j-I8-Y3G" id="204-Ie-rub">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6H-IA-R8a">
+                                            <rect key="frame" x="8" y="8" width="359" height="44"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8/26, 8:00 PM - 8/28, 2:00 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Riw-Ub-Fkb">
+                                                    <rect key="frame" x="41" y="0.0" width="248" height="44"/>
+                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Salmon Tab Selected" translatesAutoresizingMaskIntoConstraints="NO" id="ZUB-rA-2RS">
+                                                    <rect key="frame" x="8" y="13.5" width="25" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="25" id="9oZ-pL-xGN"/>
+                                                        <constraint firstAttribute="width" secondItem="ZUB-rA-2RS" secondAttribute="height" multiplier="22:15.23" id="Hgq-OI-V7L"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="ZUB-rA-2RS" firstAttribute="centerY" secondItem="w6H-IA-R8a" secondAttribute="centerY" id="2b9-IF-AYH"/>
+                                                <constraint firstAttribute="bottom" secondItem="Riw-Ub-Fkb" secondAttribute="bottom" id="Kf1-kt-7oL"/>
+                                                <constraint firstItem="Riw-Ub-Fkb" firstAttribute="top" secondItem="w6H-IA-R8a" secondAttribute="top" id="Lf2-y9-dHv"/>
+                                                <constraint firstItem="ZUB-rA-2RS" firstAttribute="leading" secondItem="w6H-IA-R8a" secondAttribute="leading" constant="8" id="PDn-wb-E9S"/>
+                                                <constraint firstItem="Riw-Ub-Fkb" firstAttribute="leading" secondItem="ZUB-rA-2RS" secondAttribute="trailing" constant="8" id="b1c-1q-my1"/>
+                                            </constraints>
+                                        </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Lv-JP-Lm1">
+                                            <rect key="frame" x="305" y="16" width="66" height="28"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAs-io-rj9">
+                                                    <rect key="frame" x="4" y="4" width="58" height="20"/>
+                                                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.98676377530000003" green="0.2715459905" blue="0.033880121110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="BAs-io-rj9" secondAttribute="trailing" constant="4" id="98K-kK-5Nt"/>
+                                                <constraint firstAttribute="width" constant="66" id="CMt-zE-APK"/>
+                                                <constraint firstAttribute="bottom" secondItem="BAs-io-rj9" secondAttribute="bottom" constant="4" id="QcY-Dn-umP"/>
+                                                <constraint firstItem="BAs-io-rj9" firstAttribute="top" secondItem="4Lv-JP-Lm1" secondAttribute="top" constant="4" id="Tdv-HP-H4Y"/>
+                                                <constraint firstItem="BAs-io-rj9" firstAttribute="leading" secondItem="4Lv-JP-Lm1" secondAttribute="leading" constant="4" id="Zih-bO-arr"/>
+                                            </constraints>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="w6H-IA-R8a" secondAttribute="trailing" constant="8" id="1bZ-Nk-hfA"/>
+                                        <constraint firstItem="w6H-IA-R8a" firstAttribute="leading" secondItem="204-Ie-rub" secondAttribute="leading" constant="8" id="8eQ-se-zxb"/>
+                                        <constraint firstAttribute="trailing" secondItem="4Lv-JP-Lm1" secondAttribute="trailing" constant="4" id="EHb-Op-WMa"/>
+                                        <constraint firstItem="4Lv-JP-Lm1" firstAttribute="leading" secondItem="Riw-Ub-Fkb" secondAttribute="trailing" constant="8" id="FtJ-p7-N2k"/>
+                                        <constraint firstItem="4Lv-JP-Lm1" firstAttribute="bottom" secondItem="w6H-IA-R8a" secondAttribute="bottom" constant="-8" id="esl-uy-FMM"/>
+                                        <constraint firstItem="w6H-IA-R8a" firstAttribute="top" secondItem="204-Ie-rub" secondAttribute="top" constant="8" id="fNJ-Hj-zML"/>
+                                        <constraint firstItem="4Lv-JP-Lm1" firstAttribute="top" secondItem="w6H-IA-R8a" secondAttribute="top" constant="8" id="iex-Xj-0Sl"/>
+                                        <constraint firstAttribute="bottom" secondItem="w6H-IA-R8a" secondAttribute="bottom" id="lE1-1x-vKM"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="badgeLabel" destination="BAs-io-rj9" id="Khz-Gj-Bcs"/>
+                                    <outlet property="badgeView" destination="4Lv-JP-Lm1" id="Pkl-Nm-nRv"/>
+                                    <outlet property="bubbleView" destination="w6H-IA-R8a" id="7OL-2v-46X"/>
+                                    <outlet property="timeLabel" destination="Riw-Ub-Fkb" id="q9t-Zs-qgf"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="I7D-qk-enJ" id="92Z-8e-GZX"/>
+                            <outlet property="delegate" destination="I7D-qk-enJ" id="poZ-gI-SET"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Salmon Run" largeTitleDisplayMode="always" id="lOi-Ev-6Xm"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T4J-W6-Evo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1245.5999999999999" y="106.59670164917542"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Salmon Tab Selected" width="30" height="21"/>
+    </resources>
+</document>

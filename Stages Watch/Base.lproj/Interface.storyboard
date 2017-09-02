@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13189.4" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SJi-J7-fVz">
+    <device id="watch42" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13049.2"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Splatoon2.ttf">
+            <string>Splatoon2</string>
+        </array>
+        <array key="paintball.ttf">
+            <string>JapanYoshiSplatoon</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Stages-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller identifier="Stages" id="AgC-eL-Hgc" customClass="StagesInterfaceController" customModule="Stages_Watch_Extension">
+                    <items>
+                        <group width="1" height="1" alignment="left" layout="vertical" radius="0.0" id="bIi-Cs-i8t">
+                            <items>
+                                <group width="1" height="0.10000000000000001" alignment="left" layout="vertical" spacing="0.0" id="Gvz-bf-cwb">
+                                    <items>
+                                        <group width="1" height="1" alignment="left" spacing="6" id="uaf-6n-Tbh">
+                                            <items>
+                                                <imageView width="0.12" height="1" alignment="left" image="Regular Battle" contentMode="scaleAspectFit" id="kGC-O9-UqX"/>
+                                                <label alignment="left" text="Turf War" id="TnV-vP-jG9">
+                                                    <color key="textColor" red="0.38750320780000003" green="0.89547413789999997" blue="0.28126877569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="16"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                        <group width="1" height="0.5" alignment="left" verticalAlignment="bottom" id="LtM-b3-zFD">
+                                            <items>
+                                                <label alignment="center" verticalAlignment="center" text="8/30, 10:00 AM - 8/30, 12:00 PM" textAlignment="center" minimumScaleFactor="0.20000000000000001" id="T3Z-O2-OGK">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="16"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                    <variation key="default">
+                                        <mask key="items">
+                                            <exclude reference="LtM-b3-zFD"/>
+                                        </mask>
+                                    </variation>
+                                </group>
+                                <group width="1" height="0.45000000000000001" alignment="left" backgroundImage="humpback-pump-track" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="xir-oH-BgH">
+                                    <items>
+                                        <group width="1" height="1" alignment="center" verticalAlignment="bottom" id="OlJ-yH-DCH">
+                                            <items>
+                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Humpback Pump Track" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="hap-db-fWb">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="15"/>
+                                                    <variation key="device=watch38mm" numberOfLines="1"/>
+                                                </label>
+                                            </items>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </group>
+                                    </items>
+                                </group>
+                                <group width="1" height="0.45000000000000001" alignment="left" backgroundImage="inkblot-art-academy" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="CKZ-Ej-rxY">
+                                    <items>
+                                        <group width="1" height="1" alignment="center" verticalAlignment="bottom" id="teP-eA-ixL">
+                                            <items>
+                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Inkblot Art Academy" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="ZbK-Zz-guq">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="15"/>
+                                                    <variation key="device=watch38mm" numberOfLines="1"/>
+                                                </label>
+                                            </items>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </group>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <menu key="menu" id="qv6-xX-Qln">
+                        <items>
+                            <menuItem title="Regular Battle" image="Regular Battle Tab" id="hcR-go-iwW">
+                                <connections>
+                                    <action selector="regularBattleButtonPressed" destination="AgC-eL-Hgc" id="HVL-cH-hez"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="6py-s2-qsf">
+                                <connections>
+                                    <action selector="rankedBattleButtonPressed" destination="AgC-eL-Hgc" id="OwH-4s-bns"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="League Battle" image="League Battle Tab" id="0ta-1b-qDv">
+                                <connections>
+                                    <action selector="leagueBattleButtonPressed" destination="AgC-eL-Hgc" id="Gna-1O-jy6"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="modeIconImage" destination="kGC-O9-UqX" id="Cp4-p5-A0v"/>
+                        <outlet property="modeNameLabel" destination="TnV-vP-jG9" id="zXi-1A-siX"/>
+                        <outlet property="stageAGroup" destination="xir-oH-BgH" id="Pb6-Bf-W1O"/>
+                        <outlet property="stageALabel" destination="hap-db-fWb" id="TTv-fl-Wvp"/>
+                        <outlet property="stageBGroup" destination="CKZ-Ej-rxY" id="1Dh-9x-1t1"/>
+                        <outlet property="stageBLabel" destination="ZbK-Zz-guq" id="C5x-Rd-3MR"/>
+                        <outlet property="timeLabel" destination="T3Z-O2-OGK" id="ekw-wP-Kep"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="90" y="74"/>
+        </scene>
+        <!--Stages-->
+        <scene sceneID="jSg-d3-6by">
+            <objects>
+                <controller identifier="Initial" title="Stages" id="SJi-J7-fVz" customClass="InitialInterfaceController" customModule="Stages_Watch" customModuleProvider="target">
+                    <items>
+                        <label alignment="center" verticalAlignment="center" text="Loading…" textAlignment="center" id="zPg-Fj-RbX">
+                            <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="25"/>
+                        </label>
+                        <button width="1" alignment="center" verticalAlignment="bottom" hidden="YES" title="Retry" id="o3K-fq-mYe">
+                            <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="18"/>
+                            <connections>
+                                <action selector="retryButtonPressed" destination="SJi-J7-fVz" id="Avn-Al-F3R"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="label" destination="zPg-Fj-RbX" id="hKp-Mz-hgk"/>
+                        <outlet property="retryButton" destination="o3K-fq-mYe" id="3Xe-SK-Rmh"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="41" y="352"/>
+        </scene>
+    </scenes>
+</document>
