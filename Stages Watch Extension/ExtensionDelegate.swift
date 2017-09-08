@@ -188,9 +188,15 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 	
 	func extendComplicationTimelines() {
 		let complicationAction: (CLKComplication) -> ()
-		if let updateDate = complicationUpdateDate, Date().timeIntervalSince(updateDate) <= 7200 {
+		let updateTimeInterval = Date().timeIntervalSince(complicationUpdateDate)
+		if updateTimeInterval < 7200 {
+			// Updated under two hours ago
+			return
+		} else if updateTimeInterval < 14400 {
+			// Updated between two and four hours ago
 			complicationAction = CLKComplicationServer.sharedInstance().extendTimeline
 		} else {
+			// Updated four or more hours ago
 			complicationAction = CLKComplicationServer.sharedInstance().reloadTimeline
 		}
 		

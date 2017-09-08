@@ -28,7 +28,7 @@
                                         <group width="1" height="1" alignment="left" spacing="6" id="uaf-6n-Tbh">
                                             <items>
                                                 <imageView width="0.12" height="1" alignment="left" image="Regular Battle" contentMode="scaleAspectFit" id="kGC-O9-UqX"/>
-                                                <label alignment="left" text="Turf War" id="TnV-vP-jG9">
+                                                <label alignment="left" text="Mode" id="TnV-vP-jG9">
                                                     <color key="textColor" red="0.38750320780000003" green="0.89547413789999997" blue="0.28126877569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="16"/>
                                                 </label>
@@ -48,11 +48,11 @@
                                         </mask>
                                     </variation>
                                 </group>
-                                <group width="1" height="0.45000000000000001" alignment="left" backgroundImage="humpback-pump-track" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="xir-oH-BgH">
+                                <group width="1" height="0.45000000000000001" alignment="left" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="xir-oH-BgH">
                                     <items>
                                         <group width="1" height="1" alignment="center" verticalAlignment="bottom" id="OlJ-yH-DCH">
                                             <items>
-                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Humpback Pump Track" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="hap-db-fWb">
+                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Stage A" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="hap-db-fWb">
                                                     <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="15"/>
                                                     <variation key="device=watch38mm" numberOfLines="1"/>
                                                 </label>
@@ -61,11 +61,11 @@
                                         </group>
                                     </items>
                                 </group>
-                                <group width="1" height="0.45000000000000001" alignment="left" backgroundImage="inkblot-art-academy" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="CKZ-Ej-rxY">
+                                <group width="1" height="0.45000000000000001" alignment="left" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="CKZ-Ej-rxY">
                                     <items>
                                         <group width="1" height="1" alignment="center" verticalAlignment="bottom" id="teP-eA-ixL">
                                             <items>
-                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Inkblot Art Academy" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="ZbK-Zz-guq">
+                                                <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Stage B" textAlignment="center" numberOfLines="2" minimumScaleFactor="0.5" id="ZbK-Zz-guq">
                                                     <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="15"/>
                                                     <variation key="device=watch38mm" numberOfLines="1"/>
                                                 </label>
@@ -112,7 +112,7 @@
         <!--Stages-->
         <scene sceneID="jSg-d3-6by">
             <objects>
-                <controller identifier="Initial" title="Stages" id="SJi-J7-fVz" customClass="InitialInterfaceController" customModule="Stages_Watch" customModuleProvider="target">
+                <controller identifier="Initial" title="Stages" id="SJi-J7-fVz" customClass="InitialInterfaceController" customModule="Stages_Watch_Extension">
                     <items>
                         <label alignment="center" verticalAlignment="center" text="Loading…" textAlignment="center" id="zPg-Fj-RbX">
                             <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="25"/>

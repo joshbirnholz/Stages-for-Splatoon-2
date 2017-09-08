@@ -21,12 +21,12 @@ var complicationMode: Mode {
 	}
 }
 
-var complicationUpdateDate: Date? {
+var complicationUpdateDate: Date {
 	set {
 		UserDefaults.standard.set(newValue, forKey: "complicationUpdateDate")
 	}
 	get {
-		return UserDefaults.standard.object(forKey: "complicationUpdateDate") as? Date
+		return (UserDefaults.standard.object(forKey: "complicationUpdateDate") as? Date) ?? .distantPast
 	}
 }
 
