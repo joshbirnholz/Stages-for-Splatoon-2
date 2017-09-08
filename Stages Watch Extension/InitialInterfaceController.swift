@@ -10,7 +10,7 @@ import WatchKit
 
 class InitialInterfaceController: WKInterfaceController {
 	
-	var buttonAction: (() -> ()) = { }
+	var buttonAction: ((Mode) -> ()) = { _ in }
 	
 	@IBOutlet var label: WKInterfaceLabel!
 	@IBOutlet var retryButton: WKInterfaceButton!
@@ -18,7 +18,18 @@ class InitialInterfaceController: WKInterfaceController {
 	override func awake(withContext context: Any?) {
 		super.awake(withContext: context)
 		
-		initialInterfaceController = self
+		(WKExtension.shared().delegate as? ExtensionDelegate)?.initialInterfaceController = self
+	}
+	
+	override func didAppear() {
+		super.didAppear()
+		
+		updateUserActivity("com.josh.birnholz.Splatoon-2-Stages.openMode", userInfo: ["mode": selectedMode.rawValue], webpageURL: URL(string: "https://splatoon2.ink"))
+	}
+	
+	override func willDisappear() {
+		super.willDisappear()
+		invalidateUserActivity()
 	}
 	
 	override func willActivate() {
@@ -34,6 +45,6 @@ class InitialInterfaceController: WKInterfaceController {
 	@IBAction func retryButtonPressed() {
 		retryButton.setEnabled(false)
 		label.setText("Loading…")
-		buttonAction()
+		buttonAction(selectedMode)
 	}
 }

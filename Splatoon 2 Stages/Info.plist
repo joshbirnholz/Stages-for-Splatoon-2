@@ -4,6 +4,10 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.josh.birnholz.Splatoon-2-Stages.openMode</string>
+	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Stages</string>
 	<key>CFBundleExecutable</key>

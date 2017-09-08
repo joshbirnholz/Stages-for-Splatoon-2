@@ -76,11 +76,7 @@
 		54C776FE1F570B0A002F06E0 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
 		54C776FF1F570B0A002F06E0 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
 		54C777011F570B0B002F06E0 /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
-		54D7525B1F6214D4006BD25C /* WatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7525A1F6214D4006BD25C /* WatchDelegate.swift */; };
-		54D7525C1F6214D4006BD25C /* WatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7525A1F6214D4006BD25C /* WatchDelegate.swift */; };
-		54D7525D1F6214D4006BD25C /* WatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7525A1F6214D4006BD25C /* WatchDelegate.swift */; };
-		54D7525E1F6214D4006BD25C /* WatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7525A1F6214D4006BD25C /* WatchDelegate.swift */; };
-		54D7525F1F6214D4006BD25C /* WatchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54D7525A1F6214D4006BD25C /* WatchDelegate.swift */; };
+		54D752601F6237B1006BD25C /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 		54F377C61F57D5200013776D /* SharedAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */; };
 		54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 /* End PBXBuildFile section */
@@ -213,7 +209,6 @@
 		54C776FA1F570AEA002F06E0 /* SharedAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = SharedAssets.xcassets; sourceTree = "<group>"; };
 		54D752581F620DCB006BD25C /* Salmon Run Schedule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Salmon Run Schedule.entitlements"; sourceTree = "<group>"; };
 		54D752591F620DD4006BD25C /* Stages Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Stages Watch.entitlements"; sourceTree = "<group>"; };
-		54D7525A1F6214D4006BD25C /* WatchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchDelegate.swift; sourceTree = "<group>"; };
 		54F2D62E1F532894001D585E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		54F2D6301F532894001D585E /* UpcomingStagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingStagesViewController.swift; sourceTree = "<group>"; };
 		54F2D6351F532894001D585E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -307,7 +302,6 @@
 				54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */,
 				544171211F5338880046C07E /* StagesCell.swift */,
 				5477750E1F56474E000B17B5 /* WidgetStagesViewController.swift */,
-				54D7525A1F6214D4006BD25C /* WatchDelegate.swift */,
 				54A1D1981F533C2F00D40985 /* Splatoon2.ttf */,
 				54A1D19A1F535C9C00D40985 /* paintball.ttf */,
 				543E603A1F567008007DA88D /* WidgetMainInterface.storyboard */,
@@ -750,7 +744,6 @@
 				543E603D1F567031007DA88D /* WidgetStagesViewController.swift in Sources */,
 				543E60411F5670A0007DA88D /* StagesCell.swift in Sources */,
 				543E603E1F567037007DA88D /* WidgetViewController.swift in Sources */,
-				54D7525C1F6214D4006BD25C /* WatchDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,7 +755,6 @@
 				543E605E1F56716E007DA88D /* Schedule.swift in Sources */,
 				543E60601F56716E007DA88D /* WidgetStagesViewController.swift in Sources */,
 				543E605C1F56711D007DA88D /* RegularWidgetViewController.swift in Sources */,
-				54D7525D1F6214D4006BD25C /* WatchDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -774,7 +766,6 @@
 				543E60821F5672F0007DA88D /* WidgetStagesViewController.swift in Sources */,
 				543E60831F5672F4007DA88D /* StagesCell.swift in Sources */,
 				543E607F1F5672D5007DA88D /* RegularWidgetViewController.swift in Sources */,
-				54D7525E1F6214D4006BD25C /* WatchDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -787,7 +778,6 @@
 				54712C4F1F549F8D004B9249 /* CurrentStagesTableViewController.swift in Sources */,
 				54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */,
 				54712C501F549F8F004B9249 /* UpcomingStagesViewController.swift in Sources */,
-				54D7525B1F6214D4006BD25C /* WatchDelegate.swift in Sources */,
 				54712C4D1F549F88004B9249 /* AppDelegate.swift in Sources */,
 				54712C521F549F94004B9249 /* SalmonRunTableViewController.swift in Sources */,
 				54712C4E1F549F8A004B9249 /* SplatoonTabBarController.swift in Sources */,
@@ -800,7 +790,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				54D7525F1F6214D4006BD25C /* WatchDelegate.swift in Sources */,
 				54C703501F56FE52002A8D76 /* Schedule.swift in Sources */,
 				54C7033F1F56FDB9002A8D76 /* SalmonRunTableViewController.swift in Sources */,
 				54C7034D1F56FDD1002A8D76 /* SalmonRunCell.swift in Sources */,
@@ -816,6 +805,7 @@
 				54C776E21F570A4E002F06E0 /* StagesInterfaceController.swift in Sources */,
 				54C776F71F570A5B002F06E0 /* Schedule.swift in Sources */,
 				54C776E61F570A4E002F06E0 /* ComplicationController.swift in Sources */,
+				54D752601F6237B1006BD25C /* UIImage+Scaled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

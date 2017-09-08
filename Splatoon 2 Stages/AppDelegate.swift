@@ -8,33 +8,8 @@
 
 import UIKit
 
-var schedule: Schedule? {
-	didSet {
-		if let schedule = schedule {
-			do {
-				let data = try encoder.encode(schedule)
-				try data.write(to: scheduleURL, options: .atomic)
-				print("Wrote schedule to", scheduleURL)
-			} catch {
-				print("Error writing schedule:", error.localizedDescription)
-			}
-		}
-	}
-}
-
-var runs: Runs? {
-	didSet {
-		if let runs = runs {
-			do {
-				let data = try encoder.encode(runs)
-				try data.write(to: runsURL, options: .atomic)
-				print("Wrote salmon run schedule to:", runsURL)
-			} catch {
-				print("Error writing salmon runs:", error.localizedDescription)
-			}
-		}
-	}
-}
+var schedule: Schedule?
+var runs: Runs?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -114,6 +89,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func applicationWillTerminate(_ application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	}
+	
+	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+		switch userActivity.activityType {
+		case "com.josh.birnholz.Splatoon-2-Stages.openMode":
+			if let modeString = userActivity.userInfo?["mode"] as? String,
+				let mode = Mode(rawValue: modeString) {
+				print("Opening to mode:", mode)
+				
+				if let tabBarController = window?.rootViewController as? UITabBarController,
+					let tab = tabBarController.tabBar.items?.first(where: { (item) -> Bool in
+						item.title == mode.description
+					}),
+					let index = tabBarController.tabBar.items?.index(of: tab) {
+					tabBarController.selectedIndex = index
+				}
+				
+				return true
+			}
+		default:
+			break
+		}
+		
+		return false
 	}
 
 

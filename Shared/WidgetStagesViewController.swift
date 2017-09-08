@@ -12,19 +12,7 @@ import NotificationCenter
 
 class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	
-	var schedule: Schedule? {
-		didSet {
-			if let schedule = schedule {
-				do {
-					let data = try encoder.encode(schedule)
-					try data.write(to: scheduleURL, options: .atomic)
-					print("Wrote schedule to", scheduleURL)
-				} catch {
-					print("Error writing schedule:", error.localizedDescription)
-				}
-			}
-		}
-	}
+	var schedule: Schedule?
 	
 	static let widgetFormatter: DateFormatter = {
 		let df = DateFormatter()
@@ -72,7 +60,8 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 			case .failure(let error):
 				print("Error retreiving the schedule:", error.localizedDescription)
 				completionHandler(.failed)
-			case .success(let sch):
+			case .success(var sch):
+				sch.removeExpiredEntries()
 				self.schedule = sch
 				
 				DispatchQueue.main.async {

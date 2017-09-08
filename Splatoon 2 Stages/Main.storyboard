@@ -131,7 +131,11 @@
                             <outlet property="delegate" destination="S1C-Fs-SUZ" id="MHk-Js-jIP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Current Stages" largeTitleDisplayMode="always" id="yfP-Tg-Xsd"/>
+                    <navigationItem key="navigationItem" title="Current Stages" largeTitleDisplayMode="always" id="yfP-Tg-Xsd">
+                        <barButtonItem key="leftBarButtonItem" image="Settings" id="UdW-dR-dbz">
+                            <color key="tintColor" red="0.95014292" green="0.21252280470000001" blue="0.51657241580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ijQ-uR-MDH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -373,5 +377,7 @@
     </scenes>
     <resources>
         <image name="Salmon Tab Selected" width="30" height="21"/>
+        <image name="Settings" width="22" height="22"/>
     </resources>
+    <color key="tintColor" red="0.95014292001724243" green="0.21252280473709106" blue="0.51657241582870483" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

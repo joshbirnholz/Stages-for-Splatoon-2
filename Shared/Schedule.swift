@@ -8,12 +8,15 @@
 
 import UIKit
 
-public let encoder = PropertyListEncoder()
-public let decoder = PropertyListDecoder()
+public let decoder: JSONDecoder = {
+	let d = JSONDecoder()
+	d.dateDecodingStrategy = .secondsSince1970
+	return d
+}()
 //public let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 public let documentDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.josh.birnholz.Splatoon-2-Stages")!
-public let runsURL = documentDirectory.appendingPathComponent("salmonruns.plist")
-public let scheduleURL = documentDirectory.appendingPathComponent("schedule.plist")
+public let runsURL = documentDirectory.appendingPathComponent("salmonruns.json")
+public let scheduleURL = documentDirectory.appendingPathComponent("schedule.json")
 
 let dateFormatter: DateFormatter = {
 	let df = DateFormatter()
@@ -22,6 +25,8 @@ let dateFormatter: DateFormatter = {
 }()
 
 struct Schedule: Codable {
+	
+	static let downloadURL = URL(string: "http://squidkidsfeed.azurewebsites.net/Schedule.json")!
 	
 	struct Entry: Codable {
 		
@@ -113,6 +118,17 @@ struct Schedule: Codable {
 		
 		return true
 	}
+	
+	mutating func removeExpiredEntries() {
+		let now = Date()
+		func isIncluded(entry: Entry) -> Bool {
+			return entry.endTime > now
+		}
+		
+		regularEntries = regularEntries.filter(isIncluded)
+		rankedEntries = rankedEntries.filter(isIncluded)
+		leagueEntries = leagueEntries.filter(isIncluded)
+	}
 }
 
 enum ScheduleResult {
@@ -164,7 +180,28 @@ enum Mode: String, CustomStringConvertible {
 	}
 }
 
-func getSchedule(completion: @escaping (ScheduleResult) -> ()) {
+func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, completion: @escaping (ScheduleResult) -> ()) {
+	guard let data = data, error == nil else {
+		completion(.failure(error!))
+		return
+	}
+	
+	do {
+		let schedule = try decoder.decode(Schedule.self, from: data)
+		completion(.success(schedule))
+	} catch {
+		completion(.failure(error))
+	}
+	
+	do {
+		try data.write(to: scheduleURL)
+		print("Wrote schedule to ", scheduleURL)
+	} catch let error {
+		print("Error writing schedule:", error.localizedDescription)
+	}
+}
+
+func getSchedule(session: URLSession = URLSession(configuration: .default), completion: @escaping (ScheduleResult) -> ()) {
 	
 	do {
 		let data = try Data(contentsOf: scheduleURL)
@@ -181,28 +218,9 @@ func getSchedule(completion: @escaping (ScheduleResult) -> ()) {
 	}
 	
 	print("Downloading updated schedule")
-
-	let session = URLSession(configuration: .default)
 	
-	let stagesURL = URL(string: "http://squidkidsfeed.azurewebsites.net/Schedule.json")!
-	
-	session.dataTask(with: stagesURL) { data, response, error in
-		guard let data = data, error == nil else {
-			completion(.failure(error!))
-			return
-		}
-		
-		do {
-			let decoder = JSONDecoder()
-			decoder.dateDecodingStrategy = .secondsSince1970
-			
-			let schedule = try decoder.decode(Schedule.self, from: data)
-			completion(.success(schedule))
-			
-		} catch {
-			print(String(data: data, encoding: .utf8)!)
-			completion(.failure(error))
-		}
+	session.dataTask(with: Schedule.downloadURL) { data, response, error in
+		getScheduleFinished(data: data, response: response, error: error, completion: completion)
 	}.resume()
 }
 
@@ -257,7 +275,7 @@ fileprivate let runDateFormatter: DateFormatter = {
 	return df
 }()
 
-func getRuns(completion: @escaping (RunResult) -> ()) {
+func getRuns(session: URLSession = URLSession(configuration: .default), completion: @escaping (RunResult) -> ()) {
 	
 	do {
 		let data = try Data(contentsOf: runsURL)
@@ -273,8 +291,6 @@ func getRuns(completion: @escaping (RunResult) -> ()) {
 		print("Error reading salmon run data:", error.localizedDescription)
 	}
 	
-	let session = URLSession(configuration: .default)
-	
 	let timezoneOffset = -Calendar.current.timeZone.secondsFromGMT()/60
 	let stagesURL = URL(string: "http://splatooniverse.com/ajax/get-salmon.php?timezone=\(timezoneOffset)")!
 	
@@ -285,16 +301,17 @@ func getRuns(completion: @escaping (RunResult) -> ()) {
 		}
 		
 		do {
-			
-			let decoder = JSONDecoder()
-			decoder.dateDecodingStrategy = .secondsSince1970
-			
 			let runs = try decoder.decode(Runs.self, from: data)
-			
 			completion(.success(runs))
-			
 		} catch {
 			completion(.failure(error))
 		}
-		}.resume()
+		
+		do {
+			try data.write(to: runsURL)
+			print("Wrote salmon runs to ", runsURL)
+		} catch let error {
+			print("Error writing salmon run schedule:", error.localizedDescription)
+		}
+	}.resume()
 }
