@@ -12,7 +12,19 @@ import NotificationCenter
 
 class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	
-	var schedule: Schedule?
+	var schedule: Schedule? {
+		didSet {
+			if let schedule = schedule {
+				do {
+					let data = try encoder.encode(schedule)
+					try data.write(to: scheduleURL, options: .atomic)
+					print("Wrote schedule to", scheduleURL)
+				} catch {
+					print("Error writing schedule:", error.localizedDescription)
+				}
+			}
+		}
+	}
 	
 	static let widgetFormatter: DateFormatter = {
 		let df = DateFormatter()
@@ -49,7 +61,11 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
 		
-		print("Update")
+		if let schedule = schedule, schedule.isValid {
+			completionHandler(.noData)
+			return
+		}
+		
 		getSchedule { (result) in
 			print("Completion")
 			switch result {

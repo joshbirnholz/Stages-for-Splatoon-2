@@ -96,6 +96,23 @@ struct Schedule: Codable {
 			return rankedEntries
 		}
 	}
+	
+	var isValid: Bool {
+		let firstEntries = [leagueEntries.first, regularEntries.first, rankedEntries.first].flatMap { $0 }
+		guard !firstEntries.isEmpty else {
+			return false
+		}
+		
+		let now = Date()
+		
+		for entry in firstEntries {
+			if entry.endTime < now {
+				return false
+			}
+		}
+		
+		return true
+	}
 }
 
 enum ScheduleResult {
@@ -148,6 +165,22 @@ enum Mode: String, CustomStringConvertible {
 }
 
 func getSchedule(completion: @escaping (ScheduleResult) -> ()) {
+	
+	do {
+		let data = try Data(contentsOf: scheduleURL)
+		let schedule = try decoder.decode(Schedule.self, from: data)
+		
+		if schedule.isValid {
+			print("Previous schedule was valid, using that one")
+			completion(.success(schedule))
+			return
+		}
+		
+	} catch {
+		print("Error reading schedule data:", error.localizedDescription)
+	}
+	
+	print("Downloading updated schedule")
 
 	let session = URLSession(configuration: .default)
 	
@@ -202,6 +235,14 @@ struct Runs: Codable {
 		}
 	}
 	var runs: [Run]
+	
+	var isValid: Bool {
+		guard let first = runs.first else {
+			return false
+		}
+		
+		return first.isOpen || first.endTime < Date()
+	}
 }
 
 
@@ -217,6 +258,20 @@ fileprivate let runDateFormatter: DateFormatter = {
 }()
 
 func getRuns(completion: @escaping (RunResult) -> ()) {
+	
+	do {
+		let data = try Data(contentsOf: runsURL)
+		let runs = try decoder.decode(Runs.self, from: data)
+		
+		if runs.isValid {
+			print("Previous salmon run schedule was valid, using that one")
+			completion(.success(runs))
+			return
+		}
+		
+	} catch {
+		print("Error reading salmon run data:", error.localizedDescription)
+	}
 	
 	let session = URLSession(configuration: .default)
 	

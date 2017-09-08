@@ -11,7 +11,19 @@ import NotificationCenter
 
 class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 	
-	var runs: Runs?
+	var runs: Runs? {
+		didSet {
+			if let runs = runs {
+				do {
+					let data = try encoder.encode(runs)
+					try data.write(to: runsURL, options: .atomic)
+					print("Wrote salmon runs to:", runsURL)
+				} catch {
+					print("Error writing salmon runs:", error.localizedDescription)
+				}
+			}
+		}
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +46,10 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 		// If an error is encountered, use NCUpdateResult.Failed
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
+		if let runs = runs, runs.isValid {
+			completionHandler(.noData)
+			return
+		}
 		
 		getRuns { (result) in
 			switch result {

@@ -8,7 +8,19 @@
 
 import UIKit
 
-var schedule: Schedule?
+var schedule: Schedule? {
+	didSet {
+		if let schedule = schedule {
+			do {
+				let data = try encoder.encode(schedule)
+				try data.write(to: scheduleURL, options: .atomic)
+				print("Wrote schedule to", scheduleURL)
+			} catch {
+				print("Error writing schedule:", error.localizedDescription)
+			}
+		}
+	}
+}
 
 var runs: Runs? {
 	didSet {
@@ -16,8 +28,9 @@ var runs: Runs? {
 			do {
 				let data = try encoder.encode(runs)
 				try data.write(to: runsURL, options: .atomic)
+				print("Wrote salmon run schedule to:", runsURL)
 			} catch {
-				print("Error writing schedule:", error.localizedDescription)
+				print("Error writing salmon runs:", error.localizedDescription)
 			}
 		}
 	}
