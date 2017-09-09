@@ -7,8 +7,15 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 class CurrentStagesTableViewController: UITableViewController {
+	
+	@IBOutlet var watchSettingsButton: UIBarButtonItem!
+	
+	@IBAction func settingsButtonPressed(_ sender: Any) {
+		tabBarController?.performSegue(withIdentifier: "Settings", sender: sender)
+	}
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,6 +41,7 @@ class CurrentStagesTableViewController: UITableViewController {
 		if runs == nil {
 			getRunSchedule()
 		}
+		
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -157,6 +165,10 @@ class CurrentStagesTableViewController: UITableViewController {
 		cell.badgeLabel.text = run.isOpen ? "Open!" : "Next"
 		
 		return cell
+	}
+	
+	@IBAction func unwindToCurrentStagesViewController(segue: UIStoryboardSegue) {
+	
 	}
 	
 //	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

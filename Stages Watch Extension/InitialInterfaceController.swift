@@ -17,8 +17,6 @@ class InitialInterfaceController: WKInterfaceController {
 	
 	override func awake(withContext context: Any?) {
 		super.awake(withContext: context)
-		
-		(WKExtension.shared().delegate as? ExtensionDelegate)?.initialInterfaceController = self
 	}
 	
 	override func didAppear() {

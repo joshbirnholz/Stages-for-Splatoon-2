@@ -9,6 +9,11 @@
 import WatchKit
 
 var schedule: Schedule?
+var timer: Timer? {
+	willSet {
+		timer?.invalidate()
+	}
+}
 
 func reloadControllers(mode: Mode) {
 	DispatchQueue.main.async {
@@ -20,14 +25,15 @@ func reloadControllers(mode: Mode) {
 		schedule.removeExpiredEntries()
 		
 		let names = Array(repeating: "Stages", count: min(4, schedule[mode].count))
+		let contexts = Array(schedule[mode].prefix(names.count))
 		
 		if #available(watchOSApplicationExtension 4.0, *) {
 			WKInterfaceController.reloadRootPageControllers(withNames: names,
-			                                                contexts: Array(schedule[mode].prefix(names.count)),
+			                                                contexts: contexts,
 			                                                orientation: .vertical,
 			                                                pageIndex: 0)
 		} else {
-			WKInterfaceController.reloadRootControllers(withNames: names, contexts: schedule[mode])
+			WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
 		}
 	}
 }
@@ -108,6 +114,19 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 			} else {
 				print("Successfully scheduled snapshot.  All background work completed.")
 			}
+		}
+	}
+	
+	func scheduleForegroundReload() {
+		guard let updateTime = schedule?[selectedMode].first?.endTime else {
+			loadSchedule(displayMode: selectedMode)
+			return
+		}
+		timer = Timer(fire: updateTime, interval: 0, repeats: false) { [weak self] timer in
+			if WKExtension.shared().applicationState == .active {
+				self?.loadSchedule(displayMode: selectedMode)
+			}
+			self?.scheduleForegroundReload()
 		}
 	}
 	

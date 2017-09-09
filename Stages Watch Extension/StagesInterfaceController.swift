@@ -44,8 +44,16 @@ class StagesInterfaceController: WKInterfaceController {
 		stageBLabel.setText(entry.stageB.name)
 		stageBGroup.setBackgroundImage(UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-")))
 		
+		(WKExtension.shared().delegate as? ExtensionDelegate)?.scheduleForegroundReload()
+		
     }
-    
+	
+	override func didAppear() {
+		if schedule == nil || !schedule!.isValid {
+			(WKExtension.shared().delegate as? ExtensionDelegate)?.loadSchedule(displayMode: selectedMode)
+		}
+	}
+	
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
@@ -67,5 +75,6 @@ class StagesInterfaceController: WKInterfaceController {
 	@IBAction func leagueBattleButtonPressed() {
 		selectedMode = .league
 	}
+	
 	
 }

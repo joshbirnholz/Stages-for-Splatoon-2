@@ -10,11 +10,8 @@ import WatchKit
 import ClockKit
 
 var complicationMode: Mode {
-	set {
-		UserDefaults.standard.set(newValue.rawValue, forKey: "complicationMode")
-	}
 	get {
-		guard let str = UserDefaults.standard.string(forKey: "complicationMode") else {
+		guard let str = UserDefaults.group.string(forKey: "complicationMode") else {
 			return .regular
 		}
 		return Mode(rawValue: str) ?? .regular

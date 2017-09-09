@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import WatchConnectivity
 
 var schedule: Schedule?
 var runs: Runs?
@@ -22,6 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "JapanYoshiSplatoon", size: 22)!]
 		
 		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 9)!], for: .normal)
+		
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 19)!], for: .normal)
 		
 		//UITabBarItem.appearance().setBadgeTextAttributes([NSAttributedStringKey.font.rawValue: UIFont(name: "Splatoon2", size: 10)!], for: .normal)
 		//UITabBarItem.appearance().setBadgeTextAttributes([NSAttributedStringKey.font.rawValue: UIFont(name: "Splatoon2", size: 10)!], for: .selected)
@@ -65,6 +68,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		vcs.append(salmonRun)
 		
 		tab.viewControllers = vcs
+		
+		print("Will activate WCSession")
+		if WCSession.isSupported() {
+			print("Activating WCSession")
+			WCSession.default.delegate = self
+			WCSession.default.activate()
+		}
 		
 		return true
 	}
@@ -118,3 +128,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+extension AppDelegate: WCSessionDelegate {
+	
+	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+		if activationState == .activated {
+			print("Watch session activated")
+		}
+		
+		if let error = error {
+			print("Error activating WCSession:", error.localizedDescription)
+		}
+	}
+	
+	func sessionDidBecomeInactive(_ session: WCSession) {
+		print("Watch session became inactive")
+	}
+	
+	func sessionDidDeactivate(_ session: WCSession) {
+		print("Watch Session deactivated")
+	}
+	
+	
+}
