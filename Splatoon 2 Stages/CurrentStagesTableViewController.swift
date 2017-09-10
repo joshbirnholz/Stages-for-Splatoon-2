@@ -21,7 +21,7 @@ class CurrentStagesTableViewController: UITableViewController {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		
-		tableView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "zigzag"))
+		tableView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "sitebg"))
 		tableView.layer.isOpaque = false
 		
 		if #available(iOS 10.0, *) {

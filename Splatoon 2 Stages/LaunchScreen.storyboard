@@ -1,25 +1,60 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ktb-D1-s3r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
+        <scene sceneID="rRi-JE-WND">
             <objects>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                <viewController id="Ktb-D1-s3r" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iaZ-zw-dZE"/>
+                        <viewControllerLayoutGuide type="bottom" id="qcJ-Qd-3S2"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9UH-09-Hiv">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sitebg" translatesAutoresizingMaskIntoConstraints="NO" id="ZBc-Sa-A8Z">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stages" translatesAutoresizingMaskIntoConstraints="NO" id="vHv-CG-1Gk">
+                                <rect key="frame" x="36" y="234" width="303" height="200"/>
+                                <color key="tintColor" red="0.95014292" green="0.21252280470000001" blue="0.51657241580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="mt1-lg-Yxe"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ZBc-Sa-A8Z" firstAttribute="centerY" secondItem="vHv-CG-1Gk" secondAttribute="centerY" id="2jF-3N-PdE"/>
+                            <constraint firstItem="vHv-CG-1Gk" firstAttribute="leading" secondItem="9UH-09-Hiv" secondAttribute="leadingMargin" constant="20" id="5Bj-Fb-VRH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vHv-CG-1Gk" secondAttribute="trailing" constant="20" id="IQF-DA-ELe"/>
+                            <constraint firstItem="ZBc-Sa-A8Z" firstAttribute="bottom" secondItem="qcJ-Qd-3S2" secondAttribute="top" id="Jy5-qt-LLu"/>
+                            <constraint firstItem="ZBc-Sa-A8Z" firstAttribute="centerX" secondItem="vHv-CG-1Gk" secondAttribute="centerX" id="LMu-pH-CBb"/>
+                            <constraint firstItem="ZBc-Sa-A8Z" firstAttribute="leading" secondItem="9UH-09-Hiv" secondAttribute="leading" id="Ovb-nI-SmX"/>
+                            <constraint firstItem="vHv-CG-1Gk" firstAttribute="centerY" secondItem="9UH-09-Hiv" secondAttribute="centerY" id="XT1-oZ-zoQ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="hc9-aj-wdd"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gs6-Ry-SaJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="356" y="335.98200899550227"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="sitebg" width="100" height="100"/>
+        <image name="stages" width="30" height="30"/>
+    </resources>
+    <color key="tintColor" red="0.95014292" green="0.21252280470000001" blue="0.51657241580000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

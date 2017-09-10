@@ -4,10 +4,6 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>NSUserActivityTypes</key>
-	<array>
-		<string>com.josh.birnholz.Splatoon-2-Stages.openMode</string>
-	</array>
 	<key>CFBundleDisplayName</key>
 	<string>Stages</string>
 	<key>CFBundleExecutable</key>
@@ -23,7 +19,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>8</string>
+	<string>10</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -70,6 +66,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSUserActivityTypes</key>
+	<array>
+		<string>com.josh.birnholz.Splatoon-2-Stages.openMode</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -78,11 +78,11 @@
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
