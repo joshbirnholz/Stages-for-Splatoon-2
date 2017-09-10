@@ -27,7 +27,7 @@ class UpcomingStagesViewController: UITableViewController {
 		
 		navigationItem.title = mode.description
 		
-		if schedule == nil {
+		if battleSchedule == nil {
 			loadSchedule()
 		}
 	}
@@ -44,7 +44,7 @@ class UpcomingStagesViewController: UITableViewController {
 			case .failure(let error):
 				print("Error retreiving the schedule:", error.localizedDescription)
 			case .success(let sch):
-				schedule = sch
+				battleSchedule = sch
 				
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
@@ -62,7 +62,7 @@ class UpcomingStagesViewController: UITableViewController {
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		guard let _ = schedule else {
+		guard let _ = battleSchedule else {
 			return 0
 		}
 		
@@ -70,7 +70,7 @@ class UpcomingStagesViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let schedule = schedule else  {
+		guard let schedule = battleSchedule else  {
 			return 0
 		}
 		
@@ -82,7 +82,7 @@ class UpcomingStagesViewController: UITableViewController {
 			return UITableViewCell()
 		}
 		
-		guard let schedule = schedule else {
+		guard let schedule = battleSchedule else {
 			return cell
 		}
 		

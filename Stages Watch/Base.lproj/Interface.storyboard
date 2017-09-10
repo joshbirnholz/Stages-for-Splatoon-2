@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13189.4" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SJi-J7-fVz">
-    <device id="watch42" orientation="portrait">
+    <device id="watch38" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -84,6 +84,11 @@
                                     <action selector="regularBattleButtonPressed" destination="AgC-eL-Hgc" id="HVL-cH-hez"/>
                                 </connections>
                             </menuItem>
+                            <menuItem title="Salmon Run" image="Salmon Tab" id="SWG-0B-RTH">
+                                <connections>
+                                    <action selector="salmonRunButtonPressed" destination="AgC-eL-Hgc" id="XUo-jk-CGm"/>
+                                </connections>
+                            </menuItem>
                             <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="6py-s2-qsf">
                                 <connections>
                                     <action selector="rankedBattleButtonPressed" destination="AgC-eL-Hgc" id="OwH-4s-bns"/>
@@ -108,6 +113,76 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="90" y="74"/>
+        </scene>
+        <!--Salmon Run-->
+        <scene sceneID="pwb-r1-zb5">
+            <objects>
+                <controller identifier="SalmonRun" title="Salmon Run" alwaysBounce="YES" id="nQN-tf-8Lx" customClass="SalmonRunInterfaceController" customModule="Stages_Watch_Extension">
+                    <items>
+                        <table alignment="left" id="r0c-S7-oVT">
+                            <items>
+                                <tableRow identifier="SalmonRowController" selectable="NO" id="m8w-3k-Fkm" customClass="SalmonRunRowController" customModule="Stages_Watch_Extension">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" id="l1s-67-Pl7">
+                                        <items>
+                                            <group width="1" alignment="left" id="3iw-S1-aED">
+                                                <items>
+                                                    <imageView alignment="left" verticalAlignment="center" image="Salmon Icon" contentMode="scaleAspectFit" id="UFA-up-W6R"/>
+                                                    <group height="20" alignment="right" hidden="YES" spacing="0.0" id="h9m-at-KHp">
+                                                        <items>
+                                                            <label alignment="right" verticalAlignment="center" text="Open!" textAlignment="center" id="4gJ-Jc-3EA">
+                                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="11"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" red="0.98676377530000003" green="0.2715459905" blue="0.033880121110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <edgeInsets key="margins" left="4" right="4" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                </items>
+                                            </group>
+                                            <label alignment="left" text="9/10 8:00, AM - 9/11, 2:00 PM" numberOfLines="0" id="yRu-SP-4mj">
+                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="16"/>
+                                            </label>
+                                        </items>
+                                        <edgeInsets key="margins" left="7" right="7" top="7" bottom="0.0"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="badge" destination="h9m-at-KHp" id="WlN-Jg-2kH"/>
+                                        <outlet property="badgeLabel" destination="4gJ-Jc-3EA" id="MaP-En-AOL"/>
+                                        <outlet property="timeLabel" destination="yRu-SP-4mj" id="Dy4-vV-fTh"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                        </table>
+                    </items>
+                    <menu key="menu" id="uzM-1i-4w9">
+                        <items>
+                            <menuItem title="Regular Battle" image="Regular Battle Tab" id="RVa-VB-Ydm">
+                                <connections>
+                                    <action selector="regularBattleButtonPressed" destination="nQN-tf-8Lx" id="Jej-sR-ZOt"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Salmon Run" image="Salmon Tab" id="zWO-nG-0xx">
+                                <connections>
+                                    <action selector="salmonRunButtonPressed" destination="nQN-tf-8Lx" id="CHD-pF-K3H"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="SI7-5O-wvc">
+                                <connections>
+                                    <action selector="rankedBattleButtonPressed" destination="nQN-tf-8Lx" id="tCd-PE-Jb3"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="League Battle" image="League Battle Tab" id="qFG-Bh-VPr">
+                                <connections>
+                                    <action selector="leagueBattleButtonPressed" destination="nQN-tf-8Lx" id="h86-l2-Ulx"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="table" destination="r0c-S7-oVT" id="W4D-gt-Cd5"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="330" y="74"/>
         </scene>
         <!--Stages-->
         <scene sceneID="jSg-d3-6by">

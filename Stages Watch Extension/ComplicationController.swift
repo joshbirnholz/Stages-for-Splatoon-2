@@ -6,15 +6,19 @@
 //  Copyright © 2017 Joshua Birnholz. All rights reserved.
 //
 
+// Human Interface Guidelines:
+// Complications: https://developer.apple.com/watchos/human-interface-guidelines/app-components/
+// Complication Images: https://developer.apple.com/watchos/human-interface-guidelines/icons-and-images/#complication-images
+
 import WatchKit
 import ClockKit
 
-var complicationMode: Mode {
+var complicationMode: WatchScreen {
 	get {
 		guard let str = UserDefaults.group.string(forKey: "complicationMode") else {
-			return .regular
+			return .battle(.regular)
 		}
-		return Mode(rawValue: str) ?? .regular
+		return WatchScreen(rawValue: str) ?? .battle(.regular)
 	}
 }
 
@@ -29,13 +33,11 @@ var complicationUpdateDate: Date {
 
 class ComplicationController: NSObject, CLKComplicationDataSource {
 	
-	override init() {
-		super.init()
-	}
+	static let tintColor = #colorLiteral(red: 0.95014292, green: 0.2125228047, blue: 0.5165724158, alpha: 1)
 	
 	// Calls the completion handler with the loaded (valid) schedule, if any, otherwise it downloads the schedule, saves it to disk, and calls the completion handler with that. This avoids redownloading the schedule when the current schedule is valid.
-	func loadSchedule(completion: @escaping (Schedule?) -> Void) {
-		if let schedule = schedule, schedule.isValid {
+	func loadBattleSchedule(completion: @escaping (BattleSchedule?) -> Void) {
+		if let schedule = battleSchedule, schedule.isValid {
 			completion(schedule)
 			return
 		}
@@ -47,12 +49,31 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				completion(nil)
 			case .success(var sch):
 				sch.removeExpiredEntries()
-				schedule = sch
+				battleSchedule = sch
 				completion(sch)
 			}
 		}
 		
+	}
+	
+	func loadSalmonRunSchedule(completion: @escaping (SalmonRunSchedule?) -> Void) {
+		if let schedule = runSchedule, schedule.isValid {
+			completion(schedule)
+			return
+		}
 		
+		getRuns { result in
+			switch result {
+			case .failure(let error):
+				print("Failed to get salmon run schedule", error.localizedDescription)
+				completion(nil)
+			case .success(var r):
+				r.removeExpiredRuns()
+				r.sort()
+				runSchedule = r
+				completion(r)
+			}
+		}
 	}
 	
     // MARK: - Timeline Configuration
@@ -62,26 +83,50 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     }
     
     func getTimelineStartDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-		loadSchedule { schedule in
-			guard let firstEntry = schedule?[complicationMode].first else {
-				handler(nil)
-				return
+		switch complicationMode {
+		case .battle(let mode):
+			loadBattleSchedule { schedule in
+				guard let firstEntry = schedule?[mode].first else {
+					handler(nil)
+					return
+				}
+				
+				handler(firstEntry.startTime)
+				
 			}
-			
-			handler(firstEntry.startTime)
-			
+		case .salmonRun:
+			loadSalmonRunSchedule { runs in
+				guard let firstRun = runs?.runs.first else {
+					handler(nil)
+					return
+				}
+				
+				handler(firstRun.startTime)
+			}
 		}
+		
     }
     
     func getTimelineEndDate(for complication: CLKComplication, withHandler handler: @escaping (Date?) -> Void) {
-		loadSchedule { schedule in
-			guard let lastEntry = schedule?[complicationMode].last else {
-				handler(nil)
-				return
+		switch complicationMode {
+		case .battle(let mode):
+			loadBattleSchedule { schedule in
+				guard let lastEntry = schedule?[mode].last else {
+					handler(nil)
+					return
+				}
+			
+				handler(lastEntry.endTime)
 			}
-			
-			handler(lastEntry.endTime)
-			
+		case .salmonRun:
+			loadSalmonRunSchedule { runs in
+				guard let lastRun = runs?.runs.last else {
+					handler(nil)
+					return
+				}
+				
+				handler(lastRun.endTime)
+			}
 		}
     }
     
@@ -93,19 +138,37 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getCurrentTimelineEntry(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTimelineEntry?) -> Void) {
         // Call the handler with the current timeline entry
-		loadSchedule { schedule in
-			guard let scheduleEntry = schedule?[complicationMode].first else {
+		switch complicationMode {
+		case .battle(let mode):
+			loadBattleSchedule { schedule in
+				guard let scheduleEntry = schedule?[mode].first else {
+					handler(nil)
+					return
+				}
+				
+				if let template = self.battleTemplate(for: complication.family, scheduleEntry: scheduleEntry) {
+					let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
+					handler(entry)
+					return
+				}
+				
 				handler(nil)
-				return
 			}
-			
-			if let template = self.template(for: complication.family, scheduleEntry: scheduleEntry) {
-				let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
-				handler(entry)
-				return
+		case .salmonRun:
+			loadSalmonRunSchedule { schedule in
+				guard let run = schedule?.runs.first else {
+					handler(nil)
+					return
+				}
+				
+				if let template = self.salmonRunTemplate(for: complication.family, run: run) {
+					let entry = CLKComplicationTimelineEntry(date: Date(), complicationTemplate: template)
+					handler(entry)
+					return
+				}
+				
+				handler(nil)
 			}
-			
-			handler(nil)
 		}
 		
     }
@@ -117,52 +180,69 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
     
     func getTimelineEntries(for complication: CLKComplication, after date: Date, limit: Int, withHandler handler: @escaping ([CLKComplicationTimelineEntry]?) -> Void) {
         // Call the handler with the timeline entries after to the given date
-		loadSchedule { schedule in
-			guard let entries = schedule?[complicationMode] else {
-				handler(nil)
-				return
+		switch complicationMode {
+		case .battle(let mode):
+				loadBattleSchedule { schedule in
+					guard let entries = schedule?[mode] else {
+						handler(nil)
+						return
+					}
+					
+					let timelineEntries: [CLKComplicationTimelineEntry] = entries.flatMap { scheduleEntry in
+						guard let template = self.battleTemplate(for: complication.family, scheduleEntry: scheduleEntry) else {
+							return nil
+						}
+						let timelineEntry = CLKComplicationTimelineEntry(date: scheduleEntry.startTime, complicationTemplate: template)
+						return timelineEntry
+					}
+					
+					handler(timelineEntries)
 			}
-			
-			let timelineEntries: [CLKComplicationTimelineEntry] = entries.flatMap { scheduleEntry in
-				guard let template = self.template(for: complication.family, scheduleEntry: scheduleEntry) else {
-					return nil
+		case .salmonRun:
+			loadSalmonRunSchedule { schedule in
+				guard let runs = schedule?.runs else {
+					handler(nil)
+					return
 				}
-				let timelineEntry = CLKComplicationTimelineEntry(date: scheduleEntry.startTime, complicationTemplate: template)
-				return timelineEntry
+				
+				// TODO: Create timeline entries for during and between salmon runs
+				
+				handler(nil)
+				
 			}
-			
-			handler(timelineEntries)
 		}
+		
+		
     }
     
     // MARK: - Placeholder Templates
     
     func getLocalizableSampleTemplate(for complication: CLKComplication, withHandler handler: @escaping (CLKComplicationTemplate?) -> Void) {
         // This method will be called once per supported complication, and the results will be cached
-		let start = Date()
+		let start = Date().addingTimeInterval(-2700)
 		let end = start.addingTimeInterval(7200)
 		
-		let gameMode = Schedule.Entry.GameMode(name: "Regular", key: "regular")
-		let stageA = Schedule.Entry.Stage(id: "", name: "Stage A", image: "")
-		let stageB = Schedule.Entry.Stage(id: "", name: "Stage B", image: "")
+		let gameMode = BattleSchedule.Entry.GameMode(name: "Regular", key: "regular")
+		let stageA = BattleSchedule.Entry.Stage(id: "", name: "Stage A", image: "")
+		let stageB = BattleSchedule.Entry.Stage(id: "", name: "Stage B", image: "")
 		
-		let rule = Schedule.Entry.Rule(multilineName: "", key: "turfwar", name: "Turf War")
+		let rule = BattleSchedule.Entry.Rule(multilineName: "", key: "turfwar", name: "Turf War")
 		
-		let sampleScheduleEntry = Schedule.Entry(startTime: start,
-		                                         id: 0,
-		                                         gameMode: gameMode,
-		                                         endTime: end,
-		                                         stageA: stageA,
-		                                         stageB: stageB,
-		                                         rule: rule)
+		let sampleScheduleEntry = BattleSchedule.Entry(startTime: start,
+		                                               id: 0,
+		                                               gameMode: gameMode,
+		                                               endTime: end,
+		                                               stageA: stageA,
+		                                               stageB: stageB,
+		                                               rule: rule)
 		
-        handler(template(for: complication.family, scheduleEntry: sampleScheduleEntry))
+		handler(battleTemplate(for: complication.family, scheduleEntry: sampleScheduleEntry))
+		
     }
 	
-	func template(for complicationFamily: CLKComplicationFamily, scheduleEntry: Schedule.Entry) -> CLKComplicationTemplate? {
+	func battleTemplate(for complicationFamily: CLKComplicationFamily, scheduleEntry: BattleSchedule.Entry) -> CLKComplicationTemplate? {
 		
 		let gameMode = Mode(rawValue: scheduleEntry.gameMode.key) ?? .regular
-		let tintColor = #colorLiteral(red: 0.95014292, green: 0.2125228047, blue: 0.5165724158, alpha: 1)
 		
 		var endTimeRelativeDateTextProvider: CLKRelativeDateTextProvider {
 			return CLKRelativeDateTextProvider(date: scheduleEntry.endTime, style: .timer, units: [.hour, .minute, .second])
@@ -187,7 +267,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let size = CGSize(width: dimension, height: dimension)
 			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
 			template.line2TextProvider = endTimeRelativeDateTextProvider
-			template.tintColor = tintColor
+			template.tintColor = ComplicationController.tintColor
 			return template
 		case .extraLarge:
 			let template = CLKComplicationTemplateExtraLargeStackImage()
@@ -195,7 +275,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let size = CGSize(width: dimension, height: dimension)
 			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
 			template.line2TextProvider = endTimeRelativeDateTextProvider
-			template.tintColor = tintColor
+			template.tintColor = ComplicationController.tintColor
 			return template
 		case .modularLarge:
 			let template = CLKComplicationTemplateModularLargeStandardBody()
@@ -213,7 +293,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let size = CGSize(width: dimension, height: dimension)
 			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
 			template.line2TextProvider = endTimeRelativeDateTextProvider
-			template.tintColor = tintColor
+			template.tintColor = ComplicationController.tintColor
 			return template
 		case .utilitarianLarge:
 			let template = CLKComplicationTemplateUtilitarianLargeFlat()
@@ -221,23 +301,68 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let size = CGSize(width: dimension, height: dimension)
 			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
 			template.textProvider = endTimeRelativeDateTextProvider
-			template.tintColor = tintColor
+			template.tintColor = ComplicationController.tintColor
 			return template
 		case .utilitarianSmall:
-			let template = CLKComplicationTemplateUtilitarianSmallSquare()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Utilitarian"))
-			template.tintColor = tintColor
-			return template
+			return genericTemplate(for: complicationFamily)
 		case .utilitarianSmallFlat:
 			let template = CLKComplicationTemplateUtilitarianSmallFlat()
 			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 20 : 18
 			let size = CGSize(width: dimension, height: dimension)
 			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
 			template.textProvider = endTimeRelativeDateTextProvider
-			template.tintColor = tintColor
+			template.tintColor = ComplicationController.tintColor
 			return template
 		}
 		
 	}
-    
+	
+	func salmonRunTemplate(for complicationFamily: CLKComplicationFamily, run: SalmonRunSchedule.Run) -> CLKComplicationTemplate? {
+		// TODO: return Salmon Run template
+		return nil
+	}
+	
+	func genericTemplate(for complicationFamily: CLKComplicationFamily) -> CLKComplicationTemplate? {
+		switch complicationFamily {
+		case .circularSmall:
+			let template = CLKComplicationTemplateCircularSmallSimpleImage()
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Circular"))
+			template.tintColor = ComplicationController.tintColor
+			return template
+		case .extraLarge:
+			let template = CLKComplicationTemplateExtraLargeSimpleImage()
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Extra Large"))
+			template.tintColor = ComplicationController.tintColor
+			return template
+		case .modularSmall:
+			let template = CLKComplicationTemplateModularSmallSimpleImage()
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Modular"))
+			template.tintColor = ComplicationController.tintColor
+			return template
+		case .utilitarianLarge:
+			let template = CLKComplicationTemplateUtilitarianLargeFlat()
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 20 : 18
+			let size = CGSize(width: dimension, height: dimension)
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.textProvider = CLKSimpleTextProvider(text: "Stages")
+			template.tintColor = ComplicationController.tintColor
+			return template
+		case .utilitarianSmall:
+			let template = CLKComplicationTemplateUtilitarianSmallSquare()
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Utilitarian"))
+			template.tintColor = ComplicationController.tintColor
+			return template
+		case .utilitarianSmallFlat:
+			let template = CLKComplicationTemplateUtilitarianSmallFlat()
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 20 : 18
+			let size = CGSize(width: dimension, height: dimension)
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.textProvider = CLKSimpleTextProvider(text: "Stages")
+			template.tintColor = ComplicationController.tintColor
+			return template
+		default:
+			return nil
+		}
+	}
+	
 }

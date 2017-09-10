@@ -9,8 +9,8 @@
 import UIKit
 import WatchConnectivity
 
-var schedule: Schedule?
-var runs: Runs?
+var battleSchedule: BattleSchedule?
+var runSchedule: SalmonRunSchedule?
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

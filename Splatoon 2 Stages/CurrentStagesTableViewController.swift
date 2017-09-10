@@ -34,11 +34,11 @@ class CurrentStagesTableViewController: UITableViewController {
 			tableView.refreshControl = refreshControl
 		}
 		
-		if schedule == nil {
+		if battleSchedule == nil {
 			loadSchedule()
 		}
 		
-		if runs == nil {
+		if runSchedule == nil {
 			getRunSchedule()
 		}
 		
@@ -61,7 +61,7 @@ class CurrentStagesTableViewController: UITableViewController {
 			case .failure(let error):
 				print("Error retreiving the schedule:", error.localizedDescription)
 			case .success(let sch):
-				schedule = sch
+				battleSchedule = sch
 				
 				DispatchQueue.main.async {
 					if #available(iOS 10.0, *) {
@@ -82,7 +82,7 @@ class CurrentStagesTableViewController: UITableViewController {
 			case .success(var r):
 				r.removeExpiredRuns()
 				r.sort()
-				runs = r
+				runSchedule = r
 				
 				DispatchQueue.main.async {
 					(self.tabBarController as? SplatoonTabBarController)?.updateSalmonRunBadge()
@@ -98,11 +98,11 @@ class CurrentStagesTableViewController: UITableViewController {
 	}
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		return schedule == nil ? 0 : 1
+		return battleSchedule == nil ? 0 : 1
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return schedule == nil ? 0 : 3
+		return battleSchedule == nil ? 0 : 3
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -114,12 +114,12 @@ class CurrentStagesTableViewController: UITableViewController {
 			return UITableViewCell()
 		}
 		
-		guard let schedule = schedule else {
+		guard let schedule = battleSchedule else {
 			return cell
 		}
 		
-		guard let entry: Schedule.Entry = {
-			func match(entry: Schedule.Entry) -> Bool {
+		guard let entry: BattleSchedule.Entry = {
+			func match(entry: BattleSchedule.Entry) -> Bool {
 				let now = Date()
 				return entry.startTime < now && entry.endTime > now
 			}
@@ -154,7 +154,7 @@ class CurrentStagesTableViewController: UITableViewController {
 	}
 	
 	func salmonRunCell(forRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let run = runs?.runs.first else {
+		guard let run = runSchedule?.runs.first else {
 			return UITableViewCell()
 		}
 		

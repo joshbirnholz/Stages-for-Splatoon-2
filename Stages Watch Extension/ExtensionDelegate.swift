@@ -8,46 +8,63 @@
 
 import WatchKit
 
-var schedule: Schedule?
+var battleSchedule: BattleSchedule?
+var runSchedule: SalmonRunSchedule?
+
 var timer: Timer? {
 	willSet {
 		timer?.invalidate()
 	}
 }
 
-func reloadControllers(mode: Mode) {
-	DispatchQueue.main.async {
-		guard var schedule = schedule else {
+func reloadControllers(mode: WatchScreen) {
+	switch mode {
+	case .battle(let mode):
+		DispatchQueue.main.async {
+			guard var schedule = battleSchedule else {
+				WKInterfaceController.reloadRootControllers(withNames: ["Initial"], contexts: nil)
+				return
+			}
+			
+			schedule.removeExpiredEntries()
+			
+			let names = Array(repeating: "Stages", count: min(4, schedule[mode].count))
+			let contexts = Array(schedule[mode].prefix(names.count))
+			
+			if #available(watchOSApplicationExtension 4.0, *) {
+				WKInterfaceController.reloadRootPageControllers(withNames: names,
+				                                                contexts: contexts,
+				                                                orientation: .vertical,
+				                                                pageIndex: 0)
+			} else {
+				WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
+			}
+		}
+	case .salmonRun:
+		guard var schedule = runSchedule else {
 			WKInterfaceController.reloadRootControllers(withNames: ["Initial"], contexts: nil)
 			return
 		}
 		
-		schedule.removeExpiredEntries()
+		schedule.removeExpiredRuns()
+		schedule.sort()
 		
-		let names = Array(repeating: "Stages", count: min(4, schedule[mode].count))
-		let contexts = Array(schedule[mode].prefix(names.count))
-		
-		if #available(watchOSApplicationExtension 4.0, *) {
-			WKInterfaceController.reloadRootPageControllers(withNames: names,
-			                                                contexts: contexts,
-			                                                orientation: .vertical,
-			                                                pageIndex: 0)
-		} else {
-			WKInterfaceController.reloadRootControllers(withNames: names, contexts: contexts)
-		}
+		WKInterfaceController.reloadRootControllers(withNames: ["SalmonRun"], contexts: nil)
 	}
+	
+	
 }
 
-var selectedMode: Mode {
+var selectedMode: WatchScreen {
 	set {
 		UserDefaults.standard.set(newValue.rawValue, forKey: "selectedMode")
 		reloadControllers(mode: newValue)
 	}
 	get {
 		guard let str = UserDefaults.standard.string(forKey: "selectedMode") else {
-			return .regular
+			return .battle(.regular)
 		}
-		return Mode(rawValue: str) ?? .regular
+		return WatchScreen(rawValue: str) ?? .battle(.regular)
 	}
 }
 
@@ -64,39 +81,80 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 		
 	}
 	
-	func loadSchedule(displayMode: Mode) {
-		print("Loading schedule")
+	func loadSchedule(displayMode: WatchScreen) {
+		print("Loading schedules")
+		
+		var errorToShow: Error?
+		let group = DispatchGroup()
+		
+		group.enter()
 		getSchedule { (result) in
 			switch result {
 			case .failure(let error):
-				let okAction = WKAlertAction(title: "OK", style: .default) { }
-				DispatchQueue.main.async {
-					print(error)
-					self.initialInterfaceController?.presentAlert(withTitle: "An error occurred loading stages.", message: error.localizedDescription, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
-					self.initialInterfaceController?.loadingImage.stopAnimating()
-					self.initialInterfaceController?.loadingImage.setHidden(true)
-					self.initialInterfaceController?.retryButton.setEnabled(true)
-					self.initialInterfaceController?.retryButton.setHidden(false)
-					self.initialInterfaceController?.buttonAction = self.loadSchedule
+				switch selectedMode {
+				case .battle(_):
+					errorToShow = error
+				default:
+					break
 				}
 			case .success(var sch):
 				sch.removeExpiredEntries()
-				schedule = sch
-				reloadControllers(mode: displayMode)
-				self.extendComplicationTimelines()
-				
-				self.scheduleBackgroundRefresh()
+				battleSchedule = sch
 			}
+			group.leave()
 		}
+		
+		group.enter()
+		getRuns { (result) in
+			switch result {
+			case .failure(let error):
+				switch selectedMode {
+				case .battle(_):
+					errorToShow = error
+				default:
+					break
+				}
+			case .success(var r):
+				r.removeExpiredRuns()
+				r.sort()
+				runSchedule = r
+			}
+			group.leave()
+		}
+		
+		group.wait()
+		
+		if let error = errorToShow {
+			if let initial = initialInterfaceController {
+				initial.showError(error)
+			} else {
+				DispatchQueue.main.async {
+					WKInterfaceController.reloadRootControllers(withNames: ["Initial"], contexts: [error])
+				}
+			}
+		} else {
+			reloadControllers(mode: displayMode)
+			self.extendComplicationTimelines()
+			self.scheduleBackgroundRefresh()
+		}
+	
 	}
 	
 	func scheduleBackgroundRefresh() {
 		// Schedule next update
-		guard let firstEntry = schedule?[complicationMode].first else {
-			return
+		
+		guard let refreshDate: Date = {
+			switch complicationMode {
+			case .battle(let mode):
+				return battleSchedule?[mode].first?.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval)
+			case .salmonRun:
+				return runSchedule?.runs.first?.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval)
+			}
+		}() else {
+				return
 		}
 		
-		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: firstEntry.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval), userInfo: nil) { error in
+		WKExtension.shared().scheduleBackgroundRefresh(withPreferredDate: refreshDate, userInfo: nil) { error in
 			if let error = error {
 				print("Error scheduling background task:", error.localizedDescription)
 			} else {
@@ -118,10 +176,18 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 	}
 	
 	func scheduleForegroundReload() {
-		guard let updateTime = schedule?[selectedMode].first?.endTime else {
-			loadSchedule(displayMode: selectedMode)
-			return
+		guard let updateTime: Date = {
+			switch selectedMode {
+			case .battle(let mode):
+				return battleSchedule?[mode].first?.endTime
+			case .salmonRun:
+				return runSchedule?.runs.first?.endTime
+			}
+			}() else {
+			self.loadSchedule(displayMode: selectedMode)
+				return
 		}
+		
 		timer = Timer(fire: updateTime, interval: 0, repeats: false) { [weak self] timer in
 			if WKExtension.shared().applicationState == .active {
 				self?.loadSchedule(displayMode: selectedMode)
@@ -135,7 +201,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 		backgroundConfigObject.sessionSendsLaunchEvents = true
 		let backgroundSession = URLSession(configuration: backgroundConfigObject)
 		
-		let downloadScheduleTask = backgroundSession.downloadTask(with: Schedule.downloadURL)
+		let downloadScheduleTask = backgroundSession.downloadTask(with: BattleSchedule.downloadURL)
 		downloadScheduleTask.resume()
 	}
 	
@@ -172,7 +238,17 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 				print("Received snapshot task")
 				// Snapshot tasks have a unique completion call, make sure to set your expiration date
 				
-				snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: schedule?[complicationMode].first?.endTime ?? .distantFuture, userInfo: nil)
+				let expirationDate: Date = {
+					switch complicationMode {
+					case .battle(let mode):
+						return battleSchedule?[mode].first?.endTime ?? .distantFuture
+					case .salmonRun:
+						return runSchedule?.runs.first?.endTime ?? .distantFuture
+					}
+				}()
+				
+				snapshotTask.setTaskCompleted(restoredDefaultState: true, estimatedSnapshotExpiration: expirationDate, userInfo: nil)
+				
 			case let connectivityTask as WKWatchConnectivityRefreshBackgroundTask:
 				// Be sure to complete the connectivity task once you’re done.
 				if #available(watchOSApplicationExtension 4.0, *) {
@@ -238,7 +314,7 @@ extension ExtensionDelegate: URLSessionDownloadDelegate {
 				print("Failed to load stages:", error.localizedDescription)
 			case .success(var sch):
 				sch.removeExpiredEntries()
-				schedule = sch
+				battleSchedule = sch
 				extendComplicationTimelines()
 				
 				self.scheduleBackgroundRefresh()

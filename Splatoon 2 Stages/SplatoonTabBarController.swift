@@ -23,7 +23,7 @@ class SplatoonTabBarController: UITabBarController {
 		
 		item.badgeColor = #colorLiteral(red: 0.9867637753, green: 0.2715459905, blue: 0.03388012111, alpha: 1)
 		
-		guard let run = runs?.runs.first else {
+		guard let run = runSchedule?.runs.first else {
 			item.badgeValue = nil
 			return
 		}

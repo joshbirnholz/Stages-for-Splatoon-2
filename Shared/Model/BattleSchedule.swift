@@ -24,7 +24,7 @@ let dateFormatter: DateFormatter = {
 	return df
 }()
 
-struct Schedule: Codable {
+struct BattleSchedule: Codable {
 	
 	private static let encoder: JSONEncoder = {
 		let e = JSONEncoder()
@@ -138,8 +138,18 @@ struct Schedule: Codable {
 }
 
 enum ScheduleResult {
-	case success(Schedule)
+	case success(BattleSchedule)
 	case failure(Error)
+	
+	var validSchedule: BattleSchedule? {
+		switch self {
+		case .success(var schedule) where schedule.isValid:
+			schedule.removeExpiredEntries()
+			return schedule
+		default:
+			return nil
+		}
+	}
 }
 
 func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, completion: @escaping (ScheduleResult) -> ()) {
@@ -149,7 +159,7 @@ func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, com
 	}
 	
 	do {
-		var schedule = try decoder.decode(Schedule.self, from: data)
+		var schedule = try decoder.decode(BattleSchedule.self, from: data)
 		schedule.removeExpiredEntries()
 		
 		completion(.success(schedule))
@@ -169,7 +179,7 @@ func getSchedule(session: URLSession = URLSession(configuration: .default), comp
 	
 	do {
 		let data = try Data(contentsOf: scheduleURL)
-		let schedule = try decoder.decode(Schedule.self, from: data)
+		let schedule = try decoder.decode(BattleSchedule.self, from: data)
 		
 		if schedule.isValid {
 			print("Previous schedule was valid, using that one")
@@ -183,7 +193,7 @@ func getSchedule(session: URLSession = URLSession(configuration: .default), comp
 	
 	print("Downloading updated schedule")
 	
-	session.dataTask(with: Schedule.downloadURL) { data, response, error in
+	session.dataTask(with: BattleSchedule.downloadURL) { data, response, error in
 		getScheduleFinished(data: data, response: response, error: error, completion: completion)
 	}.resume()
 }

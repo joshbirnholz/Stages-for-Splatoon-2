@@ -11,7 +11,7 @@ import NotificationCenter
 
 class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 	
-	var runs: Runs?
+	var runSchedule: SalmonRunSchedule?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -34,7 +34,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 		// If an error is encountered, use NCUpdateResult.Failed
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
-		if let runs = runs, runs.isValid {
+		if let runs = runSchedule, runs.isValid {
 			completionHandler(.noData)
 			return
 		}
@@ -47,7 +47,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 			case .success(var r):
 				r.removeExpiredRuns()
 				r.sort()
-				self.runs = r
+				self.runSchedule = r
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 					completionHandler(.newData)
@@ -57,7 +57,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	func badgeText(forRowAt indexPath: IndexPath) -> String? {
-		guard let runs = runs else {
+		guard let runs = runSchedule else {
 			return nil
 		}
 		if runs.runs[indexPath.row].status == .open {
@@ -82,7 +82,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let runs = runs else {
+		guard let runs = runSchedule else {
 			extensionContext?.widgetLargestAvailableDisplayMode = .compact
 			return 0
 		}
@@ -99,7 +99,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonRunCell", for: indexPath) as! SalmonRunCell
 		
-		guard let run = runs?.runs[indexPath.row] else {
+		guard let run = runSchedule?.runs[indexPath.row] else {
 			return cell
 		}
 		

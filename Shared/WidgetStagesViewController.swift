@@ -12,7 +12,7 @@ import NotificationCenter
 
 class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	
-	var schedule: Schedule?
+	var battleSchedule: BattleSchedule?
 	
 	static let widgetFormatter: DateFormatter = {
 		let df = DateFormatter()
@@ -49,7 +49,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
 		
-		if let schedule = schedule, schedule.isValid {
+		if let schedule = battleSchedule, schedule.isValid {
 			completionHandler(.noData)
 			return
 		}
@@ -62,7 +62,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 				completionHandler(.failed)
 			case .success(var sch):
 				sch.removeExpiredEntries()
-				self.schedule = sch
+				self.battleSchedule = sch
 				
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
@@ -82,7 +82,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let schedule = schedule else {
+		guard let schedule = battleSchedule else {
 			extensionContext?.widgetLargestAvailableDisplayMode = .compact
 			return 0
 		}
@@ -101,7 +101,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 			return UITableViewCell()
 		}
 		
-		guard let schedule = schedule else {
+		guard let schedule = battleSchedule else {
 			return cell
 		}
 		

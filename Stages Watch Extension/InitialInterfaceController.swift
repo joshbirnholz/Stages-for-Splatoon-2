@@ -11,12 +11,18 @@ import WatchKit
 class InitialInterfaceController: WKInterfaceController {
 	
 	@IBOutlet var loadingImage: WKInterfaceImage!
-	var buttonAction: ((Mode) -> ()) = { _ in }
+	var buttonAction: ((WatchScreen) -> ())? = nil
 	
 	@IBOutlet var retryButton: WKInterfaceButton!
 	
 	override func awake(withContext context: Any?) {
 		super.awake(withContext: context)
+		
+		(WKExtension.shared().delegate as? ExtensionDelegate)?.initialInterfaceController = self
+		
+		if let error = context as? Error {
+			showError(error)
+		}
 	}
 	
 	override func didAppear() {
@@ -40,11 +46,21 @@ class InitialInterfaceController: WKInterfaceController {
 		super.didDeactivate()
 	}
 	
+	func showError(_ error: Error) {
+		let okAction = WKAlertAction(title: "OK", style: .default) { }
+		presentAlert(withTitle: "An error occurred loading data.", message: error.localizedDescription, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
+		loadingImage.stopAnimating()
+		loadingImage.setHidden(true)
+		retryButton.setEnabled(true)
+		retryButton.setHidden(false)
+		buttonAction = (WKExtension.shared().delegate as? ExtensionDelegate)?.loadSchedule
+	}
+	
 	@IBAction func retryButtonPressed() {
 		retryButton.setEnabled(false)
 		retryButton.setHidden(true)
 		loadingImage.setHidden(false)
 		loadingImage.startAnimating()
-		buttonAction(selectedMode)
+		buttonAction?(selectedMode)
 	}
 }

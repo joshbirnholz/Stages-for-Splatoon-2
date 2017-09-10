@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Runs: Codable {
+struct SalmonRunSchedule: Codable {
 	struct Run: Codable {
 		enum Status {
 			case notStarted, open, ended
@@ -64,12 +64,40 @@ struct Runs: Codable {
 	mutating func sort() {
 		runs.sort { $0.startTime < $1.startTime }
 	}
+	
+	func badgeText(forRowAt index: Int) -> String? {
+		if runs[index].status == .open {
+			return "Open!"
+		}
+		
+		if index == 0 {
+			return "Next"
+		}
+		
+		let previous = index - 1
+		if previous >= 0 && runs[previous].status == .open {
+			return "Next"
+		}
+		
+		return nil
+	}
 }
 
 
 enum RunResult {
 	case failure(Error)
-	case success(Runs)
+	case success(SalmonRunSchedule)
+	
+	var validSchedule: SalmonRunSchedule? {
+		switch self {
+		case .success(var schedule) where schedule.isValid:
+			schedule.removeExpiredRuns()
+			schedule.sort()
+			return schedule
+		default:
+			return nil
+		}
+	}
 }
 
 fileprivate let runDateFormatter: DateFormatter = {
@@ -82,7 +110,7 @@ func getRuns(session: URLSession = URLSession(configuration: .default), completi
 	
 	do {
 		let data = try Data(contentsOf: runsURL)
-		let runs = try decoder.decode(Runs.self, from: data)
+		let runs = try decoder.decode(SalmonRunSchedule.self, from: data)
 		
 		if runs.isValid {
 			print("Previous salmon run schedule was valid, using that one")
@@ -104,7 +132,7 @@ func getRuns(session: URLSession = URLSession(configuration: .default), completi
 		}
 		
 		do {
-			let runs = try decoder.decode(Runs.self, from: data)
+			let runs = try decoder.decode(SalmonRunSchedule.self, from: data)
 			completion(.success(runs))
 		} catch {
 			completion(.failure(error))

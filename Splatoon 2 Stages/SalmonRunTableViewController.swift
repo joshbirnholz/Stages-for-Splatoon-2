@@ -23,7 +23,7 @@ class SalmonRunTableViewController: UITableViewController {
 			tableView.refreshControl = refreshControl
 		}
 		
-		if runs == nil {
+		if runSchedule == nil {
 			loadRuns()
 		}
 	}
@@ -42,7 +42,7 @@ class SalmonRunTableViewController: UITableViewController {
 			case .success(var r):
 				r.removeExpiredRuns()
 				r.sort()
-				runs = r
+				runSchedule = r
 				DispatchQueue.main.async {
 					if #available(iOS 10.0, *) {
 					self.tableView.refreshControl?.endRefreshing()
@@ -54,30 +54,8 @@ class SalmonRunTableViewController: UITableViewController {
 		}
 	}
 	
-	func badgeText(forRowAt indexPath: IndexPath) -> String? {
-		guard let runs = runs else {
-			return nil
-		}
-		
-		if runs.runs[indexPath.row].status == .open {
-			return "Open!"
-		}
-		
-		if indexPath.row == 0 {
-			return "Next"
-		}
-		
-		let previous = indexPath.row - 1
-		if previous >= 0 && runs.runs[previous].status == .open {
-			return "Next"
-		}
-		
-		return nil
-		
-	}
-	
 	override func numberOfSections(in tableView: UITableView) -> Int {
-		guard let _ = runs else {
+		guard let _ = runSchedule else {
 			return 0
 		}
 		
@@ -85,7 +63,7 @@ class SalmonRunTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let runs = runs else {
+		guard let runs = runSchedule else {
 			return 0
 		}
 		
@@ -95,14 +73,14 @@ class SalmonRunTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonRunCell", for: indexPath) as! SalmonRunCell
 		
-		guard let run = runs?.runs[indexPath.row] else {
+		guard let run = runSchedule?.runs[indexPath.row] else {
 			return cell
 		}
 		
 		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
 		cell.timeLabel.text = timeString
 		
-		if let text = badgeText(forRowAt: indexPath) {
+		if let text = runSchedule?.badgeText(forRowAt: indexPath.row) {
 			cell.badgeView.isHidden = false
 			cell.badgeLabel.text = text
 		} else {

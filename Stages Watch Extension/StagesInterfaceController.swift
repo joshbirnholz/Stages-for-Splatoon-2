@@ -24,7 +24,7 @@ class StagesInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 		
-		guard let entry = context as? Schedule.Entry,
+		guard let entry = context as? BattleSchedule.Entry,
 			let mode = Mode(rawValue: entry.gameMode.key) else {
 			return
 		}
@@ -49,7 +49,7 @@ class StagesInterfaceController: WKInterfaceController {
     }
 	
 	override func didAppear() {
-		if schedule == nil || !schedule!.isValid {
+		if battleSchedule == nil || !battleSchedule!.isValid {
 			WKInterfaceController.reloadRootControllers(withNames: ["Initial"], contexts: nil)
 			(WKExtension.shared().delegate as? ExtensionDelegate)?.loadSchedule(displayMode: selectedMode)
 		}
@@ -66,16 +66,22 @@ class StagesInterfaceController: WKInterfaceController {
     }
 	
 	@IBAction func regularBattleButtonPressed() {
-		selectedMode = .regular
+		selectedMode = .battle(.regular)
 	}
 	
 	@IBAction func rankedBattleButtonPressed() {
-		selectedMode = .ranked
+		selectedMode = .battle(.ranked)
 	}
 	
 	@IBAction func leagueBattleButtonPressed() {
-		selectedMode = .league
+		selectedMode = .battle(.league)
 	}
 	
+	deinit {
+		timer = nil
+	}
 	
+	@IBAction func salmonRunButtonPressed() {
+		selectedMode = .salmonRun
+	}
 }
