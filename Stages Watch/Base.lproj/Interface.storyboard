@@ -114,18 +114,16 @@
             <objects>
                 <controller identifier="Initial" title="Stages" id="SJi-J7-fVz" customClass="InitialInterfaceController" customModule="Stages_Watch_Extension">
                     <items>
-                        <label alignment="center" verticalAlignment="center" text="Loading…" textAlignment="center" id="zPg-Fj-RbX">
-                            <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="25"/>
-                        </label>
-                        <button width="1" alignment="center" verticalAlignment="bottom" hidden="YES" title="Retry" id="o3K-fq-mYe">
-                            <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="18"/>
+                        <imageView width="0.69999999999999996" height="0.69999999999999996" alignment="center" verticalAlignment="center" image="loading" contentMode="scaleAspectFit" id="5dJ-mV-ES4"/>
+                        <button width="1" alignment="center" verticalAlignment="center" hidden="YES" title="Retry" id="o3K-fq-mYe">
+                            <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="23"/>
                             <connections>
                                 <action selector="retryButtonPressed" destination="SJi-J7-fVz" id="Avn-Al-F3R"/>
                             </connections>
                         </button>
                     </items>
                     <connections>
-                        <outlet property="label" destination="zPg-Fj-RbX" id="hKp-Mz-hgk"/>
+                        <outlet property="loadingImage" destination="5dJ-mV-ES4" id="B1C-S3-JJ5"/>
                         <outlet property="retryButton" destination="o3K-fq-mYe" id="3Xe-SK-Rmh"/>
                     </connections>
                 </controller>

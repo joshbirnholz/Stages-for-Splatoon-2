@@ -73,9 +73,9 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 				DispatchQueue.main.async {
 					print(error)
 					self.initialInterfaceController?.presentAlert(withTitle: "An error occurred loading stages.", message: error.localizedDescription, preferredStyle: WKAlertControllerStyle.alert, actions: [okAction])
-					self.initialInterfaceController?.label.setText("No Data")
+					self.initialInterfaceController?.loadingImage.stopAnimating()
+					self.initialInterfaceController?.loadingImage.setHidden(true)
 					self.initialInterfaceController?.retryButton.setEnabled(true)
-					self.initialInterfaceController?.label.setHidden(false)
 					self.initialInterfaceController?.retryButton.setHidden(false)
 					self.initialInterfaceController?.buttonAction = self.loadSchedule
 				}

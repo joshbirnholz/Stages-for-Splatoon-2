@@ -69,12 +69,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		tab.viewControllers = vcs
 		
-		print("Will activate WCSession")
-		if WCSession.isSupported() {
-			print("Activating WCSession")
-			WCSession.default.delegate = self
-			WCSession.default.activate()
-		}
+//		print("Will activate WCSession")
+//		if WCSession.isSupported() {
+//			print("Activating WCSession")
+//			WCSession.default.delegate = self
+//			WCSession.default.activate()
+//		}
 		
 		return true
 	}

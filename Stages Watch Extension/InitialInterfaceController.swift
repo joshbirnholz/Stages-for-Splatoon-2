@@ -10,9 +10,9 @@ import WatchKit
 
 class InitialInterfaceController: WKInterfaceController {
 	
+	@IBOutlet var loadingImage: WKInterfaceImage!
 	var buttonAction: ((Mode) -> ()) = { _ in }
 	
-	@IBOutlet var label: WKInterfaceLabel!
 	@IBOutlet var retryButton: WKInterfaceButton!
 	
 	override func awake(withContext context: Any?) {
@@ -42,7 +42,9 @@ class InitialInterfaceController: WKInterfaceController {
 	
 	@IBAction func retryButtonPressed() {
 		retryButton.setEnabled(false)
-		label.setText("Loading…")
+		retryButton.setHidden(true)
+		loadingImage.setHidden(false)
+		loadingImage.startAnimating()
 		buttonAction(selectedMode)
 	}
 }
