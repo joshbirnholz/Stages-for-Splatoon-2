@@ -79,7 +79,9 @@ class CurrentStagesTableViewController: UITableViewController {
 			switch result {
 			case .failure(let error):
 				print("Error retreiving salmon runs:", error.localizedDescription)
-			case .success(let r):
+			case .success(var r):
+				r.removeExpiredRuns()
+				r.sort()
 				runs = r
 				
 				DispatchQueue.main.async {
@@ -162,7 +164,7 @@ class CurrentStagesTableViewController: UITableViewController {
 		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
 		cell.timeLabel.text = timeString
 		
-		cell.badgeLabel.text = run.isOpen ? "Open!" : "Next"
+		cell.badgeLabel.text = run.status == .open ? "Open!" : "Next"
 		
 		return cell
 	}

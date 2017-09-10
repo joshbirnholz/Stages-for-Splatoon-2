@@ -164,15 +164,37 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		let gameMode = Mode(rawValue: scheduleEntry.gameMode.key) ?? .regular
 		let tintColor = #colorLiteral(red: 0.95014292, green: 0.2125228047, blue: 0.5165724158, alpha: 1)
 		
+		var endTimeRelativeDateTextProvider: CLKRelativeDateTextProvider {
+			return CLKRelativeDateTextProvider(date: scheduleEntry.endTime, style: .timer, units: [.hour, .minute, .second])
+		}
+		
+		var stageATextProvider: CLKSimpleTextProvider {
+			return CLKSimpleTextProvider(text: scheduleEntry.stageA.name)
+		}
+		
+		var stageBTextProvider: CLKSimpleTextProvider {
+			return CLKSimpleTextProvider(text: scheduleEntry.stageB.name)
+		}
+		
+		var ruleTextProvider: CLKSimpleTextProvider {
+			return CLKSimpleTextProvider(text: scheduleEntry.rule.name)
+		}
+		
 		switch complicationFamily {
 		case .circularSmall:
-			let template = CLKComplicationTemplateCircularSmallSimpleImage()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Circular"))
+			let template = CLKComplicationTemplateCircularSmallStackImage()
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 16 : 14
+			let size = CGSize(width: dimension, height: dimension)
+			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.line2TextProvider = endTimeRelativeDateTextProvider
 			template.tintColor = tintColor
 			return template
 		case .extraLarge:
-			let template = CLKComplicationTemplateExtraLargeSimpleImage()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Extra Large"))
+			let template = CLKComplicationTemplateExtraLargeStackImage()
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 90 : 84
+			let size = CGSize(width: dimension, height: dimension)
+			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.line2TextProvider = endTimeRelativeDateTextProvider
 			template.tintColor = tintColor
 			return template
 		case .modularLarge:
@@ -180,21 +202,26 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 24 : 22
 			let size = CGSize(width: dimension, height: dimension)
 			template.headerImageProvider = CLKImageProvider(onePieceImage: gameMode.tabBarIcon.scaled(toFit: size))
-			template.headerTextProvider = CLKSimpleTextProvider(text: scheduleEntry.rule.name)
-			template.body1TextProvider = CLKSimpleTextProvider(text: scheduleEntry.stageA.name)
-			template.body2TextProvider = CLKSimpleTextProvider(text: scheduleEntry.stageB.name)
+			template.headerTextProvider = ruleTextProvider
+			template.body1TextProvider = stageATextProvider
+			template.body2TextProvider = stageBTextProvider
 			template.tintColor = gameMode.color
 			return template
 		case .modularSmall:
-			let template = CLKComplicationTemplateModularSmallSimpleImage()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Modular"))
+			let template = CLKComplicationTemplateModularSmallStackImage()
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 30 : 28
+			let size = CGSize(width: dimension, height: dimension)
+			template.line1ImageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.line2TextProvider = endTimeRelativeDateTextProvider
 			template.tintColor = tintColor
 			return template
 		case .utilitarianLarge:
 			let template = CLKComplicationTemplateUtilitarianLargeFlat()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Utilitarian"))
-			template.textProvider = CLKSimpleTextProvider(text: scheduleEntry.rule.name)
-			template.tintColor = gameMode.color
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 20 : 18
+			let size = CGSize(width: dimension, height: dimension)
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.textProvider = endTimeRelativeDateTextProvider
+			template.tintColor = tintColor
 			return template
 		case .utilitarianSmall:
 			let template = CLKComplicationTemplateUtilitarianSmallSquare()
@@ -203,8 +230,10 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			return template
 		case .utilitarianSmallFlat:
 			let template = CLKComplicationTemplateUtilitarianSmallFlat()
-			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "Complication/Utilitarian"))
-			template.textProvider = CLKSimpleTextProvider(text: "Stages", shortText: "Stages")
+			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 20 : 18
+			let size = CGSize(width: dimension, height: dimension)
+			template.imageProvider = CLKImageProvider(onePieceImage: #imageLiteral(resourceName: "stages").scaled(toFit: size))
+			template.textProvider = endTimeRelativeDateTextProvider
 			template.tintColor = tintColor
 			return template
 		}

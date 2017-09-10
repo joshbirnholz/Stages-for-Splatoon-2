@@ -39,7 +39,9 @@ class SalmonRunTableViewController: UITableViewController {
 			switch result {
 			case .failure(let error):
 				print("Error getting runs:", error.localizedDescription)
-			case .success(let r):
+			case .success(var r):
+				r.removeExpiredRuns()
+				r.sort()
 				runs = r
 				DispatchQueue.main.async {
 					if #available(iOS 10.0, *) {
@@ -56,7 +58,8 @@ class SalmonRunTableViewController: UITableViewController {
 		guard let runs = runs else {
 			return nil
 		}
-		if runs.runs[indexPath.row].isOpen {
+		
+		if runs.runs[indexPath.row].status == .open {
 			return "Open!"
 		}
 		
@@ -65,7 +68,7 @@ class SalmonRunTableViewController: UITableViewController {
 		}
 		
 		let previous = indexPath.row - 1
-		if previous >= 0 && runs.runs[previous].isOpen {
+		if previous >= 0 && runs.runs[previous].status == .open {
 			return "Next"
 		}
 		

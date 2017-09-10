@@ -57,6 +57,18 @@
 		54712C5C1F549FCE004B9249 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54712C5A1F549FC6004B9249 /* Main.storyboard */; };
 		54712C5D1F54FD46004B9249 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54712C5B1F549FC6004B9249 /* LaunchScreen.storyboard */; };
 		547B7E481F63494700400A83 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547B7E471F63494700400A83 /* SettingsTableViewController.swift */; };
+		54807E1F1F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E201F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E211F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E221F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E231F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E241F6589CB00AFBC1C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		54807E261F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
+		54807E271F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
+		54807E281F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
+		54807E291F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
+		54807E2A1F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
+		54807E2B1F6589FB00AFBC1C /* Runs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* Runs.swift */; };
 		54AE28811F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE28801F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift */; };
 		54B228021F64850100924201 /* Stages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228011F64850100924201 /* Stages.xcassets */; };
 		54B228031F64850100924201 /* Stages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228011F64850100924201 /* Stages.xcassets */; };
@@ -211,6 +223,8 @@
 		547775161F56525D000B17B5 /* Splatoon 2 Stages.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Splatoon 2 Stages.entitlements"; sourceTree = "<group>"; };
 		5478C5FF1F53E1C20024DF6F /* SplatoonTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplatoonTabBarController.swift; sourceTree = "<group>"; };
 		547B7E471F63494700400A83 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		54807E1E1F6589CB00AFBC1C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
+		54807E251F6589FB00AFBC1C /* Runs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Runs.swift; sourceTree = "<group>"; };
 		548F10B41F55EF0F008ACD37 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5490A1601F5746E600F19A75 /* Stages Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Stages Watch Extension.entitlements"; sourceTree = "<group>"; };
 		54A1D1981F533C2F00D40985 /* Splatoon2.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Splatoon2.ttf; sourceTree = "<group>"; };
@@ -324,7 +338,7 @@
 		543E60631F5671C4007DA88D /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				54F2D6681F5328A2001D585E /* Schedule.swift */,
+				54807E1D1F6589A000AFBC1C /* Model */,
 				54C776FA1F570AEA002F06E0 /* Icons.xcassets */,
 				54B228091F64855200924201 /* Backgrounds.xcassets */,
 				54B228011F64850100924201 /* Stages.xcassets */,
@@ -346,6 +360,16 @@
 				543E60721F5672B2007DA88D /* Info.plist */,
 			);
 			path = "League Battle Stages";
+			sourceTree = "<group>";
+		};
+		54807E1D1F6589A000AFBC1C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				54F2D6681F5328A2001D585E /* Schedule.swift */,
+				54807E251F6589FB00AFBC1C /* Runs.swift */,
+				54807E1E1F6589CB00AFBC1C /* Mode.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		548F10B31F55EF0F008ACD37 /* Frameworks */ = {
@@ -789,7 +813,9 @@
 			files = (
 				543E60401F567087007DA88D /* Schedule.swift in Sources */,
 				543E603D1F567031007DA88D /* WidgetStagesViewController.swift in Sources */,
+				54807E201F6589CB00AFBC1C /* Mode.swift in Sources */,
 				543E60411F5670A0007DA88D /* StagesCell.swift in Sources */,
+				54807E271F6589FB00AFBC1C /* Runs.swift in Sources */,
 				541C96051F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				543E603E1F567037007DA88D /* WidgetViewController.swift in Sources */,
 			);
@@ -801,7 +827,9 @@
 			files = (
 				543E605F1F56716E007DA88D /* StagesCell.swift in Sources */,
 				543E605E1F56716E007DA88D /* Schedule.swift in Sources */,
+				54807E211F6589CB00AFBC1C /* Mode.swift in Sources */,
 				543E60601F56716E007DA88D /* WidgetStagesViewController.swift in Sources */,
+				54807E281F6589FB00AFBC1C /* Runs.swift in Sources */,
 				541C96061F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				543E605C1F56711D007DA88D /* RegularWidgetViewController.swift in Sources */,
 			);
@@ -813,7 +841,9 @@
 			files = (
 				543E60811F5672E8007DA88D /* Schedule.swift in Sources */,
 				543E60821F5672F0007DA88D /* WidgetStagesViewController.swift in Sources */,
+				54807E221F6589CB00AFBC1C /* Mode.swift in Sources */,
 				543E60831F5672F4007DA88D /* StagesCell.swift in Sources */,
+				54807E291F6589FB00AFBC1C /* Runs.swift in Sources */,
 				541C96071F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				543E607F1F5672D5007DA88D /* RegularWidgetViewController.swift in Sources */,
 			);
@@ -829,6 +859,8 @@
 				54712C4F1F549F8D004B9249 /* CurrentStagesTableViewController.swift in Sources */,
 				547B7E481F63494700400A83 /* SettingsTableViewController.swift in Sources */,
 				54AE28811F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift in Sources */,
+				54807E261F6589FB00AFBC1C /* Runs.swift in Sources */,
+				54807E1F1F6589CB00AFBC1C /* Mode.swift in Sources */,
 				54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */,
 				54712C501F549F8F004B9249 /* UpcomingStagesViewController.swift in Sources */,
 				54712C4D1F549F88004B9249 /* AppDelegate.swift in Sources */,
@@ -844,7 +876,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				54C703501F56FE52002A8D76 /* Schedule.swift in Sources */,
+				54807E231F6589CB00AFBC1C /* Mode.swift in Sources */,
 				54C7033F1F56FDB9002A8D76 /* SalmonRunTableViewController.swift in Sources */,
+				54807E2A1F6589FB00AFBC1C /* Runs.swift in Sources */,
 				541C96081F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				54C7034D1F56FDD1002A8D76 /* SalmonRunCell.swift in Sources */,
 			);
@@ -856,6 +890,8 @@
 			files = (
 				5463A7E61F575456000D19CF /* InitialInterfaceController.swift in Sources */,
 				54C776E41F570A4E002F06E0 /* ExtensionDelegate.swift in Sources */,
+				54807E241F6589CB00AFBC1C /* Mode.swift in Sources */,
+				54807E2B1F6589FB00AFBC1C /* Runs.swift in Sources */,
 				54C776E21F570A4E002F06E0 /* StagesInterfaceController.swift in Sources */,
 				54C776F71F570A5B002F06E0 /* Schedule.swift in Sources */,
 				54C776E61F570A4E002F06E0 /* ComplicationController.swift in Sources */,

@@ -26,6 +26,12 @@ let dateFormatter: DateFormatter = {
 
 struct Schedule: Codable {
 	
+	private static let encoder: JSONEncoder = {
+		let e = JSONEncoder()
+		e.dateEncodingStrategy = .secondsSince1970
+		return e
+	}()
+	
 	static let downloadURL = URL(string: "http://squidkidsfeed.azurewebsites.net/Schedule.json")!
 	
 	struct Entry: Codable {
@@ -136,50 +142,6 @@ enum ScheduleResult {
 	case failure(Error)
 }
 
-enum Mode: String, CustomStringConvertible {
-	case regular, ranked = "gachi", league
-	
-	var color: UIColor {
-		switch self {
-		case .regular: return #colorLiteral(red: 0.1253578663, green: 0.9081364274, blue: 0.08959365636, alpha: 1)
-		case .ranked: return #colorLiteral(red: 0.9625250697, green: 0.3669919372, blue: 0.1715939343, alpha: 1)
-		case .league: return #colorLiteral(red: 0.9654037356, green: 0.144708246, blue: 0.7567376494, alpha: 1)
-		}
-	}
-	
-	var description: String {
-		switch self {
-		case .league: return "League Battle"
-		case .ranked: return "Ranked Battle"
-		case .regular: return "Regular Battle"
-		}
-	}
-	
-	var icon: UIImage {
-		switch self {
-		case .league: return #imageLiteral(resourceName: "League Battle")
-		case .ranked: return #imageLiteral(resourceName: "Ranked Battle")
-		case .regular: return #imageLiteral(resourceName: "Regular Battle")
-		}
-	}
-	
-	var tabBarIcon: UIImage {
-		switch self {
-		case .league: return #imageLiteral(resourceName: "League Battle Tab")
-		case .ranked: return #imageLiteral(resourceName: "Ranked Battle Tab")
-		case .regular: return #imageLiteral(resourceName: "Regular Battle Tab")
-		}
-	}
-	
-	var selectedTabBarIcon: UIImage {
-		switch self {
-		case .league: return #imageLiteral(resourceName: "League Battle Tab Selected")
-		case .ranked: return #imageLiteral(resourceName: "Ranked Battle Tab Selected")
-		case .regular: return #imageLiteral(resourceName: "Regular Battle Tab").withRenderingMode(.alwaysOriginal)
-		}
-	}
-}
-
 func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, completion: @escaping (ScheduleResult) -> ()) {
 	guard let data = data, error == nil else {
 		completion(.failure(error!))
@@ -187,7 +149,9 @@ func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, com
 	}
 	
 	do {
-		let schedule = try decoder.decode(Schedule.self, from: data)
+		var schedule = try decoder.decode(Schedule.self, from: data)
+		schedule.removeExpiredEntries()
+		
 		completion(.success(schedule))
 	} catch {
 		completion(.failure(error))
@@ -224,94 +188,4 @@ func getSchedule(session: URLSession = URLSession(configuration: .default), comp
 	}.resume()
 }
 
-struct Runs: Codable {
-	struct Run: Codable {
-		private var end: String
-		
-		var startTime: Date
-		var endTime: Date {
-			let endStr = end.replacingCharacters(in: end.index(end.startIndex, offsetBy: 8) ... end.index(end.startIndex, offsetBy: 9), with: "")
-			let endDate = runDateFormatter.date(from: endStr)!
-			var endComps = Calendar.current.dateComponents([.hour, .minute, .month, .day], from: endDate)
-			let startComps = Calendar.current.dateComponents([.year, .month], from: startTime)
-			endComps.year = startComps.year!
-			if startComps.month == 12 && startComps.month == 1 {
-				endComps.year! += 1
-			}
-			let endTime = Calendar.current.date(from: endComps)!
-			return endTime
-		}
-		
-		private enum CodingKeys: String, CodingKey {
-			case startTime = "unix_start"
-			case end
-		}
-		
-		var isOpen: Bool {
-			let now = Date()
-			return startTime < now && endTime > now
-		}
-	}
-	var runs: [Run]
-	
-	var isValid: Bool {
-		guard let first = runs.first else {
-			return false
-		}
-		
-		return first.isOpen || first.endTime < Date()
-	}
-}
 
-
-enum RunResult {
-	case failure(Error)
-	case success(Runs)
-}
-
-fileprivate let runDateFormatter: DateFormatter = {
-	let df = DateFormatter()
-	df.dateFormat = "HH:mm dd MMMM"
-	return df
-}()
-
-func getRuns(session: URLSession = URLSession(configuration: .default), completion: @escaping (RunResult) -> ()) {
-	
-	do {
-		let data = try Data(contentsOf: runsURL)
-		let runs = try decoder.decode(Runs.self, from: data)
-		
-		if runs.isValid {
-			print("Previous salmon run schedule was valid, using that one")
-			completion(.success(runs))
-			return
-		}
-		
-	} catch {
-		print("Error reading salmon run data:", error.localizedDescription)
-	}
-	
-	let timezoneOffset = -Calendar.current.timeZone.secondsFromGMT()/60
-	let stagesURL = URL(string: "http://splatooniverse.com/ajax/get-salmon.php?timezone=\(timezoneOffset)")!
-	
-	session.dataTask(with: stagesURL) { data, response, error in
-		guard let data = data, error == nil else {
-			completion(.failure(error!))
-			return
-		}
-		
-		do {
-			let runs = try decoder.decode(Runs.self, from: data)
-			completion(.success(runs))
-		} catch {
-			completion(.failure(error))
-		}
-		
-		do {
-			try data.write(to: runsURL)
-			print("Wrote salmon runs to ", runsURL)
-		} catch let error {
-			print("Error writing salmon run schedule:", error.localizedDescription)
-		}
-	}.resume()
-}

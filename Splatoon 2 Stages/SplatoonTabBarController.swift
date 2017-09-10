@@ -28,7 +28,7 @@ class SplatoonTabBarController: UITabBarController {
 			return
 		}
 		
-		item.badgeValue = run.isOpen ? "!" : nil
+		item.badgeValue = run.status == .open ? "!" : nil
 
 	}
 	

@@ -193,13 +193,13 @@
                                                             <rect key="frame" x="380" y="0.0" width="372" height="253"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-La-jzJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="Mol-La-jzJ" secondAttribute="height" multiplier="16:9" id="rfe-of-gD6"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bLO-El-osJ">
-                                                                    <rect key="frame" x="0.0" y="213.5" width="372" height="39.5"/>
+                                                                    <rect key="frame" x="0.0" y="213" width="372" height="40"/>
                                                                     <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -315,6 +315,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="35" id="BEY-Mk-qgL"/>
+                                                    </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LSj-6M-HB3">
                                                     <rect key="frame" x="0.0" y="39" width="752" height="253"/>

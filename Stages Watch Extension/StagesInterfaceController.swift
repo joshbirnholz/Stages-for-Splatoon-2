@@ -50,6 +50,7 @@ class StagesInterfaceController: WKInterfaceController {
 	
 	override func didAppear() {
 		if schedule == nil || !schedule!.isValid {
+			WKInterfaceController.reloadRootControllers(withNames: ["Initial"], contexts: nil)
 			(WKExtension.shared().delegate as? ExtensionDelegate)?.loadSchedule(displayMode: selectedMode)
 		}
 	}
