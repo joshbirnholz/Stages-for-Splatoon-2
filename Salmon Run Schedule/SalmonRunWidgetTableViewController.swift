@@ -1,5 +1,5 @@
 //
-//  SalmonRunTableViewController
+//  SalmonRunWidgetTableViewController
 //  Salmon Run Schedule
 //
 //  Created by Josh Birnholz on 8/30/17.
@@ -9,7 +9,7 @@
 import UIKit
 import NotificationCenter
 
-class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
+class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProviding {
 	
 	var runSchedule: SalmonRunSchedule?
 	
@@ -49,7 +49,7 @@ class SalmonRunTableViewController: UITableViewController, NCWidgetProviding {
 				r.sort()
 				self.runSchedule = r
 				DispatchQueue.main.async {
-					self.tableView.reloadData()
+					self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
 					completionHandler(.newData)
 				}
 			}

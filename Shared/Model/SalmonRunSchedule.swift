@@ -14,26 +14,8 @@ struct SalmonRunSchedule: Codable {
 			case notStarted, open, ended
 		}
 		
-		private var end: String
-		
 		var startTime: Date
-		var endTime: Date {
-			let endStr = end.replacingCharacters(in: end.index(end.startIndex, offsetBy: 8) ... end.index(end.startIndex, offsetBy: 9), with: "")
-			let endDate = runDateFormatter.date(from: endStr)!
-			var endComps = Calendar.current.dateComponents([.hour, .minute, .month, .day], from: endDate)
-			let startComps = Calendar.current.dateComponents([.year, .month], from: startTime)
-			endComps.year = startComps.year!
-			if startComps.month == 12 && startComps.month == 1 {
-				endComps.year! += 1
-			}
-			let endTime = Calendar.current.date(from: endComps)!
-			return endTime
-		}
-		
-		private enum CodingKeys: String, CodingKey {
-			case startTime = "unix_start"
-			case end
-		}
+		var endTime: Date
 		
 		var status: Status {
 			let now = Date()
@@ -102,15 +84,54 @@ enum RunResult {
 
 fileprivate let runDateFormatter: DateFormatter = {
 	let df = DateFormatter()
-	df.dateFormat = "HH:mm dd MMMM"
+	df.dateFormat = "yyyyLLdd'T'HHmmssZ"
 	return df
 }()
+
+fileprivate func parseRunSchedule(fromICSString str: String) -> SalmonRunSchedule {
+	var runs: [SalmonRunSchedule.Run] = []
+	let separator = "•"
+	let events = str.replacingOccurrences(of: "\r", with: "").replacingOccurrences(of: "BEGIN:VEVENT", with: separator).split(separator: Character(separator))
+	for eventStr in events {
+		let dict: [String: String] = {
+			var d: [String: String] = [:]
+			for line in eventStr.split(separator: "\n") {
+				let info = line.split(separator: ":")
+				guard info.count == 2 else {
+					continue
+				}
+				let key = String(info[0])
+				let value = String(info[1])
+				d[key] = value
+			}
+			return d
+		}()
+		
+		if let startDateStr = dict["DTSTART"],
+			let endDateStr = dict["DTEND"],
+			let startDate = runDateFormatter.date(from: startDateStr),
+			let endDate = runDateFormatter.date(from: endDateStr) {
+			print(startDate)
+			print(endDate)
+			
+			let run = SalmonRunSchedule.Run(startTime: startDate, endTime: endDate)
+			runs.append(run)
+		}
+		
+	}
+	
+	return SalmonRunSchedule(runs: runs)
+}
+
+enum RunReadError: Error {
+	case incorrectFormat
+}
 
 func getRuns(session: URLSession = URLSession(configuration: .default), completion: @escaping (RunResult) -> ()) {
 	
 	do {
-		let data = try Data(contentsOf: runsURL)
-		let runs = try decoder.decode(SalmonRunSchedule.self, from: data)
+		let str = try String.init(contentsOf: runsURL)
+		let runs = parseRunSchedule(fromICSString: str)
 		
 		if runs.isValid {
 			print("Previous salmon run schedule was valid, using that one")
@@ -122,8 +143,7 @@ func getRuns(session: URLSession = URLSession(configuration: .default), completi
 		print("Error reading salmon run data:", error.localizedDescription)
 	}
 	
-	let timezoneOffset = -Calendar.current.timeZone.secondsFromGMT()/60
-	let stagesURL = URL(string: "http://splatooniverse.com/ajax/get-salmon.php?timezone=\(timezoneOffset)")!
+	let stagesURL = URL(string: "https://calendar.google.com/calendar/ical/7e5g474p0ng7vaejkg3mkomhks%40group.calendar.google.com/public/basic.ics")!
 	
 	session.dataTask(with: stagesURL) { data, response, error in
 		guard let data = data, error == nil else {
@@ -131,12 +151,13 @@ func getRuns(session: URLSession = URLSession(configuration: .default), completi
 			return
 		}
 		
-		do {
-			let runs = try decoder.decode(SalmonRunSchedule.self, from: data)
-			completion(.success(runs))
-		} catch {
-			completion(.failure(error))
+		guard let str = String(data: data, encoding: .utf8) else {
+			completion(.failure(RunReadError.incorrectFormat))
+			return
 		}
+		
+		let runs = parseRunSchedule(fromICSString: str)
+		completion(.success(runs))
 		
 		do {
 			try data.write(to: runsURL)

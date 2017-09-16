@@ -10,6 +10,8 @@ import UIKit
 
 class SalmonRunTableViewController: UITableViewController {
 	
+	@IBOutlet var noDataLabel: UILabel!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -47,6 +49,9 @@ class SalmonRunTableViewController: UITableViewController {
 					if #available(iOS 10.0, *) {
 					self.tableView.refreshControl?.endRefreshing()
 					}
+					
+					self.tableView.tableHeaderView = r.runs.isEmpty ? self.noDataLabel : nil
+					
 					self.tableView.reloadData()
 					(self.tabBarController as? SplatoonTabBarController)?.updateSalmonRunBadge()
 				}

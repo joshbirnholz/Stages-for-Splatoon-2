@@ -74,6 +74,7 @@
 		54807E2A1F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
 		54807E2B1F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
 		54AE28811F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AE28801F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift */; };
+		54AEA0DE1F69D03B00738241 /* StagesTableInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54AEA0DD1F69D03B00738241 /* StagesTableInterfaceController.swift */; };
 		54B228021F64850100924201 /* Stages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228011F64850100924201 /* Stages.xcassets */; };
 		54B228031F64850100924201 /* Stages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228011F64850100924201 /* Stages.xcassets */; };
 		54B228041F64850100924201 /* Stages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228011F64850100924201 /* Stages.xcassets */; };
@@ -89,7 +90,7 @@
 		54B2280F1F64856E00924201 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
 		54B228101F64856E00924201 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
 		54C7033C1F56FDB9002A8D76 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 548F10B41F55EF0F008ACD37 /* NotificationCenter.framework */; };
-		54C7033F1F56FDB9002A8D76 /* SalmonRunTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C7033E1F56FDB9002A8D76 /* SalmonRunTableViewController.swift */; };
+		54C7033F1F56FDB9002A8D76 /* SalmonRunWidgetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54C7033E1F56FDB9002A8D76 /* SalmonRunWidgetTableViewController.swift */; };
 		54C703421F56FDB9002A8D76 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54C703401F56FDB9002A8D76 /* MainInterface.storyboard */; };
 		54C703461F56FDB9002A8D76 /* Salmon Run Schedule.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 54C7033B1F56FDB9002A8D76 /* Salmon Run Schedule.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		54C7034D1F56FDD1002A8D76 /* SalmonRunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */; };
@@ -237,10 +238,11 @@
 		54A1D19A1F535C9C00D40985 /* paintball.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = paintball.ttf; sourceTree = "<group>"; };
 		54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Scaled.swift"; sourceTree = "<group>"; };
 		54AE28801F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+SelectedBackgroundColor.swift"; sourceTree = "<group>"; };
+		54AEA0DD1F69D03B00738241 /* StagesTableInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagesTableInterfaceController.swift; sourceTree = "<group>"; };
 		54B228011F64850100924201 /* Stages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stages.xcassets; sourceTree = "<group>"; };
 		54B228091F64855200924201 /* Backgrounds.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Backgrounds.xcassets; sourceTree = "<group>"; };
 		54C7033B1F56FDB9002A8D76 /* Salmon Run Schedule.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Salmon Run Schedule.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		54C7033E1F56FDB9002A8D76 /* SalmonRunTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonRunTableViewController.swift; sourceTree = "<group>"; };
+		54C7033E1F56FDB9002A8D76 /* SalmonRunWidgetTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonRunWidgetTableViewController.swift; sourceTree = "<group>"; };
 		54C703411F56FDB9002A8D76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		54C703431F56FDB9002A8D76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54C776D01F570A4E002F06E0 /* Stages Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Stages Watch.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -391,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				54D752581F620DCB006BD25C /* Salmon Run Schedule.entitlements */,
-				54C7033E1F56FDB9002A8D76 /* SalmonRunTableViewController.swift */,
+				54C7033E1F56FDB9002A8D76 /* SalmonRunWidgetTableViewController.swift */,
 				54C703401F56FDB9002A8D76 /* MainInterface.storyboard */,
 				54C703431F56FDB9002A8D76 /* Info.plist */,
 			);
@@ -416,6 +418,7 @@
 				54C776E31F570A4E002F06E0 /* ExtensionDelegate.swift */,
 				5463A7E51F575456000D19CF /* InitialInterfaceController.swift */,
 				54C776E11F570A4E002F06E0 /* StagesInterfaceController.swift */,
+				54AEA0DD1F69D03B00738241 /* StagesTableInterfaceController.swift */,
 				5427EAB11F65ECB200E48928 /* SalmonRunInterfaceController.swift */,
 				54C776E51F570A4E002F06E0 /* ComplicationController.swift */,
 				54C776E71F570A4E002F06E0 /* Assets.xcassets */,
@@ -886,7 +889,7 @@
 			files = (
 				54C703501F56FE52002A8D76 /* BattleSchedule.swift in Sources */,
 				54807E231F6589CB00AFBC1C /* Mode.swift in Sources */,
-				54C7033F1F56FDB9002A8D76 /* SalmonRunTableViewController.swift in Sources */,
+				54C7033F1F56FDB9002A8D76 /* SalmonRunWidgetTableViewController.swift in Sources */,
 				54807E2A1F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */,
 				541C96081F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				5427EAAE1F65D71200E48928 /* WatchScreen.swift in Sources */,
@@ -909,6 +912,7 @@
 				54C776E61F570A4E002F06E0 /* ComplicationController.swift in Sources */,
 				54D752601F6237B1006BD25C /* UIImage+Scaled.swift in Sources */,
 				541C96091F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
+				54AEA0DE1F69D03B00738241 /* StagesTableInterfaceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

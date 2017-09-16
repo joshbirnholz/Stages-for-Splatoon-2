@@ -65,7 +65,8 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 				self.battleSchedule = sch
 				
 				DispatchQueue.main.async {
-					self.tableView.reloadData()
+					self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+					
 					completionHandler(.newData)
 				}
 			}

@@ -15,7 +15,7 @@ public let decoder: JSONDecoder = {
 }()
 //public let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 public let documentDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.josh.birnholz.Splatoon-2-Stages")!
-public let runsURL = documentDirectory.appendingPathComponent("salmonruns.json")
+public let runsURL = documentDirectory.appendingPathComponent("salmonruns.ics")
 public let scheduleURL = documentDirectory.appendingPathComponent("schedule.json")
 
 let dateFormatter: DateFormatter = {
@@ -175,7 +175,7 @@ func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, com
 	}
 }
 
-func getSchedule(session: URLSession = URLSession(configuration: .default), completion: @escaping (ScheduleResult) -> ()) {
+func getSchedule(session: URLSession = .shared, completion: @escaping (ScheduleResult) -> ()) {
 	
 	do {
 		let data = try Data(contentsOf: scheduleURL)
