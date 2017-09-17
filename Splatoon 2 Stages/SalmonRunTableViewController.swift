@@ -25,7 +25,11 @@ class SalmonRunTableViewController: UITableViewController {
 			tableView.refreshControl = refreshControl
 		}
 		
-		if runSchedule == nil {
+		if let runSchedule = runSchedule {
+			if runSchedule.runs.isEmpty {
+				tableView.tableHeaderView = noDataLabel
+			}
+		} else {
 			loadRuns()
 		}
 	}
