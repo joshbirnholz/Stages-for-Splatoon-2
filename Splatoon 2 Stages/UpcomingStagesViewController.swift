@@ -11,6 +11,8 @@ import UIKit
 
 class UpcomingStagesViewController: UITableViewController {
 	
+	@IBOutlet weak var noDataLabel: UILabel!
+	
 	var mode: Mode!
 	
 	override func viewDidLoad() {
@@ -30,6 +32,16 @@ class UpcomingStagesViewController: UITableViewController {
 		if battleSchedule == nil {
 			loadSchedule()
 		}
+		
+		updateNoDataLabel()
+	}
+	
+	func updateNoDataLabel() {
+		if let schedule = battleSchedule, !schedule[mode].isEmpty {
+			self.tableView.tableHeaderView = nil
+		} else {
+			self.tableView.tableHeaderView = noDataLabel
+		}
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -48,9 +60,8 @@ class UpcomingStagesViewController: UITableViewController {
 				
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
-					if #available(iOS 10.0, *) {
-						self.tableView.refreshControl?.endRefreshing()
-					}
+					self.updateNoDataLabel()
+					self.tableView.refreshControl?.endRefreshing()
 				}
 			}
 		}

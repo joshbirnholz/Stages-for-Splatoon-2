@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum WatchScreen: RawRepresentable {
+enum WatchScreen: RawRepresentable, CustomStringConvertible {
 
 	private static let salmonRunRawValue = "salmonRun"
 	
@@ -33,6 +33,15 @@ enum WatchScreen: RawRepresentable {
 			self = .salmonRun
 		} else {
 			return nil
+		}
+	}
+	
+	var description: String {
+		switch self {
+		case .battle(let mode):
+			return mode.description
+		case .salmonRun:
+			return "Salmon Run"
 		}
 	}
 	

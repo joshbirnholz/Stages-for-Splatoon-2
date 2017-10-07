@@ -115,6 +115,7 @@
 		54C776FD1F570B09002F06E0 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
 		54C776FE1F570B0A002F06E0 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
 		54C776FF1F570B0A002F06E0 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
+		54CB72FD1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54CB72FC1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift */; };
 		54D752601F6237B1006BD25C /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 		54F377C71F5A619A0013776D /* UIImage+Scaled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */; };
 /* End PBXBuildFile section */
@@ -256,6 +257,8 @@
 		54C776E71F570A4E002F06E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54C776E91F570A4E002F06E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54C776FA1F570AEA002F06E0 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		54CB72FC1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArrayURLQueryItem+Dictionary.swift"; sourceTree = "<group>"; };
+		54CDC1611F7204FE008561A3 /* BlockTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		54D752581F620DCB006BD25C /* Salmon Run Schedule.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Salmon Run Schedule.entitlements"; sourceTree = "<group>"; };
 		54D752591F620DD4006BD25C /* Stages Watch.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Stages Watch.entitlements"; sourceTree = "<group>"; };
 		54F2D62E1F532894001D585E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -352,9 +355,9 @@
 				54B228011F64850100924201 /* Stages.xcassets */,
 				54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */,
 				544171211F5338880046C07E /* StagesCell.swift */,
-				5477750E1F56474E000B17B5 /* WidgetStagesViewController.swift */,
 				54A1D1981F533C2F00D40985 /* Splatoon2.ttf */,
 				54A1D19A1F535C9C00D40985 /* paintball.ttf */,
+				5477750E1F56474E000B17B5 /* WidgetStagesViewController.swift */,
 				543E603A1F567008007DA88D /* WidgetMainInterface.storyboard */,
 			);
 			path = Shared;
@@ -473,6 +476,8 @@
 				54A1D19C1F535F8700D40985 /* UIImage+Scaled.swift */,
 				54AE28801F6353D20058BF04 /* UITableViewCell+SelectedBackgroundColor.swift */,
 				541C96031F646C4E00CA57C7 /* UserDefaults+Group.swift */,
+				54CB72FC1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift */,
+				54CDC1611F7204FE008561A3 /* BlockTapGestureRecognizer.swift */,
 				54F2D6351F532894001D585E /* Assets.xcassets */,
 				541C96011F646A9000CA57C7 /* Settings-Watch.bundle */,
 				54F2D63A1F532894001D585E /* Info.plist */,
@@ -866,6 +871,7 @@
 			files = (
 				543E60441F5670CE007DA88D /* WidgetStagesViewController.swift in Sources */,
 				543E60431F5670CE007DA88D /* StagesCell.swift in Sources */,
+				54CB72FD1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift in Sources */,
 				541C96041F646C4E00CA57C7 /* UserDefaults+Group.swift in Sources */,
 				54712C4F1F549F8D004B9249 /* CurrentStagesTableViewController.swift in Sources */,
 				547B7E481F63494700400A83 /* SettingsTableViewController.swift in Sources */,

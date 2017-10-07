@@ -14,9 +14,9 @@ class StageRowController: NSObject {
 	@IBOutlet var modeIconImage: WKInterfaceImage!
 	@IBOutlet var modeLabel: WKInterfaceLabel!
 	
-	@IBOutlet var stageAGroup: WKInterfaceGroup!
+//	@IBOutlet var stageAGroup: WKInterfaceGroup!
 	@IBOutlet var stageALabel: WKInterfaceLabel!
-	@IBOutlet var stageBGroup: WKInterfaceGroup!
+//	@IBOutlet var stageBGroup: WKInterfaceGroup!
 	@IBOutlet var stageBLabel: WKInterfaceLabel!
 }
 
@@ -25,7 +25,8 @@ class StagesTableInterfaceController: WKInterfaceController {
 	@IBOutlet var table: WKInterfaceTable!
 	
 	override func awake(withContext context: Any?) {
-		guard let entries = context as? [BattleSchedule.Entry] else {
+		guard let mode = Mode(rawValue: selectedMode.rawValue),
+			let entries = battleSchedule?[mode] else {
 			return
 		}
 		
@@ -41,11 +42,13 @@ class StagesTableInterfaceController: WKInterfaceController {
 				row.modeLabel.setTextColor(mode.color)
 			}
 			
+			row.timeLabel.setText(dateFormatter.string(from: entry.startTime))
 			row.modeLabel.setText(entry.rule.name)
 			row.stageALabel.setText(entry.stageA.name)
-			row.stageAGroup.setBackgroundImage(UIImage(named: entry.stageA.name.lowercased().replacingOccurrences(of: " ", with: "-")))
-			row.stageBGroup.setBackgroundImage(UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-")))
-				
+			row.stageBLabel.setText(entry.stageB.name)
+//			row.stageAGroup.setBackgroundImage(UIImage(named: entry.stageA.name.lowercased().replacingOccurrences(of: " ", with: "-")))
+//			row.stageBGroup.setBackgroundImage(UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-")))
+			
 			(WKExtension.shared().delegate as? ExtensionDelegate)?.scheduleForegroundReload()
 			
 		}

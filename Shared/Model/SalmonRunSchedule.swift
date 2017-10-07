@@ -31,11 +31,15 @@ struct SalmonRunSchedule: Codable {
 	var runs: [Run]
 	
 	var isValid: Bool {
-		guard let first = runs.first else {
+		var temp = self
+		temp.removeExpiredRuns()
+		temp.sort()
+
+		guard let first = temp.runs.first else {
 			return false
 		}
 		
-		return first.status == .open || first.endTime < Date()
+		return first.status == .open || first.status == .notStarted
 	}
 	
 	mutating func removeExpiredRuns() {
@@ -110,10 +114,7 @@ fileprivate func parseRunSchedule(fromICSString str: String) -> SalmonRunSchedul
 		if let startDateStr = dict["DTSTART"],
 			let endDateStr = dict["DTEND"],
 			let startDate = runDateFormatter.date(from: startDateStr),
-			let endDate = runDateFormatter.date(from: endDateStr) {
-			print(startDate)
-			print(endDate)
-			
+			let endDate = runDateFormatter.date(from: endDateStr) {			
 			let run = SalmonRunSchedule.Run(startTime: startDate, endTime: endDate)
 			runs.append(run)
 		}

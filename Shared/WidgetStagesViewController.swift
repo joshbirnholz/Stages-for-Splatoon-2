@@ -12,6 +12,7 @@ import NotificationCenter
 
 class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	
+	@IBOutlet var noDataLabel: UILabel!
 	var battleSchedule: BattleSchedule?
 	
 	static let widgetFormatter: DateFormatter = {
@@ -33,13 +34,15 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 
 		tableView.showsVerticalScrollIndicator = false
 		tableView.showsHorizontalScrollIndicator = false
-
+		
 	}
 	
-	override func viewDidAppear(_ animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		tabBarController?.tabBar.tintColor = mode.color
+	func updateNoDataLabel() {
+		if let schedule = battleSchedule, !schedule[mode].isEmpty {
+			self.tableView.tableHeaderView = nil
+		} else {
+			self.tableView.tableHeaderView = noDataLabel
+		}
 	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -50,7 +53,10 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		// If there's an update, use NCUpdateResult.NewData
 		
 		if let schedule = battleSchedule, schedule.isValid {
-			completionHandler(.noData)
+			DispatchQueue.main.async {
+				self.updateNoDataLabel()
+				completionHandler(.noData)
+			}
 			return
 		}
 		
@@ -59,13 +65,17 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 			switch result {
 			case .failure(let error):
 				print("Error retreiving the schedule:", error.localizedDescription)
-				completionHandler(.failed)
+				DispatchQueue.main.async {
+					self.updateNoDataLabel()
+					completionHandler(.failed)
+				}
 			case .success(var sch):
 				sch.removeExpiredEntries()
 				self.battleSchedule = sch
 				
 				DispatchQueue.main.async {
-					self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+					self.tableView.reloadData()
+					self.updateNoDataLabel()
 					
 					completionHandler(.newData)
 				}
@@ -138,6 +148,12 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return extensionContext?.widgetMaximumSize(for: .compact).height ?? 44
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		print(#function)
+		let url = URL(string: "jbstages://openMode?mode=\(mode.rawValue)")!
+		extensionContext?.open(url, completionHandler: nil)
 	}
 	
 	func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {

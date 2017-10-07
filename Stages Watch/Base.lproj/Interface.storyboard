@@ -16,78 +16,67 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Stages Table Interface Controller-->
+        <!--ViewFull-->
+        <scene sceneID="sSE-u4-pBe">
+            <objects>
+                <controller identifier="ViewFull" id="DH2-7Z-fhH">
+                    <items>
+                        <button width="1" height="0.59999999999999998" alignment="center" verticalAlignment="center" title="View Full Schedule" id="hdn-kJ-Tki">
+                            <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="23"/>
+                            <connections>
+                                <action selector="buttonPressed" destination="DH2-7Z-fhH" id="Er4-zj-OIh"/>
+                                <segue destination="f6q-14-TZS" kind="modal" id="wEs-fz-8f4"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-408" y="74"/>
+        </scene>
+        <!--Close-->
         <scene sceneID="0GT-fk-Ifq">
             <objects>
-                <controller id="f6q-14-TZS" customClass="StagesTableInterfaceController" customModule="Stages_Watch_Extension">
+                <controller identifier="StageTable" title="Close" id="f6q-14-TZS" customClass="StagesTableInterfaceController" customModule="Stages_Watch_Extension">
                     <items>
                         <table alignment="left" id="Q8H-1a-QFg">
                             <items>
                                 <tableRow identifier="StageTableRow" selectable="NO" id="KCT-xG-ca2" customClass="StageRowController" customModule="Stages_Watch_Extension">
-                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="2" id="13i-cj-Eqi">
+                                    <group key="rootItem" width="1" height="0.0" alignment="left" layout="vertical" spacing="0.0" id="13i-cj-Eqi">
                                         <items>
-                                            <label alignment="left" text="9/13, 4:00 PM" id="A6H-Id-7Sf">
-                                                <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                            <label alignment="left" text="Start Time" id="A6H-Id-7Sf">
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="14"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="12"/>
+                                                </variation>
                                             </label>
-                                            <group width="1" alignment="left" layout="vertical" radius="6" id="CZC-ZZ-MaW">
+                                            <group width="1" height="1" alignment="left" spacing="6" id="rfv-Xj-C6i">
                                                 <items>
-                                                    <group width="1" height="1" alignment="left" spacing="6" id="rfv-Xj-C6i">
-                                                        <items>
-                                                            <imageView width="0.12" height="1" alignment="left" image="Regular Battle" contentMode="scaleAspectFit" id="0P6-sf-YM9"/>
-                                                            <label alignment="left" text="Mode" id="zu0-dq-msw">
-                                                                <color key="textColor" red="0.38750320780000003" green="0.89547413789999997" blue="0.28126877569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="16"/>
-                                                            </label>
-                                                        </items>
-                                                    </group>
-                                                    <group width="1" alignment="left" backgroundImage="humpback-pump-track" contentMode="scaleAspectFill" radius="4" spacing="5" id="IZS-zx-ajL">
-                                                        <items>
-                                                            <group width="1" alignment="left" id="YpE-BP-JoE">
-                                                                <items>
-                                                                    <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Humpback Pump Track" textAlignment="center" id="0YE-dh-vqa">
-                                                                        <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="14"/>
-                                                                        <variation key="device=watch38mm">
-                                                                            <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="12"/>
-                                                                        </variation>
-                                                                    </label>
-                                                                </items>
-                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39921635352760737" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                                            </group>
-                                                        </items>
-                                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
-                                                    <group width="1" alignment="left" backgroundImage="inkblot-art-academy" contentMode="scaleAspectFill" radius="4" spacing="5" id="hDd-nE-1rY">
-                                                        <items>
-                                                            <group width="1" alignment="left" id="VF7-xP-ZEM">
-                                                                <items>
-                                                                    <label width="1" widthAdjustment="-4" alignment="center" verticalAlignment="center" text="Inkblot Art Academy" textAlignment="center" id="DI8-LC-aDW">
-                                                                        <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="14"/>
-                                                                        <variation key="device=watch38mm">
-                                                                            <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="12"/>
-                                                                        </variation>
-                                                                    </label>
-                                                                </items>
-                                                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.39921635350000001" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                                            </group>
-                                                        </items>
-                                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
-                                                    </group>
+                                                    <imageView width="0.10000000000000001" height="1" alignment="left" image="Regular Battle" contentMode="scaleAspectFit" id="0P6-sf-YM9"/>
+                                                    <label alignment="left" text="Mode" numberOfLines="0" id="zu0-dq-msw">
+                                                        <color key="textColor" red="0.38750320780000003" green="0.89547413789999997" blue="0.28126877569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <fontDescription key="font" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="13"/>
+                                                    </label>
                                                 </items>
-                                                <color key="backgroundColor" red="0.13330727815628052" green="0.13326257467269897" blue="0.13767445087432861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <edgeInsets key="margins" left="6" right="6" top="6" bottom="6"/>
                                             </group>
+                                            <label width="1" widthAdjustment="-4" alignment="left" text="Stage A" textAlignment="left" numberOfLines="0" id="0YE-dh-vqa">
+                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="14"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="12"/>
+                                                </variation>
+                                            </label>
+                                            <label width="1" widthAdjustment="-4" alignment="left" text="Stage B" textAlignment="left" numberOfLines="0" id="DI8-LC-aDW">
+                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="14"/>
+                                                <variation key="device=watch38mm">
+                                                    <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="12"/>
+                                                </variation>
+                                            </label>
                                         </items>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <outlet property="modeIconImage" destination="0P6-sf-YM9" id="hBN-rf-aE1"/>
                                         <outlet property="modeLabel" destination="zu0-dq-msw" id="xdY-qi-LLr"/>
-                                        <outlet property="stageAGroup" destination="IZS-zx-ajL" id="J6I-Pt-RmH"/>
                                         <outlet property="stageALabel" destination="0YE-dh-vqa" id="2LV-Vs-g52"/>
-                                        <outlet property="stageBGroup" destination="hDd-nE-1rY" id="mPk-rS-e29"/>
                                         <outlet property="stageBLabel" destination="DI8-LC-aDW" id="WAf-WM-RCK"/>
                                         <outlet property="timeLabel" destination="A6H-Id-7Sf" id="VDw-Py-dzT"/>
                                     </connections>
@@ -174,6 +163,11 @@
                             <menuItem title="Regular Battle" image="Regular Battle Tab" id="hcR-go-iwW">
                                 <connections>
                                     <action selector="regularBattleButtonPressed" destination="AgC-eL-Hgc" id="HVL-cH-hez"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Salmon Run" image="Salmon Tab" id="VTM-X4-Z2j">
+                                <connections>
+                                    <action selector="salmonRunButtonPressed" destination="AgC-eL-Hgc" id="gsi-yn-Wkz"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="6py-s2-qsf">

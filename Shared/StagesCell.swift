@@ -28,6 +28,12 @@ class StagesCell: UITableViewCell {
 		stageAImageView.clipsToBounds = true
 		stageBImageView.clipsToBounds = true
 		
+		if #available(iOS 11.0, *) {
+			stageAImageView.accessibilityIgnoresInvertColors = true
+			stageBImageView.accessibilityIgnoresInvertColors = true
+			
+		}
+		
 		if let view = viewWithTag(100) {
 			view.layer.cornerRadius = 4
 			view.clipsToBounds = true

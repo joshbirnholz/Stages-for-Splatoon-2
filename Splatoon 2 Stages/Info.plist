@@ -18,8 +18,23 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>OpenMode</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>jbstages</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>14</string>
+	<string>16</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -69,6 +84,61 @@
 	<key>NSUserActivityTypes</key>
 	<array>
 		<string>com.josh.birnholz.Splatoon-2-Stages.openMode</string>
+	</array>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Salmon Tab</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Salmon Run</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>openMode</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>mode</key>
+				<string>salmonRun</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>League Battle Tab</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>League Battle</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>openMode</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>mode</key>
+				<string>league</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Ranked Battle Tab</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Ranked Battle</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>openMode</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>mode</key>
+				<string>gachi</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>Regular Battle Tab</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Regular Battle</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>openMode</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<dict>
+				<key>mode</key>
+				<string>regular</string>
+			</dict>
+		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

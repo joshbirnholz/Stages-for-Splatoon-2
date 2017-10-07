@@ -223,13 +223,12 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		let end = start.addingTimeInterval(7200)
 		
 		let gameMode = BattleSchedule.Entry.GameMode(name: "Regular", key: "regular")
-		let stageA = BattleSchedule.Entry.Stage(id: "", name: "Stage A", image: "")
-		let stageB = BattleSchedule.Entry.Stage(id: "", name: "Stage B", image: "")
+		let stageA = BattleSchedule.Entry.Stage(name: "Stage A", image: "")
+		let stageB = BattleSchedule.Entry.Stage(name: "Stage B", image: "")
 		
-		let rule = BattleSchedule.Entry.Rule(multilineName: "", key: "turfwar", name: "Turf War")
+		let rule = BattleSchedule.Entry.Rule(key: "turfwar", name: "Turf War")
 		
 		let sampleScheduleEntry = BattleSchedule.Entry(startTime: start,
-		                                               id: 0,
 		                                               gameMode: gameMode,
 		                                               endTime: end,
 		                                               stageA: stageA,

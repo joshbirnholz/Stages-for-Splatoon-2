@@ -28,8 +28,14 @@ func reloadControllers(mode: WatchScreen) {
 			
 			schedule.removeExpiredEntries()
 			
-			let names = Array(repeating: "Stages", count: min(4, schedule[mode].count))
-			let contexts = Array(schedule[mode].prefix(names.count))
+			let fullPageCount = schedule[mode].count
+			
+			var names = Array(repeating: "Stages", count: min(fullPageCount, schedule[mode].count))
+			let contexts: [Any] = Array(schedule[mode].prefix(names.count))
+			
+			if schedule[mode].count > fullPageCount {
+				names.append("ViewFull")
+			}
 			
 			if #available(watchOSApplicationExtension 4.0, *) {
 				WKInterfaceController.reloadRootPageControllers(withNames: names,

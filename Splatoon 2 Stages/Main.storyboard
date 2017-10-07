@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X35-yG-Tev">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -23,7 +23,7 @@
             <objects>
                 <tableViewController definesPresentationContext="YES" id="Y8K-ma-frd" customClass="SettingsTableViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="G0u-4k-l9X">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <color key="separatorColor" white="1" alpha="0.10000000000000001" colorSpace="calibratedWhite"/>
@@ -31,14 +31,14 @@
                             <tableViewSection headerTitle="Apple Watch Complication" id="Axm-A0-t2P">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="hbH-8J-Iy0" style="IBUITableViewCellStyleDefault" id="HLd-XY-J7e">
-                                        <rect key="frame" x="0.0" y="55.5" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HLd-XY-J7e" id="4pE-nA-H4g">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Regular Battle Stages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="hbH-8J-Iy0">
-                                                    <rect key="frame" x="20" y="0.0" width="733" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -54,14 +54,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="k78-cQ-Upi" style="IBUITableViewCellStyleDefault" id="01x-X8-MVA">
-                                        <rect key="frame" x="0.0" y="99.5" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="01x-X8-MVA" id="Fwn-Pp-Y3U">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Ranked Battle Stages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="k78-cQ-Upi">
-                                                    <rect key="frame" x="20" y="0.0" width="733" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -77,14 +77,14 @@
                                         </userDefinedRuntimeAttributes>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="uJd-C8-sPi" style="IBUITableViewCellStyleDefault" id="gNE-PU-RR8">
-                                        <rect key="frame" x="0.0" y="143.5" width="768" height="44"/>
+                                        <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gNE-PU-RR8" id="igm-3w-Lbg">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="League Battle Stages" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="uJd-C8-sPi">
-                                                    <rect key="frame" x="20" y="0.0" width="733" height="43.5"/>
+                                                    <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -132,31 +132,31 @@
             <objects>
                 <tableViewController storyboardIdentifier="CurrentStages" id="S1C-Fs-SUZ" customClass="CurrentStagesTableViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7a2-A4-gbR">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StagesCell" rowHeight="300" id="o5N-7i-t6q" customClass="StagesCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="768" height="300"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o5N-7i-t6q" id="oS4-Rc-MAq">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="uY4-u6-unq">
-                                            <rect key="frame" x="8" y="0.0" width="752" height="292"/>
+                                            <rect key="frame" x="8" y="0.0" width="359" height="292"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zzy-5n-LNK">
-                                                    <rect key="frame" x="0.0" y="0.0" width="752" height="30"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="30"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Regular Battle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="huK-QI-tNu">
-                                                            <rect key="frame" x="0.0" y="0.0" width="679" height="30"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="286" height="30"/>
                                                             <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Turf War" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="6JK-af-u84">
-                                                            <rect key="frame" x="679" y="0.0" width="73" height="30"/>
+                                                            <rect key="frame" x="286" y="0.0" width="73" height="30"/>
                                                             <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -167,19 +167,19 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bzG-ed-cUY">
-                                                    <rect key="frame" x="0.0" y="39" width="752" height="253"/>
+                                                    <rect key="frame" x="0.0" y="149.5" width="359" height="142.5"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="oOY-ls-vVE">
-                                                            <rect key="frame" x="0.0" y="0.0" width="372" height="253"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="175.5" height="142.5"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tne-gV-2UQ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="175.5" height="98.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="tne-gV-2UQ" secondAttribute="height" multiplier="16:9" id="yx6-cO-9wc"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="VGM-ef-Mg2">
-                                                                    <rect key="frame" x="0.0" y="213" width="372" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="102.5" width="175.5" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="Oa4-iB-dNS"/>
                                                                     </constraints>
@@ -190,16 +190,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8df-cw-MMh">
-                                                            <rect key="frame" x="380" y="0.0" width="372" height="253"/>
+                                                            <rect key="frame" x="183.5" y="0.0" width="175.5" height="142.5"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mol-La-jzJ">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="175.5" height="98.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="Mol-La-jzJ" secondAttribute="height" multiplier="16:9" id="rfe-of-gD6"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="bLO-El-osJ">
-                                                                    <rect key="frame" x="0.0" y="213" width="372" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="102.5" width="175.5" height="40"/>
                                                                     <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -285,31 +285,31 @@
             <objects>
                 <tableViewController storyboardIdentifier="UpcomingStages" id="fOu-Yb-q8o" customClass="UpcomingStagesViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="7pc-za-z2t">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="StagesCell" rowHeight="300" id="1Jf-PI-6cY" customClass="StagesCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="768" height="300"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="300"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Jf-PI-6cY" id="CnW-s3-Hoe">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="300"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="2sz-ZT-y9v">
-                                            <rect key="frame" x="8" y="0.0" width="752" height="292"/>
+                                            <rect key="frame" x="8" y="0.0" width="359" height="292"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oc0-nI-3D1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="752" height="35"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="35"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Turf War" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="d7e-xv-5Hb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="636" height="35"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="243" height="35"/>
                                                             <fontDescription key="fontDescription" name="JapanYoshiSplatoon" family="JapanYoshiSplatoon" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="8/28 12:00 PM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="hNm-6J-MGr">
-                                                            <rect key="frame" x="636" y="0.0" width="116" height="35"/>
+                                                            <rect key="frame" x="243" y="0.0" width="116" height="35"/>
                                                             <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
@@ -320,19 +320,19 @@
                                                     </constraints>
                                                 </stackView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="LSj-6M-HB3">
-                                                    <rect key="frame" x="0.0" y="39" width="752" height="253"/>
+                                                    <rect key="frame" x="0.0" y="39" width="359" height="253"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="cgI-yd-Dfs">
-                                                            <rect key="frame" x="0.0" y="0.0" width="372" height="253"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="175.5" height="253"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZFN-c8-8ER">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="175.5" height="209"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ZFN-c8-8ER" secondAttribute="height" multiplier="16:9" id="AGm-VG-oyA"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Qp1-dE-rdJ">
-                                                                    <rect key="frame" x="0.0" y="213" width="372" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="213" width="175.5" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="zEA-1o-40a"/>
                                                                     </constraints>
@@ -343,16 +343,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OQi-1y-Pnf">
-                                                            <rect key="frame" x="380" y="0.0" width="372" height="253"/>
+                                                            <rect key="frame" x="183.5" y="0.0" width="175.5" height="253"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9u0-m6-XwP">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="372" height="209"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="175.5" height="209"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="9u0-m6-XwP" secondAttribute="height" multiplier="16:9" id="6gR-F1-Nqi"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stage B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="H8C-VS-ek8">
-                                                                    <rect key="frame" x="0.0" y="213" width="372" height="40"/>
+                                                                    <rect key="frame" x="0.0" y="213" width="175.5" height="40"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="40" id="gJG-9t-WFO"/>
                                                                     </constraints>
@@ -403,8 +403,18 @@
                     <navigationItem key="navigationItem" title="Ranked Battle" largeTitleDisplayMode="always" id="MPT-s2-ivi"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" barStyle="black"/>
+                    <connections>
+                        <outlet property="noDataLabel" destination="bwQ-W5-eS8" id="FFu-Ty-mdf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFs-vf-nem" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Data Available" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bwQ-W5-eS8">
+                    <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </objects>
             <point key="canvasLocation" x="556" y="107"/>
         </scene>
@@ -413,22 +423,22 @@
             <objects>
                 <tableViewController storyboardIdentifier="SalmonRun" id="I7D-qk-enJ" customClass="SalmonRunTableViewController" customModule="Splatoon_2_Stages" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="52" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Etq-2U-Zar">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SalmonRunCell" rowHeight="52" id="M0j-I8-Y3G" customClass="SalmonRunCell" customModule="Splatoon_2_Stages" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="768" height="52"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="52"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="M0j-I8-Y3G" id="204-Ie-rub">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="52"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w6H-IA-R8a">
-                                            <rect key="frame" x="8" y="8" width="752" height="44"/>
+                                            <rect key="frame" x="8" y="8" width="359" height="44"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8/26, 8:00 PM - 8/28, 2:00 AM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Riw-Ub-Fkb">
-                                                    <rect key="frame" x="41" y="0.0" width="641" height="44"/>
+                                                    <rect key="frame" x="41" y="0.0" width="248" height="44"/>
                                                     <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -451,7 +461,7 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Lv-JP-Lm1">
-                                            <rect key="frame" x="698" y="16" width="66" height="28"/>
+                                            <rect key="frame" x="305" y="16" width="66" height="28"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAs-io-rj9">
                                                     <rect key="frame" x="4" y="4" width="58" height="20"/>
@@ -520,7 +530,7 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="Ex7-gy-p3m">
-                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

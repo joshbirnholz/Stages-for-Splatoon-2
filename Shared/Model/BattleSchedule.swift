@@ -37,7 +37,6 @@ struct BattleSchedule: Codable {
 	struct Entry: Codable {
 		
 		var startTime: Date
-		var id: Int64
 		
 		struct GameMode: Codable {
 			var name: String
@@ -48,7 +47,6 @@ struct BattleSchedule: Codable {
 		var endTime: Date
 		
 		struct Stage: Codable {
-			var id: String
 			var name: String
 			var image: String
 		}
@@ -57,12 +55,10 @@ struct BattleSchedule: Codable {
 		var stageB: Stage
 		
 		struct Rule: Codable {
-			var multilineName: String
 			var key: String
 			var name: String
 			
 			private enum CodingKeys: String, CodingKey {
-				case multilineName = "multiline_name"
 				case key
 				case name
 			}
@@ -77,7 +73,6 @@ struct BattleSchedule: Codable {
 		
 		private enum CodingKeys: String, CodingKey {
 			case startTime = "start_time"
-			case id
 			case gameMode = "game_mode"
 			case endTime = "end_time"
 			case stageA = "stage_a"
@@ -170,7 +165,7 @@ func getScheduleFinished(data: Data?, response: URLResponse?, error: Error?, com
 	do {
 		try data.write(to: scheduleURL)
 		print("Wrote schedule to ", scheduleURL)
-	} catch let error {
+	} catch {
 		print("Error writing schedule:", error.localizedDescription)
 	}
 }

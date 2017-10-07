@@ -1,0 +1,35 @@
+{
+  "images" : [
+    {
+      "idiom" : "iphone",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "8c95053b3043e163cbfaaf1ec1e5f3eb770e5e07-1.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "8c95053b3043e163cbfaaf1ec1e5f3eb770e5e07-2.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "watch",
+      "filename" : "8c95053b3043e163cbfaaf1ec1e5f3eb770e5e07-3.png",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}

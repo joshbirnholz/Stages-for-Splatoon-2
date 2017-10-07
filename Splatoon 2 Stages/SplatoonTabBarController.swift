@@ -33,7 +33,7 @@ class SplatoonTabBarController: UITabBarController {
 	}
 	
 	@objc func presentSettings() {
-		performSegue(withIdentifier: "Settigns", sender: nil)
+		performSegue(withIdentifier: "Settings", sender: nil)
 	}
 	
 }

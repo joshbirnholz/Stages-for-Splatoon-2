@@ -11,6 +11,7 @@ import NotificationCenter
 
 class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProviding {
 	
+	@IBOutlet var noDataLabel: UILabel!
 	var runSchedule: SalmonRunSchedule?
 	
 	override func viewDidLoad() {
@@ -24,8 +25,21 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 		
 	}
 	
+	func openApp() {
+		let url = URL(string: "jbstages://openMode?mode=\(WatchScreen.salmonRun.rawValue)")!
+		extensionContext?.open(url, completionHandler: nil)
+	}
+	
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
+	}
+	
+	func updateNoDataLabel() {
+		if let schedule = runSchedule, !schedule.runs.isEmpty {
+			self.tableView.tableHeaderView = nil
+		} else {
+			self.tableView.tableHeaderView = noDataLabel
+		}
 	}
 	
 	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
@@ -35,7 +49,10 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 		// If there's no update required, use NCUpdateResult.NoData
 		// If there's an update, use NCUpdateResult.NewData
 		if let runs = runSchedule, runs.isValid {
-			completionHandler(.noData)
+			DispatchQueue.main.async {
+				self.updateNoDataLabel()
+				completionHandler(.noData)
+			}
 			return
 		}
 		
@@ -43,13 +60,17 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 			switch result {
 			case .failure(let error):
 				print("Error getting runs:", error.localizedDescription)
-				completionHandler(.noData)
+				DispatchQueue.main.async {
+					self.updateNoDataLabel()
+					completionHandler(.failed)
+				}
 			case .success(var r):
 				r.removeExpiredRuns()
 				r.sort()
 				self.runSchedule = r
 				DispatchQueue.main.async {
-					self.tableView.reloadSections(IndexSet(integer: 0), with: .fade)
+					self.tableView.reloadData()
+					self.updateNoDataLabel()
 					completionHandler(.newData)
 				}
 			}
@@ -118,6 +139,11 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return extensionContext!.widgetMaximumSize(for: .compact).height / 2
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let url = URL(string: "jbstages://openMode?mode=\(WatchScreen.salmonRun.rawValue)")!
+		extensionContext?.open(url, completionHandler: nil)
 	}
 	
 	func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {

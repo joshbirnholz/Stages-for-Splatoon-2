@@ -24,15 +24,11 @@ class CurrentStagesTableViewController: UITableViewController {
 		tableView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "sitebg"))
 		tableView.layer.isOpaque = false
 		
-		if #available(iOS 10.0, *) {
-			tableView.refreshControl?.tintColor = UIColor(white: 1, alpha: 0.4)
-		}
+		tableView.refreshControl?.tintColor = UIColor(white: 1, alpha: 0.4)
 		
-		if #available(iOS 10.0, *) {
-			let refreshControl = UIRefreshControl()
-			refreshControl.addTarget(self, action: #selector(loadSchedule), for: .valueChanged)
-			tableView.refreshControl = refreshControl
-		}
+		let refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(loadSchedule), for: .valueChanged)
+		tableView.refreshControl = refreshControl
 		
 		if battleSchedule == nil {
 			loadSchedule()
@@ -64,10 +60,8 @@ class CurrentStagesTableViewController: UITableViewController {
 				battleSchedule = sch
 				
 				DispatchQueue.main.async {
-					if #available(iOS 10.0, *) {
-						self.tableView.reloadData()
-						self.tableView.refreshControl?.endRefreshing()
-					}
+					self.tableView.reloadData()
+					self.tableView.refreshControl?.endRefreshing()
 				}
 			}
 		}

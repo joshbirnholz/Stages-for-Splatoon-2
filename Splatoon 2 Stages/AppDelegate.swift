@@ -101,22 +101,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 	
+	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+		guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+			let host = components.host else {
+			return false
+		}
+		
+		switch host {
+		case "openMode":
+			guard let str = components.queryItems?.dictionary["mode"],
+				let mode = WatchScreen(rawValue: str) else {
+				return false
+			}
+			return showScreen(mode)
+		default:
+			return false
+		}
+	}
+	
 	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
 		switch userActivity.activityType {
 		case "com.josh.birnholz.Splatoon-2-Stages.openMode":
 			if let modeString = userActivity.userInfo?["mode"] as? String,
-				let mode = Mode(rawValue: modeString) {
-				print("Opening to mode:", mode)
-				
-				if let tabBarController = window?.rootViewController as? UITabBarController,
-					let tab = tabBarController.tabBar.items?.first(where: { (item) -> Bool in
-						item.title == mode.description
-					}),
-					let index = tabBarController.tabBar.items?.index(of: tab) {
-					tabBarController.selectedIndex = index
-				}
-				
-				return true
+				let mode = WatchScreen(rawValue: modeString) {
+				return showScreen(mode)
 			}
 		default:
 			break
@@ -124,7 +132,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		return false
 	}
-
+	
+	func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+		guard shortcutItem.type == "openMode", let str = shortcutItem.userInfo?["mode"] as? String, let mode = WatchScreen(rawValue: str) else {
+			completionHandler(false)
+			return
+		}
+		
+		completionHandler(showScreen(mode))
+	}
+	
+	func showScreen(_ mode: WatchScreen) -> Bool {
+		print("Opening to mode:", mode)
+		
+		guard let tabBarController = window?.rootViewController as? UITabBarController,
+			let tab = tabBarController.tabBar.items?.first(where: { (item) -> Bool in
+				item.title == mode.description
+			}),
+			let index = tabBarController.tabBar.items?.index(of: tab) else {
+			
+			
+			return false
+		}
+		
+		tabBarController.selectedIndex = index
+		return true
+	}
 
 }
 

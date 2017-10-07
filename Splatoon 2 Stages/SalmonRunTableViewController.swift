@@ -18,20 +18,16 @@ class SalmonRunTableViewController: UITableViewController {
 		tableView.backgroundColor = UIColor(patternImage: #imageLiteral(resourceName: "blob"))
 		tableView.layer.isOpaque = false
 		
-		if #available(iOS 10.0, *) {
-			let refreshControl = UIRefreshControl()
-			refreshControl.addTarget(self, action: #selector(loadRuns), for: .valueChanged)
-			refreshControl.tintColor = UIColor(white: 1, alpha: 0.4)
-			tableView.refreshControl = refreshControl
-		}
+		let refreshControl = UIRefreshControl()
+		refreshControl.addTarget(self, action: #selector(loadRuns), for: .valueChanged)
+		refreshControl.tintColor = UIColor(white: 1, alpha: 0.4)
+		tableView.refreshControl = refreshControl
 		
-		if let runSchedule = runSchedule {
-			if runSchedule.runs.isEmpty {
-				tableView.tableHeaderView = noDataLabel
-			}
-		} else {
+		if runSchedule == nil {
 			loadRuns()
 		}
+		
+		updateNoDataLabel()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
@@ -40,7 +36,16 @@ class SalmonRunTableViewController: UITableViewController {
 		tabBarController?.tabBar.tintColor = #colorLiteral(red: 0.9867637753, green: 0.2715459905, blue: 0.03388012111, alpha: 1)
 	}
 	
+	func updateNoDataLabel() {
+		if let schedule = runSchedule, !schedule.runs.isEmpty {
+			self.tableView.tableHeaderView = nil
+		} else {
+			self.tableView.tableHeaderView = noDataLabel
+		}
+	}
+	
 	@objc func loadRuns() {
+		self.tableView.refreshControl?.beginRefreshing()
 		getRuns { (result) in
 			switch result {
 			case .failure(let error):
@@ -50,13 +55,11 @@ class SalmonRunTableViewController: UITableViewController {
 				r.sort()
 				runSchedule = r
 				DispatchQueue.main.async {
-					if #available(iOS 10.0, *) {
 					self.tableView.refreshControl?.endRefreshing()
-					}
-					
-					self.tableView.tableHeaderView = r.runs.isEmpty ? self.noDataLabel : nil
 					
 					self.tableView.reloadData()
+					self.updateNoDataLabel()
+					
 					(self.tabBarController as? SplatoonTabBarController)?.updateSalmonRunBadge()
 				}
 			}
