@@ -37,7 +37,7 @@ class SalmonRunTableViewController: UITableViewController {
 	}
 	
 	func updateNoDataLabel() {
-		if let schedule = runSchedule, !schedule.runs.isEmpty {
+		if let schedule = runSchedule, !schedule.shifts.isEmpty {
 			self.tableView.tableHeaderView = nil
 		} else {
 			self.tableView.tableHeaderView = noDataLabel
@@ -51,7 +51,7 @@ class SalmonRunTableViewController: UITableViewController {
 			case .failure(let error):
 				print("Error getting runs:", error.localizedDescription)
 			case .success(var r):
-				r.removeExpiredRuns()
+				r.removeExpiredShifts()
 				r.sort()
 				runSchedule = r
 				DispatchQueue.main.async {
@@ -79,18 +79,44 @@ class SalmonRunTableViewController: UITableViewController {
 			return 0
 		}
 		
-		return runs.runs.count
+		return runs.shifts.count
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonRunCell", for: indexPath) as! SalmonRunCell
 		
-		guard let run = runSchedule?.runs[indexPath.row] else {
+		guard let run = runSchedule?.shifts[indexPath.row] else {
 			return cell
 		}
 		
 		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
 		cell.timeLabel.text = timeString
+		
+		if let stage = run.stage {
+			cell.extendedInfoStackView?.isHidden = false
+			cell.stageNameLabel?.text = stage.name
+			
+			loadImage(withSplatNetID: stage.imageID) { image in
+				DispatchQueue.main.async {
+					(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.stageImageView?.image = image
+				}
+			}
+			
+			for (index, weapon) in run.weapons.prefix(4).enumerated() {
+				guard let weapon = weapon else {
+					cell.weaponImageViews[index].image = #imageLiteral(resourceName: "random weapon")
+					continue
+				}
+				
+				loadImage(withSplatNetID: weapon.imageID) { image in
+					DispatchQueue.main.async {
+						(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.weaponImageViews[index].image = image
+					}
+				}
+			}
+		} else {
+			cell.extendedInfoStackView?.isHidden = true
+		}
 		
 		if let text = runSchedule?.badgeText(forRowAt: indexPath.row) {
 			cell.badgeView.isHidden = false
@@ -101,4 +127,31 @@ class SalmonRunTableViewController: UITableViewController {
 		
 		return cell
 	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		guard let weapons = runSchedule?.shifts[indexPath.row].weapons, !weapons.isEmpty else {
+			return
+		}
+		
+		let message = weapons.map { $0?.name ?? "?" }.joined(separator: "\n")
+		
+		let popup = PopupDialog(title: "Supplied Weapons", message: message)
+		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
+		popup.modalPresentationCapturesStatusBarAppearance = false
+		present(popup, animated: true, completion: nil)
+		
+//		let vc = storyboard!.instantiateViewController(withIdentifier: "WeaponInfo")
+		
+//		let popup = PopupDialog(viewController: vc, transitionStyle: .bounceDown, gestureDismissal: true, hideStatusBar: false, completion: nil)
+//		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
+//
+//		present(popup, animated: true, completion: nil)
+		
+//		let alert = UIAlertController(title: "Supplied Weapons", message: message, preferredStyle: .alert)
+//		let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+//		alert.addAction(okAction)
+//		present(alert, animated: true, completion: nil)
+		
+	}
+	
 }

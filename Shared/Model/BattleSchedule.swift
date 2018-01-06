@@ -15,8 +15,8 @@ public let decoder: JSONDecoder = {
 }()
 //public let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 public let documentDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.josh.birnholz.Splatoon-2-Stages")!
-public let runsURL = documentDirectory.appendingPathComponent("salmonruns.ics")
-public let scheduleURL = documentDirectory.appendingPathComponent("schedule.json")
+public let runsURL = documentDirectory.appendingPathComponent("coop-schedules.json")
+public let scheduleURL = documentDirectory.appendingPathComponent("schedules.json")
 
 let dateFormatter: DateFormatter = {
 	let df = DateFormatter()
@@ -32,7 +32,7 @@ struct BattleSchedule: Codable {
 		return e
 	}()
 	
-	static let downloadURL = URL(string: "http://squidkidsfeed.azurewebsites.net/Schedule.json")!
+	static let downloadURL = URL(string: "https://splatoon2.ink/data/schedules.json")!
 	
 	struct Entry: Codable {
 		
@@ -48,7 +48,14 @@ struct BattleSchedule: Codable {
 		
 		struct Stage: Codable {
 			var name: String
-			var image: String
+			fileprivate var image: URL
+			
+			lazy var imageID: String = image.deletingPathExtension().lastPathComponent
+			
+			init(name: String) {
+				self.name = name
+				image = URL(string: "file://")!
+			}
 		}
 		
 		var stageA: Stage

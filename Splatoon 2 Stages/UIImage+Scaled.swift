@@ -39,4 +39,12 @@ extension UIImage {
 			return self.scaled(to: CGSize(width: size.height * aspect, height: size.height), backgroundColor: backgroundColor)
 		}
 	}
+	
+	public func scaled(toWidth newWidth: CGFloat, backgroundColor: UIColor? = nil) -> UIImage {
+		let aspect: CGFloat = self.size.width / newWidth
+		let newHeight: CGFloat = self.size.height * aspect
+		
+		return self.scaled(to: CGSize(width: newWidth, height: newHeight))
+	}
+
 }

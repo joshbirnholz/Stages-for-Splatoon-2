@@ -15,20 +15,21 @@ class SplatoonTabBarController: UITabBarController {
 		updateSalmonRunBadge()
 	}
 	
+	/// Updates the Salmon Run tab bar item's badge. Does nothing if the Salmon Run tab is not shown.
 	func updateSalmonRunBadge() {
 		
-		guard let item = tabBar.items?.last else {
+		guard let salmonRunTabBarItem = tabBar.items?.last, salmonRunTabBarItem.title == "Salmon Run" else {
 			return
 		}
 		
-		item.badgeColor = #colorLiteral(red: 0.9867637753, green: 0.2715459905, blue: 0.03388012111, alpha: 1)
+		salmonRunTabBarItem.badgeColor = #colorLiteral(red: 0.9867637753, green: 0.2715459905, blue: 0.03388012111, alpha: 1)
 		
-		guard let run = runSchedule?.runs.first else {
-			item.badgeValue = nil
+		guard let run = runSchedule?.shifts.first else {
+			salmonRunTabBarItem.badgeValue = nil
 			return
 		}
 		
-		item.badgeValue = run.status == .open ? "!" : nil
+		salmonRunTabBarItem.badgeValue = run.currentStatus == .open ? "!" : nil
 
 	}
 	

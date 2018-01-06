@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13196" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SJi-J7-fVz">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="13529" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="SJi-J7-fVz">
     <device id="watch42" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="13507"/>
     </dependencies>
     <customFonts key="customFonts">
         <array key="Splatoon2.ttf">
@@ -158,30 +158,6 @@
                             </items>
                         </group>
                     </items>
-                    <menu key="menu" id="qv6-xX-Qln">
-                        <items>
-                            <menuItem title="Regular Battle" image="Regular Battle Tab" id="hcR-go-iwW">
-                                <connections>
-                                    <action selector="regularBattleButtonPressed" destination="AgC-eL-Hgc" id="HVL-cH-hez"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Salmon Run" image="Salmon Tab" id="VTM-X4-Z2j">
-                                <connections>
-                                    <action selector="salmonRunButtonPressed" destination="AgC-eL-Hgc" id="gsi-yn-Wkz"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="6py-s2-qsf">
-                                <connections>
-                                    <action selector="rankedBattleButtonPressed" destination="AgC-eL-Hgc" id="OwH-4s-bns"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="League Battle" image="League Battle Tab" id="0ta-1b-qDv">
-                                <connections>
-                                    <action selector="leagueBattleButtonPressed" destination="AgC-eL-Hgc" id="Gna-1O-jy6"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="modeIconImage" destination="kGC-O9-UqX" id="Cp4-p5-A0v"/>
                         <outlet property="modeNameLabel" destination="TnV-vP-jG9" id="zXi-1A-siX"/>
@@ -222,42 +198,49 @@
                                             <label alignment="left" text="9/10 8:00, AM - 9/11, 2:00 PM" numberOfLines="0" id="yRu-SP-4mj">
                                                 <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="16"/>
                                             </label>
+                                            <group width="1" height="80" alignment="left" hidden="YES" contentMode="scaleAspectFill" layout="vertical" radius="10" spacing="0.0" id="Bps-qq-z1E">
+                                                <items>
+                                                    <group height="24" alignment="right" verticalAlignment="bottom" radius="8" id="4vl-kW-xcl">
+                                                        <items>
+                                                            <label alignment="center" verticalAlignment="center" text="Stage" textAlignment="right" numberOfLines="2" minimumScaleFactor="0.5" id="XEe-jY-hPD">
+                                                                <fontDescription key="font" name="Splatoon2" family="Splatoon2" pointSize="15"/>
+                                                                <variation key="device=watch38mm" numberOfLines="1"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                                                        <edgeInsets key="margins" left="4" right="4" top="0.0" bottom="0.0"/>
+                                                    </group>
+                                                </items>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.19949434429999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <edgeInsets key="margins" left="2" right="2" top="2" bottom="2"/>
+                                            </group>
+                                            <group width="1" height="40" alignment="left" hidden="YES" spacing="0.0" id="xGg-gk-hZ5">
+                                                <items>
+                                                    <imageView width="0.25" height="1" alignment="left" contentMode="scaleAspectFit" id="sZP-SY-iEw"/>
+                                                    <imageView width="0.25" height="1" alignment="left" contentMode="scaleAspectFit" id="Nal-bJ-P2e"/>
+                                                    <imageView width="0.25" height="1" alignment="left" contentMode="scaleAspectFit" id="UlR-4X-q2X"/>
+                                                    <imageView width="0.25" height="1" alignment="left" contentMode="scaleAspectFit" id="kmk-FB-hQZ"/>
+                                                </items>
+                                            </group>
                                         </items>
                                         <edgeInsets key="margins" left="7" right="7" top="7" bottom="0.0"/>
                                     </group>
                                     <connections>
                                         <outlet property="badge" destination="h9m-at-KHp" id="WlN-Jg-2kH"/>
                                         <outlet property="badgeLabel" destination="4gJ-Jc-3EA" id="MaP-En-AOL"/>
+                                        <outlet property="stageGroup" destination="Bps-qq-z1E" id="nxZ-Oz-LrI"/>
+                                        <outlet property="stageNameLabel" destination="XEe-jY-hPD" id="jyC-Le-Epw"/>
                                         <outlet property="timeLabel" destination="yRu-SP-4mj" id="Dy4-vV-fTh"/>
+                                        <outlet property="weaponGroup" destination="xGg-gk-hZ5" id="k8a-ae-mkX"/>
+                                        <outlet property="weaponImage0" destination="sZP-SY-iEw" id="U5N-IJ-d3Y"/>
+                                        <outlet property="weaponImage1" destination="Nal-bJ-P2e" id="5Mj-jy-mWV"/>
+                                        <outlet property="weaponImage2" destination="UlR-4X-q2X" id="Ao4-2C-OAt"/>
+                                        <outlet property="weaponImage3" destination="kmk-FB-hQZ" id="DTL-AE-jdY"/>
                                     </connections>
                                 </tableRow>
                             </items>
                         </table>
                     </items>
-                    <menu key="menu" id="uzM-1i-4w9">
-                        <items>
-                            <menuItem title="Regular Battle" image="Regular Battle Tab" id="RVa-VB-Ydm">
-                                <connections>
-                                    <action selector="regularBattleButtonPressed" destination="nQN-tf-8Lx" id="Jej-sR-ZOt"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Salmon Run" image="Salmon Tab" id="zWO-nG-0xx">
-                                <connections>
-                                    <action selector="salmonRunButtonPressed" destination="nQN-tf-8Lx" id="CHD-pF-K3H"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="Ranked Battle" image="Ranked Battle Tab" id="SI7-5O-wvc">
-                                <connections>
-                                    <action selector="rankedBattleButtonPressed" destination="nQN-tf-8Lx" id="tCd-PE-Jb3"/>
-                                </connections>
-                            </menuItem>
-                            <menuItem title="League Battle" image="League Battle Tab" id="qFG-Bh-VPr">
-                                <connections>
-                                    <action selector="leagueBattleButtonPressed" destination="nQN-tf-8Lx" id="h86-l2-Ulx"/>
-                                </connections>
-                            </menuItem>
-                        </items>
-                    </menu>
                     <connections>
                         <outlet property="table" destination="r0c-S7-oVT" id="W4D-gt-Cd5"/>
                     </connections>

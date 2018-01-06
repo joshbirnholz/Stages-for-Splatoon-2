@@ -11,7 +11,7 @@ import WatchKit
 class InitialInterfaceController: WKInterfaceController {
 	
 	@IBOutlet var loadingImage: WKInterfaceImage!
-	var buttonAction: ((WatchScreen) -> ())? = nil
+	var buttonAction: ((AppSection) -> ())? = nil
 	
 	@IBOutlet var retryButton: WKInterfaceButton!
 	

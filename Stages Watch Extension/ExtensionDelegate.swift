@@ -1,4 +1,4 @@
-//
+ //
 //  ExtensionDelegate.swift
 //  Stages Watch Extension
 //
@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+//import WatchConnectivity
 
 var battleSchedule: BattleSchedule?
 var runSchedule: SalmonRunSchedule?
@@ -17,7 +18,7 @@ var timer: Timer? {
 	}
 }
 
-func reloadControllers(mode: WatchScreen) {
+func reloadControllers(mode: AppSection) {
 	switch mode {
 	case .battle(let mode):
 		DispatchQueue.main.async {
@@ -52,7 +53,7 @@ func reloadControllers(mode: WatchScreen) {
 			return
 		}
 		
-		schedule.removeExpiredRuns()
+		schedule.removeExpiredShifts()
 		schedule.sort()
 		
 		WKInterfaceController.reloadRootControllers(withNames: ["SalmonRun"], contexts: nil)
@@ -61,7 +62,7 @@ func reloadControllers(mode: WatchScreen) {
 	
 }
 
-var selectedMode: WatchScreen {
+var selectedMode: AppSection {
 	set {
 		UserDefaults.standard.set(newValue.rawValue, forKey: "selectedMode")
 		reloadControllers(mode: newValue)
@@ -70,7 +71,7 @@ var selectedMode: WatchScreen {
 		guard let str = UserDefaults.standard.string(forKey: "selectedMode") else {
 			return .battle(.regular)
 		}
-		return WatchScreen(rawValue: str) ?? .battle(.regular)
+		return AppSection(rawValue: str) ?? .battle(.regular)
 	}
 }
 
@@ -83,11 +84,21 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 	func applicationDidFinishLaunching() {
 		// Perform any final initialization of your application.
 		
+		registerAppSettings(to: .group)
+		
+//		let session = WCSession.default
+//		session.delegate = self
+//		session.activate()
+		
+		if !UserDefaults.group.bool(forKey: "ShowSalmonRun") && selectedMode == .salmonRun {
+			selectedMode = .battle(.regular)
+		}
+		
 		loadSchedule(displayMode: selectedMode)
 		
 	}
 	
-	func loadSchedule(displayMode: WatchScreen) {
+	func loadSchedule(displayMode: AppSection) {
 		print("Loading schedules")
 		
 		var errorToShow: Error?
@@ -121,7 +132,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 					break
 				}
 			case .success(var r):
-				r.removeExpiredRuns()
+				r.removeExpiredShifts()
 				r.sort()
 				runSchedule = r
 			}
@@ -154,7 +165,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 			case .battle(let mode):
 				return battleSchedule?[mode].first?.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval)
 			case .salmonRun:
-				return runSchedule?.runs.first?.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval)
+				return runSchedule?.shifts.first?.endTime.addingTimeInterval(ExtensionDelegate.updateTimeInterval)
 			}
 		}() else {
 				return
@@ -187,7 +198,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 			case .battle(let mode):
 				return battleSchedule?[mode].first?.endTime
 			case .salmonRun:
-				return runSchedule?.runs.first?.endTime
+				return runSchedule?.shifts.first?.endTime
 			}
 			}() else {
 			self.loadSchedule(displayMode: selectedMode)
@@ -249,7 +260,7 @@ class ExtensionDelegate: NSObject, WKExtensionDelegate {
 					case .battle(let mode):
 						return battleSchedule?[mode].first?.endTime ?? .distantFuture
 					case .salmonRun:
-						return runSchedule?.runs.first?.endTime ?? .distantFuture
+						return runSchedule?.shifts.first?.endTime ?? .distantFuture
 					}
 				}()
 				
@@ -337,3 +348,23 @@ extension ExtensionDelegate: URLSessionDownloadDelegate {
 		}
 	}
 }
+
+//extension ExtensionDelegate: WCSessionDelegate {
+//	func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+//		switch activationState {
+//		case .activated:
+//			print("WCSessionActivationState changed to activated")
+//		case .inactive:
+//			print("WCSessionActivationState changed to inactive")
+//		case .notActivated:
+//			print("WCSessionActivationState changed to not activated")
+//		}
+//
+//		if let error = error {
+//			print("WCSession Activation error: \(error.localizedDescription)")
+//		}
+//	}
+//
+//
+//}
+

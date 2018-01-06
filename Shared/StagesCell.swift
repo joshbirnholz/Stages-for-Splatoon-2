@@ -31,7 +31,6 @@ class StagesCell: UITableViewCell {
 		if #available(iOS 11.0, *) {
 			stageAImageView.accessibilityIgnoresInvertColors = true
 			stageBImageView.accessibilityIgnoresInvertColors = true
-			
 		}
 		
 		if let view = viewWithTag(100) {
@@ -43,6 +42,15 @@ class StagesCell: UITableViewCell {
 			view.layer.cornerRadius = 4
 			view.clipsToBounds = true
 		}
+	}
+	
+	override func prepareForReuse() {
+		stageAImageView.image = nil
+		stageBImageView.image = nil
+		timeLabel.text = nil
+		modeLabel.text = nil
+		stageANameLabel.text = nil
+		stageBNameLabel.text = nil
 	}
 	
 }

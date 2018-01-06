@@ -13,12 +13,12 @@
 import WatchKit
 import ClockKit
 
-var complicationMode: WatchScreen {
+var complicationMode: AppSection {
 	get {
 		guard let str = UserDefaults.group.string(forKey: "complicationMode") else {
 			return .battle(.regular)
 		}
-		return WatchScreen(rawValue: str) ?? .battle(.regular)
+		return AppSection(rawValue: str) ?? .battle(.regular)
 	}
 }
 
@@ -68,7 +68,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 				print("Failed to get salmon run schedule", error.localizedDescription)
 				completion(nil)
 			case .success(var r):
-				r.removeExpiredRuns()
+				r.removeExpiredShifts()
 				r.sort()
 				runSchedule = r
 				completion(r)
@@ -96,7 +96,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			}
 		case .salmonRun:
 			loadSalmonRunSchedule { runs in
-				guard let firstRun = runs?.runs.first else {
+				guard let firstRun = runs?.shifts.first else {
 					handler(nil)
 					return
 				}
@@ -120,7 +120,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			}
 		case .salmonRun:
 			loadSalmonRunSchedule { runs in
-				guard let lastRun = runs?.runs.last else {
+				guard let lastRun = runs?.shifts.last else {
 					handler(nil)
 					return
 				}
@@ -156,7 +156,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			}
 		case .salmonRun:
 			loadSalmonRunSchedule { schedule in
-				guard let run = schedule?.runs.first else {
+				guard let run = schedule?.shifts.first else {
 					handler(nil)
 					return
 				}
@@ -200,13 +200,13 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			}
 		case .salmonRun:
 			loadSalmonRunSchedule { schedule in
-				guard let runs = schedule?.runs else {
+				guard let runs = schedule?.shifts, !runs.isEmpty else {
 					handler(nil)
 					return
 				}
 				
 				// TODO: Create timeline entries for during and between salmon runs
-				
+
 				handler(nil)
 				
 			}
@@ -223,8 +223,8 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		let end = start.addingTimeInterval(7200)
 		
 		let gameMode = BattleSchedule.Entry.GameMode(name: "Regular", key: "regular")
-		let stageA = BattleSchedule.Entry.Stage(name: "Stage A", image: "")
-		let stageB = BattleSchedule.Entry.Stage(name: "Stage B", image: "")
+		let stageA = BattleSchedule.Entry.Stage(name: "Stage A")
+		let stageB = BattleSchedule.Entry.Stage(name: "Stage B")
 		
 		let rule = BattleSchedule.Entry.Rule(key: "turfwar", name: "Turf War")
 		
@@ -316,7 +316,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 		
 	}
 	
-	func salmonRunTemplate(for complicationFamily: CLKComplicationFamily, run: SalmonRunSchedule.Run) -> CLKComplicationTemplate? {
+	func salmonRunTemplate(for complicationFamily: CLKComplicationFamily, run: SalmonRunSchedule.Shift) -> CLKComplicationTemplate? {
 		// TODO: return Salmon Run template
 		return nil
 	}

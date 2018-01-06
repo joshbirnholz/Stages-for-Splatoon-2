@@ -116,7 +116,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 			return cell
 		}
 		
-		let entry = schedule[mode][indexPath.row]
+		var entry = schedule[mode][indexPath.row]
 		
 		let gameMode = Mode(rawValue: entry.gameMode.key) ?? .regular
 		
@@ -135,9 +135,19 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		cell.stageBImageView.clipsToBounds = true
 		
 		cell.stageANameLabel.text = entry.stageA.name
-		cell.stageAImageView.image = UIImage(named: entry.stageA.name.lowercased().replacingOccurrences(of: " ", with: "-"))
 		cell.stageBNameLabel.text = entry.stageB.name
-		cell.stageBImageView.image = UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-"))
+		
+		loadImage(withSplatNetID: entry.stageA.imageID) { image in
+			DispatchQueue.main.async {
+				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageAImageView.image = image
+			}
+		}
+		
+		loadImage(withSplatNetID: entry.stageB.imageID) { image in
+			DispatchQueue.main.async {
+				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageBImageView.image = image
+			}
+		}
 		
 		if entry.endTime < Date() {
 			cell.alpha = 0.4

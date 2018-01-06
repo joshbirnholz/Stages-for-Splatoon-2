@@ -10,7 +10,7 @@ import WatchKit
 import Foundation
 
 
-class StagesInterfaceController: WKInterfaceController {
+class StagesInterfaceController: SplatoonMainInterfaceController {
 	
 	@IBOutlet var modeIconImage: WKInterfaceImage!
 	@IBOutlet var modeNameLabel: WKInterfaceLabel!
@@ -24,7 +24,7 @@ class StagesInterfaceController: WKInterfaceController {
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
 		
-		guard let entry = context as? BattleSchedule.Entry,
+		guard var entry = context as? BattleSchedule.Entry,
 			let mode = Mode(rawValue: entry.gameMode.key) else {
 			return
 		}
@@ -39,10 +39,19 @@ class StagesInterfaceController: WKInterfaceController {
 //		timeLabel.setText(dateFormatter.string(from: entry.startTime) + " - " + dateFormatter.string(from: entry.endTime))
 		
 		stageALabel.setText(entry.stageA.name)
-		stageAGroup.setBackgroundImage(UIImage(named: entry.stageA.name.lowercased().replacingOccurrences(of: " ", with: "-")))
-		
 		stageBLabel.setText(entry.stageB.name)
-		stageBGroup.setBackgroundImage(UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-")))
+		
+		loadImage(withSplatNetID: entry.stageA.imageID) { [weak self] image in
+			DispatchQueue.main.async {
+				self?.stageAGroup.setBackgroundImage(image)
+			}
+		}
+		
+		loadImage(withSplatNetID: entry.stageB.imageID) { [weak self] image in
+			DispatchQueue.main.async {
+				self?.stageBGroup.setBackgroundImage(image)
+			}
+		}
 		
 		(WKExtension.shared().delegate as? ExtensionDelegate)?.scheduleForegroundReload()
 		

@@ -11,12 +11,6 @@ import WatchConnectivity
 
 class CurrentStagesTableViewController: UITableViewController {
 	
-	@IBOutlet var watchSettingsButton: UIBarButtonItem!
-	
-	@IBAction func settingsButtonPressed(_ sender: Any) {
-		tabBarController?.performSegue(withIdentifier: "Settings", sender: sender)
-	}
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -74,7 +68,7 @@ class CurrentStagesTableViewController: UITableViewController {
 			case .failure(let error):
 				print("Error retreiving salmon runs:", error.localizedDescription)
 			case .success(var r):
-				r.removeExpiredRuns()
+				r.removeExpiredShifts()
 				r.sort()
 				runSchedule = r
 				
@@ -96,10 +90,14 @@ class CurrentStagesTableViewController: UITableViewController {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return battleSchedule == nil ? 0 : 3
+		return battleSchedule == nil ? 0 : 4
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		if indexPath.row > 2 {
+			return tableView.dequeueReusableCell(withIdentifier: "AttributionCell", for: indexPath)
+		}
+		
 		return stagesCell(forRowAt: indexPath)
 	}
 	
@@ -112,7 +110,7 @@ class CurrentStagesTableViewController: UITableViewController {
 			return cell
 		}
 		
-		guard let entry: BattleSchedule.Entry = {
+		guard var entry: BattleSchedule.Entry = {
 			func match(entry: BattleSchedule.Entry) -> Bool {
 				let now = Date()
 				return entry.startTime < now && entry.endTime > now
@@ -140,15 +138,25 @@ class CurrentStagesTableViewController: UITableViewController {
 		cell.timeLabel.textColor = gameMode.color
 		
 		cell.stageANameLabel.text = entry.stageA.name
-		cell.stageAImageView.image = UIImage(named: entry.stageA.name.lowercased().replacingOccurrences(of: " ", with: "-"))
 		cell.stageBNameLabel.text = entry.stageB.name
-		cell.stageBImageView.image = UIImage(named: entry.stageB.name.lowercased().replacingOccurrences(of: " ", with: "-"))
+		
+		loadImage(withSplatNetID: entry.stageA.imageID) { image in
+			DispatchQueue.main.async { [weak self] in
+				(self?.tableView.cellForRow(at: indexPath) as? StagesCell)?.stageAImageView.image = image
+			}
+		}
+		
+		loadImage(withSplatNetID: entry.stageB.imageID) { image in
+			DispatchQueue.main.async { [weak self] in
+				(self?.tableView.cellForRow(at: indexPath) as? StagesCell)?.stageBImageView.image = image
+			}
+		}
 		
 		return cell
 	}
 	
 	func salmonRunCell(forRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let run = runSchedule?.runs.first else {
+		guard let run = runSchedule?.shifts.first else {
 			return UITableViewCell()
 		}
 		
@@ -158,13 +166,15 @@ class CurrentStagesTableViewController: UITableViewController {
 		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
 		cell.timeLabel.text = timeString
 		
-		cell.badgeLabel.text = run.status == .open ? "Open!" : "Next"
+		cell.badgeLabel.text = run.currentStatus == .open ? "Open!" : "Next"
 		
 		return cell
 	}
 	
-	@IBAction func unwindToCurrentStagesViewController(segue: UIStoryboardSegue) {
-	
+	@IBAction func attributionButtonPressed(_ sender: UIButton) {
+		let url = URL(string: "https://splatoon2.ink")!
+		
+		UIApplication.shared.open(url, options: [:], completionHandler: nil)
 	}
 	
 //	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

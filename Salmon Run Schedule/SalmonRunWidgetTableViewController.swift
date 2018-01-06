@@ -26,7 +26,7 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 	}
 	
 	func openApp() {
-		let url = URL(string: "jbstages://openMode?mode=\(WatchScreen.salmonRun.rawValue)")!
+		let url = URL(string: "jbstages://openMode?mode=\(AppSection.salmonRun.rawValue)")!
 		extensionContext?.open(url, completionHandler: nil)
 	}
 	
@@ -35,7 +35,7 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 	}
 	
 	func updateNoDataLabel() {
-		if let schedule = runSchedule, !schedule.runs.isEmpty {
+		if let schedule = runSchedule, !schedule.shifts.isEmpty {
 			self.tableView.tableHeaderView = nil
 		} else {
 			self.tableView.tableHeaderView = noDataLabel
@@ -62,15 +62,20 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 				print("Error getting runs:", error.localizedDescription)
 				DispatchQueue.main.async {
 					self.updateNoDataLabel()
+					self.extensionContext?.widgetLargestAvailableDisplayMode = .compact
 					completionHandler(.failed)
 				}
 			case .success(var r):
-				r.removeExpiredRuns()
+				r.removeExpiredShifts()
 				r.sort()
 				self.runSchedule = r
 				DispatchQueue.main.async {
 					self.tableView.reloadData()
 					self.updateNoDataLabel()
+					
+					self.extensionContext?.widgetLargestAvailableDisplayMode = r.shifts.count > 1 ? .expanded : .compact
+					self.preferredContentSize = self.tableView.contentSize
+					
 					completionHandler(.newData)
 				}
 			}
@@ -81,7 +86,7 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 		guard let runs = runSchedule else {
 			return nil
 		}
-		if runs.runs[indexPath.row].status == .open {
+		if runs.shifts[indexPath.row].currentStatus == .open {
 			return "Open!"
 		}
 		
@@ -90,7 +95,7 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 		}
 		
 		let previous = indexPath.row - 1
-		if previous >= 0 && runs.runs[previous].status == .open {
+		if previous >= 0 && runs.shifts[previous].currentStatus == .open {
 			return "Next"
 		}
 		
@@ -103,31 +108,50 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let runs = runSchedule else {
-			extensionContext?.widgetLargestAvailableDisplayMode = .compact
+		guard let runSchedule = runSchedule else {
 			return 0
 		}
 		
-		if runs.runs.count > 2 {
-			extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-		} else {
-			extensionContext?.widgetLargestAvailableDisplayMode = .compact
-		}
-		
-		return runs.runs.count
+		return min(runSchedule.shifts.count, 2)
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonRunCell", for: indexPath) as! SalmonRunCell
 		
-		guard let run = runSchedule?.runs[indexPath.row] else {
+		guard let run = runSchedule?.shifts[indexPath.row] else {
 			return cell
 		}
 		
 		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
 		cell.timeLabel.text = timeString
 		
-		if let text = badgeText(forRowAt: indexPath) {
+		if let stage = run.stage {
+			cell.extendedInfoStackView?.isHidden = false
+			cell.stageNameLabel?.text = stage.name
+			
+			loadImage(withSplatNetID: stage.imageID) { image in
+				DispatchQueue.main.async {
+					(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.stageImageView?.image = image
+				}
+			}
+			
+			for (index, weapon) in run.weapons.prefix(4).enumerated() {
+				guard let weapon = weapon else {
+					cell.weaponImageViews[index].image = #imageLiteral(resourceName: "random weapon")
+					continue
+				}
+				
+				loadImage(withSplatNetID: weapon.imageID) { image in
+					DispatchQueue.main.async {
+						(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.weaponImageViews[index].image = image
+					}
+				}
+			}
+		} else {
+			cell.extendedInfoStackView?.isHidden = true
+		}
+		
+		if let text = runSchedule?.badgeText(forRowAt: indexPath.row) {
 			cell.badgeView.isHidden = false
 			cell.badgeLabel.text = text
 		} else {
@@ -138,20 +162,20 @@ class SalmonRunWidgetTableViewController: UITableViewController, NCWidgetProvidi
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return extensionContext!.widgetMaximumSize(for: .compact).height / 2
+		return extensionContext!.widgetMaximumSize(for: .compact).height
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let url = URL(string: "jbstages://openMode?mode=\(WatchScreen.salmonRun.rawValue)")!
+		let url = URL(string: "jbstages://openMode?mode=\(AppSection.salmonRun.rawValue)")!
 		extensionContext?.open(url, completionHandler: nil)
 	}
 	
 	func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-		switch activeDisplayMode {
-		case .compact:
-			self.preferredContentSize = maxSize
-		case .expanded:
-			self.preferredContentSize = tableView.contentSize
-		}
+//		switch activeDisplayMode {
+//		case .compact:
+//			self.preferredContentSize = maxSize
+//		case .expanded:
+//			self.preferredContentSize = tableView.contentSize
+//		}
 	}
 }

@@ -14,6 +14,17 @@ class SalmonRunRowController: NSObject {
 	@IBOutlet var badge: WKInterfaceGroup!
 	@IBOutlet var timeLabel: WKInterfaceLabel!
 	
+	@IBOutlet var stageGroup: WKInterfaceGroup!
+	@IBOutlet var stageNameLabel: WKInterfaceLabel!
+	
+	@IBOutlet var weaponGroup: WKInterfaceGroup!
+	@IBOutlet var weaponImage0: WKInterfaceImage!
+	@IBOutlet var weaponImage1: WKInterfaceImage!
+	@IBOutlet var weaponImage2: WKInterfaceImage!
+	@IBOutlet var weaponImage3: WKInterfaceImage!
+	
+	lazy var weaponImages = [weaponImage0, weaponImage1, weaponImage2, weaponImage3]
+	
 	func setBadgeText(_ text: String?) {
 		if let text = text {
 			badge.setHidden(false)
@@ -24,7 +35,7 @@ class SalmonRunRowController: NSObject {
 	}
 }
 
-class SalmonRunInterfaceController: WKInterfaceController {
+class SalmonRunInterfaceController: SplatoonMainInterfaceController {
 	
 	@IBOutlet var table: WKInterfaceTable!
 	
@@ -36,9 +47,9 @@ class SalmonRunInterfaceController: WKInterfaceController {
 			return
 		}
 		
-		table.setNumberOfRows(runSchedule.runs.count, withRowType: "SalmonRowController")
+		table.setNumberOfRows(runSchedule.shifts.count, withRowType: "SalmonRowController")
 		
-		for (index, run) in runSchedule.runs.enumerated() {
+		for (index, run) in runSchedule.shifts.enumerated() {
 			guard let row = table.rowController(at: index) as? SalmonRunRowController else {
 				continue
 			}
@@ -48,10 +59,45 @@ class SalmonRunInterfaceController: WKInterfaceController {
 			row.timeLabel.setText(timeString)
 			row.setBadgeText(runSchedule.badgeText(forRowAt: index))
 			
+			if let stage = run.stage {
+				row.stageGroup.setHidden(false)
+				row.stageNameLabel.setText(stage.name)
+				
+				loadImage(withSplatNetID: stage.imageID) { image in
+					DispatchQueue.main.async {
+						row.stageGroup.setBackgroundImage(image)
+					}
+				}
+			}
+			
+			for (index, weapon) in (run.weapons.prefix(4)).enumerated() {
+				row.weaponGroup.setHidden(false)
+				
+				guard let weapon = weapon else {
+					row.weaponImages[index]?.setImage(#imageLiteral(resourceName: "random weapon"))
+					continue
+				}
+				
+				loadImage(withSplatNetID: weapon.imageID) { image in
+					DispatchQueue.main.async {
+						row.weaponImages[index]?.setImage(image)
+					}
+				}
+				
+			}
+			
 		}
 		
 		(WKExtension.shared().delegate as? ExtensionDelegate)?.scheduleForegroundReload()
 		
+	}
+	
+	override func contextForSegue(withIdentifier segueIdentifier: String, in table: WKInterfaceTable, rowIndex: Int) -> Any? {
+		if segueIdentifier == "shiftDetail" {
+			return runSchedule?.shifts[rowIndex]
+		}
+		
+		return nil
 	}
 	
 	override func didAppear() {
