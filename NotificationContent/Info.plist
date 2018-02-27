@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>OneSignalNotificationServiceExtension</string>
+	<string>NotificationContent</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -22,10 +22,17 @@
 	<string>22</string>
 	<key>NSExtension</key>
 	<dict>
+		<key>NSExtensionAttributes</key>
+		<dict>
+			<key>UNNotificationExtensionCategory</key>
+			<string>battleStage</string>
+			<key>UNNotificationExtensionInitialContentSizeRatio</key>
+			<real>1</real>
+		</dict>
+		<key>NSExtensionMainStoryboard</key>
+		<string>WidgetMainInterface</string>
 		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.usernotifications.service</string>
-		<key>NSExtensionPrincipalClass</key>
-		<string>$(PRODUCT_MODULE_NAME).NotificationService</string>
+		<string>com.apple.usernotifications.content-extension</string>
 	</dict>
 </dict>
 </plist>

@@ -25,6 +25,13 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		return nil
 	}
 	
+	var entries: [BattleSchedule.Entry] {
+		guard let battleSchedule = battleSchedule else {
+			return []
+		}
+		return battleSchedule[mode]
+	}
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
@@ -38,7 +45,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	func updateNoDataLabel() {
-		if let schedule = battleSchedule, !schedule[mode].isEmpty {
+		if !entries.isEmpty {
 			self.tableView.tableHeaderView = nil
 		} else {
 			self.tableView.tableHeaderView = noDataLabel
@@ -93,18 +100,18 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard let schedule = battleSchedule else {
+		guard !entries.isEmpty else {
 			extensionContext?.widgetLargestAvailableDisplayMode = .compact
 			return 0
 		}
 		
-		if schedule[mode].count >= 2 {
+		if entries.count >= 2 {
 			extensionContext?.widgetLargestAvailableDisplayMode = .expanded
 		} else {
 			extensionContext?.widgetLargestAvailableDisplayMode = .compact
 		}
 		
-		return min(2, schedule[mode].count)
+		return min(2, entries.count)
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,11 +119,11 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 			return UITableViewCell()
 		}
 		
-		guard let schedule = battleSchedule else {
+		guard !entries.isEmpty else {
 			return cell
 		}
 		
-		var entry = schedule[mode][indexPath.row]
+		var entry = entries[indexPath.row]
 		
 		let gameMode = Mode(rawValue: entry.gameMode.key) ?? .regular
 		

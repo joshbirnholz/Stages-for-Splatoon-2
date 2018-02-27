@@ -124,8 +124,41 @@ class UpcomingStagesViewController: UITableViewController {
 			cell.alpha = 0.4
 		}
 		
+		cell.selectedBackgroundColor = .clear
+		cell.tintColor = mode.color
+		
 		return cell
 	}
+	
+	override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+		guard let schedule = battleSchedule else {
+			return false
+		}
+		
+//		return schedule[mode][indexPath.row].startTime > Date()
+		return false
+	}
 
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		print(#function)
+		
+		guard let entry = battleSchedule?[mode][indexPath.row] else {
+			return
+		}
+		
+		let popup = PopupDialog(title: entry.rule.name + "\n" + mode.description, message: dateFormatter.string(from: entry.startTime) + " - " + dateFormatter.string(from: entry.endTime) + "\n" + entry.stageA.name + "\n" + entry.stageB.name + "\n")
+		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
+		popup.modalPresentationCapturesStatusBarAppearance = false
+		
+		let reminderButton = PopupDialogButton(title: "Two Seconds") {
+			let alertTime = AlertTime(timeInterval: (entry.startTime.timeIntervalSinceNow * -1) + 2)
+			entry.scheduleAlerts([alertTime])
+		}
+		
+		popup.addButton(reminderButton)
+		
+		present(popup, animated: true, completion: nil)
+	}
+	
 }
 

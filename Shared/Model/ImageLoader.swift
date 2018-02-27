@@ -41,9 +41,7 @@ func loadImage(withSplatNetID id: String, completion: @escaping (UIImage?) -> ()
 		
 		// Attempt to load the image from a local file
 		
-		let fileName = id + ".png"
-		let localImageURL = sharedCacheDirectory.appendingPathComponent(fileName)
-		let remoteImageURL = baseImageURL.appendingPathComponent(fileName)
+		let localImageURL = localURL(forImageWithSplatnetID: id)
 		
 		if let image = UIImage(contentsOfFile: localImageURL.path) {
 			print("Loaded local image \(localImageURL)")
@@ -53,6 +51,8 @@ func loadImage(withSplatNetID id: String, completion: @escaping (UIImage?) -> ()
 		}
 		
 		// Load the image remotely
+		
+		let remoteImageURL = remoteURL(forImageWithSplatnetID: id)
 		
 		URLSession.shared.dataTask(with: remoteImageURL){ (data, response, error) in
 			guard let data = data, error == nil else {
@@ -79,6 +79,16 @@ func loadImage(withSplatNetID id: String, completion: @escaping (UIImage?) -> ()
 		
 	}
 	
+}
+
+func localURL(forImageWithSplatnetID id: String) -> URL {
+	let fileName = id + ".png"
+	return sharedCacheDirectory.appendingPathComponent(fileName)
+}
+
+func remoteURL(forImageWithSplatnetID id: String) -> URL {
+	let fileName = id + ".png"
+	return baseImageURL.appendingPathComponent(fileName)
 }
 
 struct ImageRequest: Hashable {

@@ -54,7 +54,27 @@
 		543E60821F5672F0007DA88D /* WidgetStagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477750E1F56474E000B17B5 /* WidgetStagesViewController.swift */; };
 		543E60831F5672F4007DA88D /* StagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544171211F5338880046C07E /* StagesCell.swift */; };
 		5441EFB11FBCA5AF00D1B588 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */; };
+		545D90B620229B3700551D5C /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545D90B520229B3700551D5C /* UserNotifications.framework */; };
+		545D90B820229B3700551D5C /* UserNotificationsUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 545D90B720229B3700551D5C /* UserNotificationsUI.framework */; };
+		545D90C220229B3700551D5C /* NotificationContent.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 545D90B420229B3700551D5C /* NotificationContent.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		545D90C820229F0700551D5C /* BattleSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2D6681F5328A2001D585E /* BattleSchedule.swift */; };
+		545D90C920229F0700551D5C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
+		545D90CA20229F0700551D5C /* Festivals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE181FBBF1ED008DBBA1 /* Festivals.swift */; };
+		545D90CB20229F0700551D5C /* Mode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E1E1F6589CB00AFBC1C /* Mode.swift */; };
+		545D90CC20229F0700551D5C /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */; };
+		545D90CD20229F0700551D5C /* AppScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5427EAA71F65D37100E48928 /* AppScreen.swift */; };
+		545D90CE20229F1100551D5C /* SalmonRunCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FBF1401F53CD2000D3ABC3 /* SalmonRunCell.swift */; };
+		545D90CF20229F1100551D5C /* StagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544171211F5338880046C07E /* StagesCell.swift */; };
+		545D90D020229F1100551D5C /* Splatoon2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54A1D1981F533C2F00D40985 /* Splatoon2.ttf */; };
+		545D90D120229F1100551D5C /* paintball.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54A1D19A1F535C9C00D40985 /* paintball.ttf */; };
+		545D90D220229F1100551D5C /* WidgetStagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5477750E1F56474E000B17B5 /* WidgetStagesViewController.swift */; };
+		545D90D320229F1700551D5C /* WidgetMainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 543E603A1F567008007DA88D /* WidgetMainInterface.storyboard */; };
 		5463A7E61F575456000D19CF /* InitialInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5463A7E51F575456000D19CF /* InitialInterfaceController.swift */; };
+		546CC3E820222E1C002B8998 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC3E420222E1B002B8998 /* NotificationsViewController.swift */; };
+		546CC3E920222E1C002B8998 /* AlertSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC3E520222E1B002B8998 /* AlertSubject.swift */; };
+		546CC3EA20222E1C002B8998 /* AlertPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC3E620222E1C002B8998 /* AlertPickerViewController.swift */; };
+		546CC3EB20222E1C002B8998 /* AlertTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC3E720222E1C002B8998 /* AlertTime.swift */; };
+		546CC3ED20222EDC002B8998 /* BattleSchedule+AlertSubject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 546CC3EC20222EDC002B8998 /* BattleSchedule+AlertSubject.swift */; };
 		54712C4B1F549F80004B9249 /* Splatoon2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54A1D1981F533C2F00D40985 /* Splatoon2.ttf */; };
 		54712C4C1F549F85004B9249 /* paintball.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54A1D19A1F535C9C00D40985 /* paintball.ttf */; };
 		54712C4D1F549F88004B9249 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54F2D62E1F532894001D585E /* AppDelegate.swift */; };
@@ -79,6 +99,13 @@
 		54807E291F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
 		54807E2A1F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
 		54807E2B1F6589FB00AFBC1C /* SalmonRunSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */; };
+		548814592022A26900AB5885 /* NotificationWidgetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 545D90D620229F5000551D5C /* NotificationWidgetViewController.swift */; };
+		5488145B2022A67D00AB5885 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5488145A2022A67D00AB5885 /* MainInterface.storyboard */; };
+		5488145D2022A68300AB5885 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5488145C2022A68200AB5885 /* NotificationViewController.swift */; };
+		5488145E2022A7C300AB5885 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54C776FA1F570AEA002F06E0 /* Icons.xcassets */; };
+		5488145F2022A7C700AB5885 /* Backgrounds.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54B228091F64855200924201 /* Backgrounds.xcassets */; };
+		548814612022A7D600AB5885 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FB7E9B1FAA370000713037 /* Settings.swift */; };
+		548814622022A7D600AB5885 /* App Settings.plist in Resources */ = {isa = PBXBuildFile; fileRef = 54FB7E931FAA36C000713037 /* App Settings.plist */; };
 		5495CE0A1FBBC9FE008DBBA1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */; };
 		5495CE0B1FBBC9FE008DBBA1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */; };
 		5495CE0C1FBBC9FE008DBBA1 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */; };
@@ -199,6 +226,13 @@
 			remoteGlobalIDString = 543E60691F5672B2007DA88D;
 			remoteInfo = "League Battle Stages";
 		};
+		545D90C020229B3700551D5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54F2D6231F532893001D585E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 545D90B320229B3700551D5C;
+			remoteInfo = NotificationContent;
+		};
 		54C776DE1F570A4E002F06E0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 54F2D6231F532893001D585E /* Project object */;
@@ -230,6 +264,7 @@
 			dstSubfolderSpec = 13;
 			files = (
 				54F90BE11FBB8C8A00936A8E /* Salmon Run Schedule.appex in Embed App Extensions */,
+				545D90C220229B3700551D5C /* NotificationContent.appex in Embed App Extensions */,
 				543E60751F5672B2007DA88D /* League Battle Stages.appex in Embed App Extensions */,
 				543272DA1FFFFD2B00E71B6A /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
 				543E60571F567114007DA88D /* Ranked Battle Stages.appex in Embed App Extensions */,
@@ -290,7 +325,18 @@
 		543E607E1F5672D2007DA88D /* RegularWidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularWidgetViewController.swift; sourceTree = "<group>"; };
 		543E60841F5672FA007DA88D /* League Battle Stages.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "League Battle Stages.entitlements"; sourceTree = "<group>"; };
 		544171211F5338880046C07E /* StagesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StagesCell.swift; sourceTree = "<group>"; };
+		545D90B420229B3700551D5C /* NotificationContent.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationContent.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		545D90B520229B3700551D5C /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		545D90B720229B3700551D5C /* UserNotificationsUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotificationsUI.framework; path = System/Library/Frameworks/UserNotificationsUI.framework; sourceTree = SDKROOT; };
+		545D90BF20229B3700551D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		545D90C620229EB500551D5C /* NotificationContent.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = NotificationContent.entitlements; sourceTree = "<group>"; };
+		545D90D620229F5000551D5C /* NotificationWidgetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationWidgetViewController.swift; sourceTree = "<group>"; };
 		5463A7E51F575456000D19CF /* InitialInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialInterfaceController.swift; sourceTree = "<group>"; };
+		546CC3E420222E1B002B8998 /* NotificationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		546CC3E520222E1B002B8998 /* AlertSubject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertSubject.swift; sourceTree = "<group>"; };
+		546CC3E620222E1C002B8998 /* AlertPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPickerViewController.swift; sourceTree = "<group>"; };
+		546CC3E720222E1C002B8998 /* AlertTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertTime.swift; sourceTree = "<group>"; };
+		546CC3EC20222EDC002B8998 /* BattleSchedule+AlertSubject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BattleSchedule+AlertSubject.swift"; sourceTree = "<group>"; };
 		54712C391F549F18004B9249 /* Splatoon 2 Stages.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Splatoon 2 Stages.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54712C5A1F549FC6004B9249 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		54712C5B1F549FC6004B9249 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -300,6 +346,8 @@
 		547B7E471F63494700400A83 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		54807E1E1F6589CB00AFBC1C /* Mode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mode.swift; sourceTree = "<group>"; };
 		54807E251F6589FB00AFBC1C /* SalmonRunSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalmonRunSchedule.swift; sourceTree = "<group>"; };
+		5488145A2022A67D00AB5885 /* MainInterface.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainInterface.storyboard; sourceTree = "<group>"; };
+		5488145C2022A68200AB5885 /* NotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		548F10B41F55EF0F008ACD37 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		5490A1601F5746E600F19A75 /* Stages Watch Extension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Stages Watch Extension.entitlements"; sourceTree = "<group>"; };
 		5495CE091FBBC9FE008DBBA1 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
@@ -426,6 +474,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		545D90B120229B3700551D5C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				545D90B820229B3700551D5C /* UserNotificationsUI.framework in Frameworks */,
+				545D90B620229B3700551D5C /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54712C361F549F18004B9249 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -534,6 +591,29 @@
 			path = "League Battle Stages";
 			sourceTree = "<group>";
 		};
+		545D90B920229B3700551D5C /* NotificationContent */ = {
+			isa = PBXGroup;
+			children = (
+				545D90C620229EB500551D5C /* NotificationContent.entitlements */,
+				545D90D620229F5000551D5C /* NotificationWidgetViewController.swift */,
+				5488145A2022A67D00AB5885 /* MainInterface.storyboard */,
+				5488145C2022A68200AB5885 /* NotificationViewController.swift */,
+				545D90BF20229B3700551D5C /* Info.plist */,
+			);
+			path = NotificationContent;
+			sourceTree = "<group>";
+		};
+		546CC3E320222E0C002B8998 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				546CC3E420222E1B002B8998 /* NotificationsViewController.swift */,
+				546CC3E620222E1C002B8998 /* AlertPickerViewController.swift */,
+				546CC3E720222E1C002B8998 /* AlertTime.swift */,
+				546CC3E520222E1B002B8998 /* AlertSubject.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
 		54807E1D1F6589A000AFBC1C /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -559,6 +639,8 @@
 				A31C437670971BAD6AD87D66 /* Pods_Splatoon_2_Stages.framework */,
 				CAF97BF525F5F9D8B5852413 /* Pods_Stages_Watch.framework */,
 				F8E74EE3B4144B4285C553E9 /* Pods_Stages_Watch_Extension.framework */,
+				545D90B520229B3700551D5C /* UserNotifications.framework */,
+				545D90B720229B3700551D5C /* UserNotificationsUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -638,6 +720,7 @@
 				54C776D11F570A4E002F06E0 /* Stages Watch */,
 				54C776E01F570A4E002F06E0 /* Stages Watch Extension */,
 				543272D41FFFFD2B00E71B6A /* OneSignalNotificationServiceExtension */,
+				545D90B920229B3700551D5C /* NotificationContent */,
 				548F10B31F55EF0F008ACD37 /* Frameworks */,
 				54F2D62C1F532894001D585E /* Products */,
 				1D634C5BA8B2763CD774AC12 /* Pods */,
@@ -655,6 +738,7 @@
 				54C776D01F570A4E002F06E0 /* Stages Watch.app */,
 				54C776DC1F570A4E002F06E0 /* Stages Watch Extension.appex */,
 				543272D31FFFFD2B00E71B6A /* OneSignalNotificationServiceExtension.appex */,
+				545D90B420229B3700551D5C /* NotificationContent.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -677,6 +761,8 @@
 				541C96031F646C4E00CA57C7 /* UserDefaults+Group.swift */,
 				54CB72FC1F70B65F004B0D74 /* ArrayURLQueryItem+Dictionary.swift */,
 				54CDC1611F7204FE008561A3 /* BlockTapGestureRecognizer.swift */,
+				546CC3EC20222EDC002B8998 /* BattleSchedule+AlertSubject.swift */,
+				546CC3E320222E0C002B8998 /* Notifications */,
 				54D6562F1FC5DB0800E55997 /* Popup Dialog */,
 				54F2D6351F532894001D585E /* Assets.xcassets */,
 				541C96011F646A9000CA57C7 /* Settings-Watch.bundle */,
@@ -776,6 +862,23 @@
 			productReference = 543E606A1F5672B2007DA88D /* League Battle Stages.appex */;
 			productType = "com.apple.product-type.app-extension";
 		};
+		545D90B320229B3700551D5C /* NotificationContent */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 545D90C520229B3700551D5C /* Build configuration list for PBXNativeTarget "NotificationContent" */;
+			buildPhases = (
+				545D90B020229B3700551D5C /* Sources */,
+				545D90B120229B3700551D5C /* Frameworks */,
+				545D90B220229B3700551D5C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NotificationContent;
+			productName = NotificationContent;
+			productReference = 545D90B420229B3700551D5C /* NotificationContent.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		54712C381F549F18004B9249 /* Splatoon 2 Stages */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 54712C4A1F549F18004B9249 /* Build configuration list for PBXNativeTarget "Splatoon 2 Stages" */;
@@ -798,6 +901,7 @@
 				543E60741F5672B2007DA88D /* PBXTargetDependency */,
 				54C776EB1F570A4E002F06E0 /* PBXTargetDependency */,
 				543272D91FFFFD2B00E71B6A /* PBXTargetDependency */,
+				545D90C120229B3700551D5C /* PBXTargetDependency */,
 			);
 			name = "Splatoon 2 Stages";
 			productName = "Splatoon 2 Stages";
@@ -904,6 +1008,15 @@
 							};
 						};
 					};
+					545D90B320229B3700551D5C = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					54712C381F549F18004B9249 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
@@ -976,6 +1089,7 @@
 				54C776CF1F570A4E002F06E0 /* Stages Watch */,
 				54C776DB1F570A4E002F06E0 /* Stages Watch Extension */,
 				543272D21FFFFD2B00E71B6A /* OneSignalNotificationServiceExtension */,
+				545D90B320229B3700551D5C /* NotificationContent */,
 			);
 		};
 /* End PBXProject section */
@@ -1024,6 +1138,20 @@
 				543E607B1F5672CE007DA88D /* Splatoon2.ttf in Resources */,
 				54B2280D1F64855200924201 /* Backgrounds.xcassets in Resources */,
 				54FB7E971FAA36C000713037 /* App Settings.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		545D90B220229B3700551D5C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				545D90D120229F1100551D5C /* paintball.ttf in Resources */,
+				5488145B2022A67D00AB5885 /* MainInterface.storyboard in Resources */,
+				545D90D020229F1100551D5C /* Splatoon2.ttf in Resources */,
+				545D90D320229F1700551D5C /* WidgetMainInterface.storyboard in Resources */,
+				5488145E2022A7C300AB5885 /* Icons.xcassets in Resources */,
+				5488145F2022A7C700AB5885 /* Backgrounds.xcassets in Resources */,
+				548814622022A7D600AB5885 /* App Settings.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1443,6 +1571,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		545D90B020229B3700551D5C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				545D90CC20229F0700551D5C /* ImageLoader.swift in Sources */,
+				545D90C820229F0700551D5C /* BattleSchedule.swift in Sources */,
+				5488145D2022A68300AB5885 /* NotificationViewController.swift in Sources */,
+				548814592022A26900AB5885 /* NotificationWidgetViewController.swift in Sources */,
+				545D90CD20229F0700551D5C /* AppScreen.swift in Sources */,
+				545D90D220229F1100551D5C /* WidgetStagesViewController.swift in Sources */,
+				548814612022A7D600AB5885 /* Settings.swift in Sources */,
+				545D90CB20229F0700551D5C /* Mode.swift in Sources */,
+				545D90CA20229F0700551D5C /* Festivals.swift in Sources */,
+				545D90CE20229F1100551D5C /* SalmonRunCell.swift in Sources */,
+				545D90C920229F0700551D5C /* SalmonRunSchedule.swift in Sources */,
+				545D90CF20229F1100551D5C /* StagesCell.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		54712C351F549F18004B9249 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1455,6 +1602,7 @@
 				54712C4F1F549F8D004B9249 /* CurrentStagesTableViewController.swift in Sources */,
 				547B7E481F63494700400A83 /* SettingsTableViewController.swift in Sources */,
 				54FB7E9C1FAA370000713037 /* Settings.swift in Sources */,
+				546CC3E920222E1C002B8998 /* AlertSubject.swift in Sources */,
 				54D656481FC5DB0800E55997 /* PopupDialog.swift in Sources */,
 				54D656431FC5DB0800E55997 /* InteractiveTransition.swift in Sources */,
 				5495CE191FBBF1ED008DBBA1 /* Festivals.swift in Sources */,
@@ -1466,6 +1614,7 @@
 				54D6564C1FC5DB0800E55997 /* UIViewController+Visibility.swift in Sources */,
 				54D6564F1FC5DB0800E55997 /* PopupDialogDefaultViewController.swift in Sources */,
 				54D656501FC5DB0800E55997 /* TransitionAnimations.swift in Sources */,
+				546CC3E820222E1C002B8998 /* NotificationsViewController.swift in Sources */,
 				54D656521FC5DB0800E55997 /* PresentationManager.swift in Sources */,
 				54D656471FC5DB0800E55997 /* PopupDialogDefaultView.swift in Sources */,
 				54807E1F1F6589CB00AFBC1C /* Mode.swift in Sources */,
@@ -1475,6 +1624,7 @@
 				54D6564E1FC5DB0800E55997 /* PopupDialog+Keyboard.swift in Sources */,
 				54D6564B1FC5DB0800E55997 /* PopupDialogButton.swift in Sources */,
 				54D656531FC5DB0800E55997 /* PopupDialogContainerView.swift in Sources */,
+				546CC3ED20222EDC002B8998 /* BattleSchedule+AlertSubject.swift in Sources */,
 				54712C501F549F8F004B9249 /* UpcomingStagesViewController.swift in Sources */,
 				54712C4D1F549F88004B9249 /* AppDelegate.swift in Sources */,
 				54712C521F549F94004B9249 /* SalmonRunTableViewController.swift in Sources */,
@@ -1484,6 +1634,8 @@
 				54D656461FC5DB0800E55997 /* UIView+Animations.swift in Sources */,
 				543E60421F5670CB007DA88D /* BattleSchedule.swift in Sources */,
 				54712C531F549F96004B9249 /* SalmonRunCell.swift in Sources */,
+				546CC3EB20222E1C002B8998 /* AlertTime.swift in Sources */,
+				546CC3EA20222E1C002B8998 /* AlertPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1550,6 +1702,11 @@
 			isa = PBXTargetDependency;
 			target = 543E60691F5672B2007DA88D /* League Battle Stages */;
 			targetProxy = 543E60731F5672B2007DA88D /* PBXContainerItemProxy */;
+		};
+		545D90C120229B3700551D5C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 545D90B320229B3700551D5C /* NotificationContent */;
+			targetProxy = 545D90C020229B3700551D5C /* PBXContainerItemProxy */;
 		};
 		54C776DF1F570A4E002F06E0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1731,6 +1888,40 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.josh.birnholz.Splatoon-2-Stages.League-Battle-Stages";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		545D90C320229B3700551D5C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CB7D3XVLP3;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josh.birnholz.Splatoon-2-Stages.NotificationContent";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		545D90C420229B3700551D5C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = NotificationContent/NotificationContent.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CB7D3XVLP3;
+				INFOPLIST_FILE = NotificationContent/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.josh.birnholz.Splatoon-2-Stages.NotificationContent";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -2041,6 +2232,15 @@
 			buildConfigurations = (
 				543E60771F5672B2007DA88D /* Debug */,
 				543E60781F5672B2007DA88D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		545D90C520229B3700551D5C /* Build configuration list for PBXNativeTarget "NotificationContent" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				545D90C320229B3700551D5C /* Debug */,
+				545D90C420229B3700551D5C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
