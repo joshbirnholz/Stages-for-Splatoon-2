@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PINCache
 
 public let baseImageURL = URL(string: "https://splatoon2.ink/assets/img/splatnet/")!
 

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PINRemoteImage
+import Intents
 
 class SalmonRunTableViewController: UITableViewController {
 	
@@ -19,7 +21,7 @@ class SalmonRunTableViewController: UITableViewController {
 		tableView.layer.isOpaque = false
 		
 		let refreshControl = UIRefreshControl()
-		refreshControl.addTarget(self, action: #selector(loadRuns), for: .valueChanged)
+		refreshControl.addTarget(self, action: #selector(loadRuns), for: UIControl.Event.valueChanged)
 		refreshControl.tintColor = UIColor(white: 1, alpha: 0.4)
 		tableView.refreshControl = refreshControl
 		
@@ -34,6 +36,30 @@ class SalmonRunTableViewController: UITableViewController {
 		super.viewDidAppear(animated)
 		
 		tabBarController?.tabBar.tintColor = #colorLiteral(red: 0.9867637753, green: 0.2715459905, blue: 0.03388012111, alpha: 1)
+		
+		if #available(iOS 12.0, *) {
+			let interaction = INInteraction(intent: intent, response: nil)
+			
+			interaction.donate { error in
+				if let error = error {
+					print("Error donating interaction:", error.localizedDescription)
+				}
+			}
+		}
+		
+	}
+	
+	@available(iOS 12.0, *)
+	var intent: ViewSalmonRunScheduleIntent {
+		let intent = ViewSalmonRunScheduleIntent()
+		
+		intent.suggestedInvocationPhrase = "Salmon Run"
+		intent.salmonRun = "Salmon Run"
+		if let data =  #imageLiteral(resourceName: "Salmon Shortcut").pngData() {
+			intent.setImage(INImage(imageData: data), forParameterNamed: \.salmonRun)
+		}
+		
+		return intent
 	}
 	
 	func updateNoDataLabel() {
@@ -96,11 +122,7 @@ class SalmonRunTableViewController: UITableViewController {
 			cell.extendedInfoStackView?.isHidden = false
 			cell.stageNameLabel?.text = stage.name
 			
-			loadImage(withSplatNetID: stage.imageID) { image in
-				DispatchQueue.main.async {
-					(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.stageImageView?.image = image
-				}
-			}
+			cell.stageImageView?.pin_setImage(from: remoteImageURL(forImageWithID: stage.imageID))
 			
 			for (index, weapon) in run.weapons.prefix(4).enumerated() {
 				guard let weapon = weapon else {
@@ -108,11 +130,7 @@ class SalmonRunTableViewController: UITableViewController {
 					continue
 				}
 				
-				loadImage(withSplatNetID: weapon.imageID) { image in
-					DispatchQueue.main.async {
-						(tableView.cellForRow(at: indexPath) as? SalmonRunCell)?.weaponImageViews[index].image = image
-					}
-				}
+				cell.weaponImageViews[index].pin_setImage(from: remoteImageURL(forImageWithID: weapon.imageID))
 			}
 		} else {
 			cell.extendedInfoStackView?.isHidden = true
@@ -139,18 +157,6 @@ class SalmonRunTableViewController: UITableViewController {
 		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
 		popup.modalPresentationCapturesStatusBarAppearance = false
 		present(popup, animated: true, completion: nil)
-		
-//		let vc = storyboard!.instantiateViewController(withIdentifier: "WeaponInfo")
-		
-//		let popup = PopupDialog(viewController: vc, transitionStyle: .bounceDown, gestureDismissal: true, hideStatusBar: false, completion: nil)
-//		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
-//
-//		present(popup, animated: true, completion: nil)
-		
-//		let alert = UIAlertController(title: "Supplied Weapons", message: message, preferredStyle: .alert)
-//		let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-//		alert.addAction(okAction)
-//		present(alert, animated: true, completion: nil)
 		
 	}
 	

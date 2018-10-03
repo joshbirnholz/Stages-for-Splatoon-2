@@ -71,14 +71,14 @@ final public class PopupDialogOverlayView: UIView {
 		let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .regular))
 		blurView.frame = .zero
 		blurView.tintColor = .clear
-		blurView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+		blurView.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
 		return blurView
 	}()
 
     internal lazy var overlay: UIView = {
         let overlay = UIView(frame: .zero)
         overlay.backgroundColor = UIColor.black
-        overlay.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        overlay.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         overlay.alpha = 0.5
         return overlay
     }()
@@ -99,7 +99,7 @@ final public class PopupDialogOverlayView: UIView {
     fileprivate func setupView() {
 
         // Self appearance
-        self.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        self.autoresizingMask = [UIView.AutoresizingMask.flexibleHeight, UIView.AutoresizingMask.flexibleWidth]
         self.backgroundColor = UIColor.clear
         self.alpha = 0
 

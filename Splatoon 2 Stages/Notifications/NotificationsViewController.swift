@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 class RightDetailCell: UITableViewCell {
-	override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
 		super.init(style: .value1, reuseIdentifier: reuseIdentifier)
 	}
 	
@@ -144,7 +144,7 @@ class NotificationsViewController: UITableViewController, AlertPickerTableViewCo
 	
 	@objc func doneButtonPressed() {
 		subject.removeAllPendingNotificationRequests() {
-			self.subject.scheduleAlerts([self.firstAlertTime, self.secondAlertTime].flatMap { $0 })
+			self.subject.scheduleAlerts([self.firstAlertTime, self.secondAlertTime].compactMap { $0 })
 		}
 		dismiss(animated: true, completion: nil)
 	}

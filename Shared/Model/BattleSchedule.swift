@@ -17,6 +17,7 @@ public let decoder: JSONDecoder = {
 public let documentDirectory = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.josh.birnholz.Splatoon-2-Stages")!
 public let runsURL = documentDirectory.appendingPathComponent("coop-schedules.json")
 public let scheduleURL = documentDirectory.appendingPathComponent("schedules.json")
+public let festivalsURL = documentDirectory.appendingPathComponent("festivals.json")
 
 let dateFormatter: DateFormatter = {
 	let df = DateFormatter()
@@ -111,7 +112,7 @@ struct BattleSchedule: Codable {
 	}
 	
 	var isValid: Bool {
-		let firstEntries = [leagueEntries.first, regularEntries.first, rankedEntries.first].flatMap { $0 }
+		let firstEntries = [leagueEntries.first, regularEntries.first, rankedEntries.first].compactMap { $0 }
 		guard !firstEntries.isEmpty else {
 			return false
 		}

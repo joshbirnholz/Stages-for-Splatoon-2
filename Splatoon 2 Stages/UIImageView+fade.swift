@@ -10,6 +10,6 @@ import UIKit
 
 extension UIImageView {
 	func fade(to image: UIImage?, duration: TimeInterval = 0.25) {
-		UIView.transition(with: self, duration: duration, options: [.transitionCrossDissolve, .allowUserInteraction], animations: { self.image = image }, completion: nil)
+		UIView.transition(with: self, duration: duration, options: [UIView.AnimationOptions.transitionCrossDissolve, UIView.AnimationOptions.allowUserInteraction], animations: { self.image = image }, completion: nil)
 	}
 }

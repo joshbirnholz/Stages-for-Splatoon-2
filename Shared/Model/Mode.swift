@@ -27,6 +27,14 @@ enum Mode: String, CustomStringConvertible {
 		}
 	}
 	
+	var shortDescription: String {
+		switch self {
+		case .league: return "League"
+		case .ranked: return "Ranked"
+		case .regular: return "Regular"
+		}
+	}
+	
 	var icon: UIImage {
 		switch self {
 		case .league: return #imageLiteral(resourceName: "League Battle")
@@ -48,6 +56,47 @@ enum Mode: String, CustomStringConvertible {
 		case .league: return #imageLiteral(resourceName: "League Battle Tab Selected")
 		case .ranked: return #imageLiteral(resourceName: "Ranked Battle Tab Selected")
 		case .regular: return #imageLiteral(resourceName: "Regular Battle Tab").withRenderingMode(.alwaysOriginal)
+		}
+	}
+	
+	var shortcutIcon: UIImage {
+		switch self {
+		case .league: return #imageLiteral(resourceName: "League Battle Shortcut")
+		case .ranked: return #imageLiteral(resourceName: "Ranked Battle Shortcut")
+		case .regular: return #imageLiteral(resourceName: "Regular Battle Shortcut")
+		}
+	}
+}
+
+@available(iOS 12.0, *)
+@available(watchOSApplicationExtension 5.0, *)
+@available(iOSApplicationExtension 12.0, *)
+extension ViewBattleScheduleBattleMode {
+	var nativeMode: Mode? {
+		switch self {
+		case .gachi:
+			return .ranked
+		case .league:
+			return .league
+		case .regular:
+			return .regular
+		case .unknown:
+			return nil
+		}
+	}
+	
+	init(nativeMode mode: Mode?) {
+		if let mode = mode {
+			switch mode {
+			case .regular:
+				self = .regular
+			case .ranked:
+				self = .gachi
+			case .league:
+				self = .league
+			}
+		} else {
+			self = .unknown
 		}
 	}
 }

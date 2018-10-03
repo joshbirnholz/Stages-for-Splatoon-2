@@ -26,7 +26,7 @@ class SalmonRunCell: UITableViewCell {
 	@IBOutlet weak var weapon3ImageView: UIImageView?
 	
 	var weaponImageViews: [UIImageView] {
-		return [weapon0imageView, weapon1imageView, weapon2imageView, weapon3ImageView].flatMap { $0 }
+		return [weapon0imageView, weapon1imageView, weapon2imageView, weapon3ImageView].compactMap { $0 }
 	}
 	
 	override func layoutSubviews() {

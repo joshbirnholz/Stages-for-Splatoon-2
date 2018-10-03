@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import NotificationCenter
+import PINRemoteImage
 
-
-class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
+class WidgetStagesViewController: UITableViewController {
 	
 	@IBOutlet var noDataLabel: UILabel!
 	var battleSchedule: BattleSchedule?
@@ -52,44 +51,6 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		}
 	}
 	
-	func widgetPerformUpdate(completionHandler: (@escaping (NCUpdateResult) -> Void)) {
-		// Perform any setup necessary in order to update the view.
-		
-		// If an error is encountered, use NCUpdateResult.Failed
-		// If there's no update required, use NCUpdateResult.NoData
-		// If there's an update, use NCUpdateResult.NewData
-		
-		if let schedule = battleSchedule, schedule.isValid {
-			DispatchQueue.main.async {
-				self.updateNoDataLabel()
-				completionHandler(.noData)
-			}
-			return
-		}
-		
-		getSchedule { (result) in
-			print("Completion")
-			switch result {
-			case .failure(let error):
-				print("Error retreiving the schedule:", error.localizedDescription)
-				DispatchQueue.main.async {
-					self.updateNoDataLabel()
-					completionHandler(.failed)
-				}
-			case .success(var sch):
-				sch.removeExpiredEntries()
-				self.battleSchedule = sch
-				
-				DispatchQueue.main.async {
-					self.tableView.reloadData()
-					self.updateNoDataLabel()
-					
-					completionHandler(.newData)
-				}
-			}
-		}
-	}
-	
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
@@ -100,18 +61,7 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		guard !entries.isEmpty else {
-			extensionContext?.widgetLargestAvailableDisplayMode = .compact
-			return 0
-		}
-		
-		if entries.count >= 2 {
-			extensionContext?.widgetLargestAvailableDisplayMode = .expanded
-		} else {
-			extensionContext?.widgetLargestAvailableDisplayMode = .compact
-		}
-		
-		return min(2, entries.count)
+		fatalError("\(#function) unimplemented")
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -132,6 +82,8 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		
 		cell.timeLabel.text = WidgetStagesViewController.widgetFormatter.string(from: entry.startTime) + " - " + WidgetStagesViewController.widgetFormatter.string(from: entry.endTime)
 		
+		let mode = Mode(rawValue: entry.gameMode.key) ?? self.mode!
+		
 		(cell.viewWithTag(200) as? UIImageView)?.image = mode.icon
 		
 		cell.modeLabel.textColor = mode.color
@@ -144,17 +96,8 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 		cell.stageANameLabel.text = entry.stageA.name
 		cell.stageBNameLabel.text = entry.stageB.name
 		
-		loadImage(withSplatNetID: entry.stageA.imageID) { image in
-			DispatchQueue.main.async {
-				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageAImageView.image = image
-			}
-		}
-		
-		loadImage(withSplatNetID: entry.stageB.imageID) { image in
-			DispatchQueue.main.async {
-				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageBImageView.image = image
-			}
-		}
+		cell.stageAImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageA.imageID))
+		cell.stageBImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageB.imageID))
 		
 		if entry.endTime < Date() {
 			cell.alpha = 0.4
@@ -164,22 +107,13 @@ class WidgetStagesViewController: UITableViewController, NCWidgetProviding {
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return extensionContext?.widgetMaximumSize(for: .compact).height ?? 44
+		fatalError("\(#function) unimplemented")
 	}
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		print(#function)
 		let url = URL(string: "jbstages://openMode?mode=\(mode.rawValue)")!
 		extensionContext?.open(url, completionHandler: nil)
-	}
-	
-	func widgetActiveDisplayModeDidChange(_ activeDisplayMode: NCWidgetDisplayMode, withMaximumSize maxSize: CGSize) {
-		switch activeDisplayMode {
-			case .compact:
-				self.preferredContentSize = maxSize
-			case .expanded:
-				self.preferredContentSize = tableView.contentSize
-		}
 	}
 	
 }

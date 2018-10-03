@@ -12,12 +12,12 @@
 		<key>NotificationContent.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>16</integer>
+			<integer>20</integer>
 		</dict>
 		<key>OneSignalNotificationServiceExtension.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>15</integer>
+			<integer>7</integer>
 		</dict>
 		<key>Ranked Battle Stages.xcscheme</key>
 		<dict>
@@ -59,9 +59,44 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
+		<key>ViewBattleScheduleIntentExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
+		<key>ViewBattleScheduleIntentExtensionUI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>23</integer>
+		</dict>
+		<key>ViewBattleScheduleIntentsUIExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>28</integer>
+		</dict>
+		<key>ViewSalmonRunScheduleIntentsUIExtension.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>29</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>5427006320C7770800732F6B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5427CB2220C8E16B0032D8A4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>543272D21FFFFD2B00E71B6A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>543E602A1F566FF6007DA88D</key>
 		<dict>
 			<key>primary</key>
@@ -88,6 +123,11 @@
 			<true/>
 		</dict>
 		<key>54C776CF1F570A4E002F06E0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>54E8788520C87EF300BF26D9</key>
 		<dict>
 			<key>primary</key>
 			<true/>

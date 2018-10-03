@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>22</string>
+	<string>25</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
@@ -64,6 +64,8 @@
 	</dict>
 	<key>NSUserActivityTypes</key>
 	<array>
+		<string>ViewBattleScheduleIntent</string>
+		<string>ViewSalmonRunScheduleIntent</string>
 		<string>com.josh.birnholz.Splatoon-2-Stages.openMode</string>
 	</array>
 	<key>UIApplicationShortcutItems</key>
@@ -123,6 +125,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
+		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

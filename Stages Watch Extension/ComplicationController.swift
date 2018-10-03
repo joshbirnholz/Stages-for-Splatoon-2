@@ -13,6 +13,29 @@
 import WatchKit
 import ClockKit
 
+
+@objc fileprivate protocol LargeStandardBodyComplication: class {
+	var headerTextProvider: CLKTextProvider { get set }
+	var body1TextProvider: CLKTextProvider { get set }
+	var body2TextProvider: CLKTextProvider? { get set }
+	var tintColor: UIColor? { get set }
+	func setHeaderImage(_ image: UIImage?)
+}
+
+@available(watchOSApplicationExtension 5.0, *)
+extension CLKComplicationTemplateGraphicRectangularStandardBody: LargeStandardBodyComplication {
+	func setHeaderImage(_ image: UIImage?) {
+		headerImageProvider = image.map(CLKFullColorImageProvider.init)
+	}
+	
+	
+}
+extension CLKComplicationTemplateModularLargeStandardBody: LargeStandardBodyComplication {
+	func setHeaderImage(_ image: UIImage?) {
+		headerImageProvider = image.map(CLKImageProvider.init)
+	}
+}
+
 var complicationMode: AppSection {
 	get {
 		guard let str = UserDefaults.group.string(forKey: "complicationMode") else {
@@ -188,7 +211,7 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 						return
 					}
 					
-					let timelineEntries: [CLKComplicationTimelineEntry] = entries.flatMap { scheduleEntry in
+					let timelineEntries: [CLKComplicationTimelineEntry] = entries.compactMap { scheduleEntry in
 						guard let template = self.battleTemplate(for: complication.family, scheduleEntry: scheduleEntry) else {
 							return nil
 						}
@@ -259,6 +282,14 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			return CLKSimpleTextProvider(text: scheduleEntry.rule.name)
 		}
 		
+		var timeLeftGaugeProvider: CLKGaugeProvider {
+			return CLKTimeIntervalGaugeProvider(style: .fill,
+												gaugeColors: [gameMode.color],
+												gaugeColorLocations: nil,
+												start: scheduleEntry.startTime,
+												end: scheduleEntry.endTime)
+		}
+		
 		switch complicationFamily {
 		case .circularSmall:
 			let template = CLKComplicationTemplateCircularSmallStackImage()
@@ -276,16 +307,35 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			template.line2TextProvider = endTimeRelativeDateTextProvider
 			template.tintColor = ComplicationController.tintColor
 			return template
-		case .modularLarge:
-			let template = CLKComplicationTemplateModularLargeStandardBody()
-			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 24 : 22
+		case .modularLarge, .graphicRectangular:
+			let template: LargeStandardBodyComplication = {
+				if #available(watchOSApplicationExtension 5.0, *) {
+					if complicationFamily == .graphicRectangular {
+						return CLKComplicationTemplateGraphicRectangularStandardBody()
+					}
+				}
+				return CLKComplicationTemplateModularLargeStandardBody()
+			}()
+			
+			let dimension: CGFloat = {
+				switch WKInterfaceDevice.current().screenBounds.width {
+				case 136: // 38mm
+					return 22
+				case 156, 162: // 42mm, 40mm
+					return 24
+				case _ where complicationFamily == .modularLarge: // 44mm
+					return 28
+				default: // 44mm
+					return 27
+				}
+			}()
 			let size = CGSize(width: dimension, height: dimension)
-			template.headerImageProvider = CLKImageProvider(onePieceImage: gameMode.tabBarIcon.scaled(toFit: size))
+			template.setHeaderImage(gameMode.tabBarIcon.scaled(toFit: size))
 			template.headerTextProvider = ruleTextProvider
 			template.body1TextProvider = stageATextProvider
 			template.body2TextProvider = stageBTextProvider
 			template.tintColor = gameMode.color
-			return template
+			return template as? CLKComplicationTemplate
 		case .modularSmall:
 			let template = CLKComplicationTemplateModularSmallStackImage()
 			let dimension = WKInterfaceDevice.current().screenBounds.width > 136.0 ? 30 : 28
@@ -312,6 +362,62 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			template.textProvider = endTimeRelativeDateTextProvider
 			template.tintColor = ComplicationController.tintColor
 			return template
+		case .graphicCorner:
+			if #available(watchOSApplicationExtension 5.0, *) {
+				let template = CLKComplicationTemplateGraphicCornerGaugeText()
+				template.gaugeProvider = timeLeftGaugeProvider
+				
+//				let dimension: CGFloat = {
+//					switch WKInterfaceDevice.current().screenBounds.width {
+//					case 162: // 40mm
+//						return 20
+//					default: // 44mm
+//						return 22
+//					}
+//				}()
+				
+				template.outerTextProvider = endTimeRelativeDateTextProvider
+//				template.imageProvider = CLKFullColorImageProvider(fullColorImage: gameMode.shortcutIcon.scaled(toFit: CGSize(width: dimension, height: dimension)))
+				
+				return template
+				
+			} else {
+				return nil
+			}
+		case .graphicBezel:
+			if #available(watchOSApplicationExtension 5.0, *) {
+				let template = CLKComplicationTemplateGraphicBezelCircularText()
+				template.textProvider = CLKSimpleTextProvider(text: "\(scheduleEntry.stageA.name) • \(scheduleEntry.stageB.name)", shortText: "\(scheduleEntry.stageA.name.split(separator: " ").first ?? "") • \(scheduleEntry.stageB.name.split(separator: " ").first ?? "")")
+				template.circularTemplate = {
+					let template = CLKComplicationTemplateGraphicCircularClosedGaugeImage()
+					
+					let dimension: CGFloat = {
+						switch WKInterfaceDevice.current().screenBounds.width {
+						case 162: // 40mm
+							return 28
+						default: // 44mm
+							return 32
+						}
+					}()
+					
+					template.gaugeProvider = timeLeftGaugeProvider
+					
+					let size = CGSize(width: dimension, height: dimension)
+					let image = gameMode.shortcutIcon.scaled(toFit: size)
+					template.imageProvider = CLKFullColorImageProvider(fullColorImage: image)
+					
+					return template
+				}()
+				
+				return template
+			}
+			return nil
+		case .graphicCircular:
+			if #available(watchOSApplicationExtension 5.0, *) {
+				return genericTemplate(for: .graphicCircular)
+			} else {
+				return nil
+			}
 		}
 		
 	}
@@ -359,6 +465,44 @@ class ComplicationController: NSObject, CLKComplicationDataSource {
 			template.textProvider = CLKSimpleTextProvider(text: "Stages")
 			template.tintColor = ComplicationController.tintColor
 			return template
+		case .graphicCircular:
+			if #available(watchOSApplicationExtension 5.0, *) {
+				let template = CLKComplicationTemplateGraphicCircularImage()
+				
+				let dimension: CGFloat = {
+					switch WKInterfaceDevice.current().screenBounds.width {
+					case 162: // 40mm
+						return 42
+					default: // 44mm
+						return 47
+					}
+				}()
+				
+				let size = CGSize(width: dimension, height: dimension)
+				template.imageProvider = CLKFullColorImageProvider(fullColorImage: #imageLiteral(resourceName: "Overview Shortcut").scaled(toFit: size))
+				
+				return template
+			}
+			return nil
+		case .graphicCorner:
+			if #available(watchOSApplicationExtension 5.0, *) {
+				let template = CLKComplicationTemplateGraphicCornerCircularImage()
+				
+				let dimension: CGFloat = {
+					switch WKInterfaceDevice.current().screenBounds.width {
+					case 162: // 40mm
+						return 32
+					default: // 44mm
+						return 36
+					}
+				}()
+				
+				let size = CGSize(width: dimension, height: dimension)
+				template.imageProvider = CLKFullColorImageProvider(fullColorImage: #imageLiteral(resourceName: "Overview Shortcut").scaled(toFit: size))
+				
+				return template
+			}
+			return nil
 		default:
 			return nil
 		}

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-
+import Intents
+import IntentsUI
 
 class UpcomingStagesViewController: UITableViewController {
 	
@@ -23,7 +24,7 @@ class UpcomingStagesViewController: UITableViewController {
 		tableView.layer.isOpaque = false
 		
 		let refreshControl = UIRefreshControl()
-		refreshControl.addTarget(self, action: #selector(loadSchedule), for: .valueChanged)
+		refreshControl.addTarget(self, action: #selector(loadSchedule), for: UIControl.Event.valueChanged)
 		refreshControl.tintColor = UIColor(white: 1, alpha: 0.4)
 		tableView.refreshControl = refreshControl
 		
@@ -48,6 +49,30 @@ class UpcomingStagesViewController: UITableViewController {
 		super.viewDidAppear(animated)
 		
 		tabBarController?.tabBar.tintColor = mode.color
+		
+		if #available(iOS 12.0, *) {
+			let interaction = INInteraction(intent: intent, response: nil)
+			
+			interaction.donate { error in
+				if let error = error {
+					print("Error donating interaction:", error.localizedDescription)
+				}
+			}
+		}
+		
+	}
+	
+	@available(iOS 12.0, *)
+	var intent: ViewBattleScheduleIntent {
+		let intent = ViewBattleScheduleIntent()
+		intent.mode = ViewBattleScheduleBattleMode(nativeMode: self.mode)
+		
+		intent.suggestedInvocationPhrase = mode.description + " Stages"
+		if let data = mode.shortcutIcon.pngData() {
+			intent.setImage(INImage(imageData: data), forParameterNamed: \.mode)
+		}
+		
+		return intent
 	}
 	
 	@objc func loadSchedule() {
@@ -108,17 +133,8 @@ class UpcomingStagesViewController: UITableViewController {
 		cell.stageANameLabel.text = entry.stageA.name
 		cell.stageBNameLabel.text = entry.stageB.name
 		
-		loadImage(withSplatNetID: entry.stageA.imageID) { image in
-			DispatchQueue.main.async {
-				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageAImageView.image = image
-			}
-		}
-		
-		loadImage(withSplatNetID: entry.stageB.imageID) { image in
-			DispatchQueue.main.async {
-				(tableView.cellForRow(at: indexPath) as? StagesCell)?.stageBImageView.image = image
-			}
-		}
+		cell.stageAImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageA.imageID))
+		cell.stageBImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageB.imageID))
 		
 		if entry.endTime < Date() {
 			cell.alpha = 0.4
@@ -135,30 +151,22 @@ class UpcomingStagesViewController: UITableViewController {
 			return false
 		}
 		
-//		return schedule[mode][indexPath.row].startTime > Date()
-		return false
-	}
-
-	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		print(#function)
-		
-		guard let entry = battleSchedule?[mode][indexPath.row] else {
-			return
-		}
-		
-		let popup = PopupDialog(title: entry.rule.name + "\n" + mode.description, message: dateFormatter.string(from: entry.startTime) + " - " + dateFormatter.string(from: entry.endTime) + "\n" + entry.stageA.name + "\n" + entry.stageB.name + "\n")
-		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
-		popup.modalPresentationCapturesStatusBarAppearance = false
-		
-		let reminderButton = PopupDialogButton(title: "Two Seconds") {
-			let alertTime = AlertTime(timeInterval: (entry.startTime.timeIntervalSinceNow * -1) + 2)
-			entry.scheduleAlerts([alertTime])
-		}
-		
-		popup.addButton(reminderButton)
-		
-		present(popup, animated: true, completion: nil)
+		return schedule[mode][indexPath.row].startTime > Date()
 	}
 	
 }
 
+@available(iOS 12.0, *)
+extension UpcomingStagesViewController: INUIAddVoiceShortcutViewControllerDelegate {
+	func addVoiceShortcutViewController(_ controller: INUIAddVoiceShortcutViewController, didFinishWith voiceShortcut: INVoiceShortcut?, error: Error?) {
+		if let error = error {
+			print("Error adding voice shortcut:", error.localizedDescription)
+		}
+	}
+	
+	func addVoiceShortcutViewControllerDidCancel(_ controller: INUIAddVoiceShortcutViewController) {
+		dismiss(animated: true, completion: nil)
+	}
+	
+	
+}

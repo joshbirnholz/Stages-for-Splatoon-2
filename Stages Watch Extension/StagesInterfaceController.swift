@@ -9,7 +9,6 @@
 import WatchKit
 import Foundation
 
-
 class StagesInterfaceController: SplatoonMainInterfaceController {
 	
 	@IBOutlet var modeIconImage: WKInterfaceImage!
@@ -40,6 +39,8 @@ class StagesInterfaceController: SplatoonMainInterfaceController {
 		
 		stageALabel.setText(entry.stageA.name)
 		stageBLabel.setText(entry.stageB.name)
+		
+		
 		
 		loadImage(withSplatNetID: entry.stageA.imageID) { [weak self] image in
 			DispatchQueue.main.async {

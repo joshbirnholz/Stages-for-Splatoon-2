@@ -12,10 +12,11 @@ fileprivate let salmonRunStagesURL = URL(string: "https://splatoon2.ink/data/coo
 
 struct SalmonRunSchedule: Codable {
     struct Shift: Codable {
+		
         struct Weapon: Codable {
             var name: String
-            var special: String
-            var sub: String
+            var special: String?
+            var sub: String?
 			var imageID: String
         }
 		
@@ -121,26 +122,31 @@ fileprivate struct SplatNetSalmonRunSchedule: Codable {
     }
     
     struct Detail: Codable {
-        struct Weapon: Codable {
-            struct Special: Codable {
-                var name: String
-            }
-            struct Sub: Codable {
-                var name: String
-            }
+		struct WeaponItem: Codable {
+			struct Weapon: Codable {
+				struct Special: Codable {
+					var name: String
+				}
+				struct Sub: Codable {
+					var name: String
+				}
+				
+				var name: String
+				var special: Special?
+				var sub: Sub?
+				var image: URL
+			}
 			
-            var name: String
-            var special: Special
-            var sub: Sub
-			var image: URL
-        }
+			var weapon: Weapon?
+			var id: String
+		}
         
         struct Stage: Codable {
             var name: String
 			var image: URL
         }
         
-        var weapons: [Weapon?]
+        var weapons: [WeaponItem?]
         var startTime: Date
         var endTime: Date
         var stage: Stage
@@ -172,14 +178,14 @@ fileprivate func decodeRuns(fromSplatNetJSON json: Data) -> SalmonRunSchedule {
         
         for detailedRun in splatNetSchedule.details {
 			
-			let weapons: [SalmonRunSchedule.Shift.Weapon?] = detailedRun.weapons.map { weapon in
-				guard let weapon = weapon else {
+			let weapons: [SalmonRunSchedule.Shift.Weapon?] = detailedRun.weapons.map { weaponItem in
+				guard let weapon = weaponItem?.weapon else {
 					return nil
 				}
 				
 				return SalmonRunSchedule.Shift.Weapon(name: weapon.name,
-													  special: weapon.special.name,
-													  sub: weapon.sub.name,
+													  special: weapon.special?.name,
+													  sub: weapon.sub?.name,
 													  imageID: weapon.image.deletingPathExtension().lastPathComponent)
 			}
 			
@@ -201,10 +207,8 @@ fileprivate func decodeRuns(fromSplatNetJSON json: Data) -> SalmonRunSchedule {
         
 	} catch let error as DecodingError {
 		print("Error decoding SplatNet coop JSON:", error.localizedDescription)
-		
 		return SalmonRunSchedule(shifts: [])
-	}
-	catch {
+	} catch {
 		print("Error decoding SplatNet coop JSON:", error.localizedDescription)
 		return SalmonRunSchedule(shifts: [])
 	}

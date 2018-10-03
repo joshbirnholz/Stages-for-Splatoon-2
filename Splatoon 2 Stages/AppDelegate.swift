@@ -8,7 +8,10 @@
 
 import UIKit
 import WatchConnectivity
+import UserNotifications
 import OneSignal
+import PINCache
+import Intents
 
 var battleSchedule: BattleSchedule?
 var runSchedule: SalmonRunSchedule?
@@ -18,11 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 	
 	var window: UIWindow?
 	
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
 		registerAppSettings(to: .group)
 		
 		setupAttributes()
+		
+		UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
+		
+		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+			
+		}
 		
 //		print("Will activate WCSession")
 //		if WCSession.isSupported() {
@@ -32,6 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 //		}
 		
 //		setupOneSignal(launchOptions: launchOptions)
+		
+		
 		
 		return setupTabBar()
 	}
@@ -58,7 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 	
-	func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+	func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
 		guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
 			let host = components.host else {
 				return false
@@ -76,13 +87,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 		}
 	}
 	
-	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+	func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
 		switch userActivity.activityType {
 		case "com.josh.birnholz.Splatoon-2-Stages.openMode":
 			if let modeString = userActivity.userInfo?["mode"] as? String,
 				let mode = AppSection(rawValue: modeString) {
 				return showScreen(mode)
 			}
+		case "ViewBattleScheduleIntent":
+			if #available(iOS 12.0, *) {
+				if let mode = (userActivity.interaction?.intent as? ViewBattleScheduleIntent)?.mode.nativeMode {
+					return showScreen(AppSection.battle(mode))
+				}
+			} else {
+				return false
+			}
+		case "ViewSalmonRunScheduleIntent":
+			return showScreen(.salmonRun)
 		default:
 			break
 		}
@@ -169,14 +190,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 	}
 	
 	private func setupAttributes() {
-		UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.font: UIFont(name: "JapanYoshiSplatoon", size: 22)!]
+		UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.font: UIFont(name: "JapanYoshiSplatoon", size: 22)!]
 		
-		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 9)!], for: .normal)
+		UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatoon2", size: 9)!], for: UIControl.State.normal)
 		
-		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 19)!], for: .normal)
-		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 19)!], for: .selected)
-		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 19)!], for: .highlighted)
-		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Splatoon2", size: 19)!], for: .disabled)
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatoon2", size: 19)!], for: UIControl.State.normal)
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatoon2", size: 19)!], for: UIControl.State.selected)
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatoon2", size: 19)!], for: UIControl.State.highlighted)
+		UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Splatoon2", size: 19)!], for: UIControl.State.disabled)
 		
 		//UITabBarItem.appearance().setBadgeTextAttributes([NSAttributedStringKey.font.rawValue: UIFont(name: "Splatoon2", size: 10)!], for: .normal)
 		//UITabBarItem.appearance().setBadgeTextAttributes([NSAttributedStringKey.font.rawValue: UIFont(name: "Splatoon2", size: 10)!], for: .selected)
@@ -184,7 +205,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 	
 	// MARK: OneSignal
 	
-	private func setupOneSignal(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
+	private func setupOneSignal(launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
 		let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
 		
 		// Replace 'YOUR_APP_ID' with your OneSignal App ID.
@@ -215,6 +236,63 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 			topVC?.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
 		}
 		previousController = topVC
+	}
+	
+	func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+		
+		UNUserNotificationCenter.current().getNotificationSettings { settings in
+			guard settings.authorizationStatus == .authorized else { completionHandler(.failed); return }
+			
+			let queue = OperationQueue()
+			
+			var battleScheduleSucceeded = false
+			var salmonRunScheduleSucceeded = false
+			
+			queue.addOperation {
+				getSchedule { result in
+					switch result {
+					case .failure:
+						battleScheduleSucceeded = false
+					case .success(let schedule):
+						battleScheduleSucceeded = true
+						// TODO: Schedule local notifications
+						
+						let content = UNMutableNotificationContent()
+						content.title = "Battle Schedule updated"
+						
+						let request = UNNotificationRequest(identifier: String(describing: Date()), content: content, trigger: nil)
+						UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+					}
+				}
+			}
+			
+			queue.addOperation {
+				getRuns(completion: { result in
+					switch result {
+					case .failure:
+						salmonRunScheduleSucceeded = false
+					case .success(let schedule):
+						salmonRunScheduleSucceeded = true
+						// TODO: Schedule local notifications
+						
+						let content = UNMutableNotificationContent()
+						content.title = "Salmon Run Schedule updated"
+						
+						let request = UNNotificationRequest(identifier: String(describing: Date()), content: content, trigger: nil)
+						UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+					}
+				})
+			}
+			
+			queue.waitUntilAllOperationsAreFinished()
+			
+			if battleScheduleSucceeded || salmonRunScheduleSucceeded {
+				completionHandler(.newData)
+			} else {
+				completionHandler(.noData)
+			}
+		}
+		
 	}
 	
 	

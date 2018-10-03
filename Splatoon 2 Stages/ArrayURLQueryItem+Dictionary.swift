@@ -10,7 +10,7 @@ import Foundation
 
 extension Array where Element == URLQueryItem {
 	
-	var dictionary: [String: String] {
+	var dictionary: [String: String] {		
 		var d: [String: String] = [:]
 		for item in self {
 			d[item.name] = item.value

@@ -64,46 +64,38 @@ struct Festival: Codable {
 	var specialStage: BattleSchedule.Entry.Stage
 	
 }
-
-enum FestivalResult {
-	case failure(Error)
-	case success()
-}
-
-/*
-func getRuns(session: URLSession = URLSession(configuration: .default), completion: @escaping (RunResult) -> ()) {
-	do {
-		let data = try Data(contentsOf: runsURL)
-		let runs = decodeRuns(fromSplatNetJSON: data)
-		
-		if runs.isValid {
-			print("Previous salmon run schedule was valid, using that one")
-			completion(.success(runs))
-			return
-		}
-	} catch {
-		print("Error decoding local salmon run data:", error.localizedDescription)
-	}
-	
-	print("Loading salmon run data from the Internet")
-	let salmonRunStagesURL = URL(string: "https://splatoon2.ink/data/coop-schedules.json")!
-	
-	session.dataTask(with: salmonRunStagesURL) { data, response, error in
-		guard let data = data, error == nil else {
-			completion(.failure(error!))
-			return
-		}
-		
-		let runs = decodeRuns(fromSplatNetJSON: data)
-		completion(.success(runs))
-		
-		do {
-			try data.write(to: runsURL)
-			print("Wrote salmon runs to ", runsURL)
-		} catch {
-			print("Error writing salmon run schedule:", error.localizedDescription)
-		}
-		}.resume()
-	
-}
-*/
+//
+//func getFestivals(session: URLSession = URLSession(configuration: .default), completion: @escaping (RunResult) -> ()) {
+//	do {
+//		let data = try Data(contentsOf: festivalsURL)
+//		let runs = decodeRuns(fromSplatNetJSON: data)
+//		
+//		if runs.isValid {
+//			print("Previous salmon run schedule was valid, using that one")
+//			completion(.success(runs))
+//			return
+//		}
+//	} catch {
+//		print("Error decoding local salmon run data:", error.localizedDescription)
+//	}
+//	
+//	print("Loading salmon run data from the Internet")
+//	
+//	session.dataTask(with: salmonRunStagesURL) { data, response, error in
+//		guard let data = data, error == nil else {
+//			completion(.failure(error!))
+//			return
+//		}
+//		
+//		let runs = decodeRuns(fromSplatNetJSON: data)
+//		completion(.success(runs))
+//		
+//		do {
+//			try data.write(to: runsURL)
+//			print("Wrote salmon runs to ", runsURL)
+//		} catch {
+//			print("Error writing salmon run schedule:", error.localizedDescription)
+//		}
+//		}.resume()
+//	
+//}

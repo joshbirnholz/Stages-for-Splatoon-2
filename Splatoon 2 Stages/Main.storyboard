@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X35-yG-Tev">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="X35-yG-Tev">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -388,25 +384,25 @@
                                                                     <rect key="frame" x="128" y="0.0" width="215" height="67.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Spawning Grounds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="lrr-ph-3Dk">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="215" height="20.5"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="215" height="20"/>
                                                                             <fontDescription key="fontDescription" name="Splatoon2" family="Splatoon2" pointSize="16"/>
                                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" distribution="fillEqually" spacing="-5" translatesAutoresizingMaskIntoConstraints="NO" id="bfC-2B-8Kv">
-                                                                            <rect key="frame" x="0.0" y="24.5" width="215" height="43"/>
+                                                                            <rect key="frame" x="0.0" y="24" width="215" height="43.5"/>
                                                                             <subviews>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TbS-oR-CqS">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="57.5" height="43"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="57.5" height="43.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3D1-pH-ugS">
-                                                                                    <rect key="frame" x="52.5" y="0.0" width="57.5" height="43"/>
+                                                                                    <rect key="frame" x="52.5" y="0.0" width="57.5" height="43.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cs5-oG-EHL">
-                                                                                    <rect key="frame" x="105" y="0.0" width="57.5" height="43"/>
+                                                                                    <rect key="frame" x="105" y="0.0" width="57.5" height="43.5"/>
                                                                                 </imageView>
                                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NDm-qC-jEe">
-                                                                                    <rect key="frame" x="157.5" y="0.0" width="57.5" height="43"/>
+                                                                                    <rect key="frame" x="157.5" y="0.0" width="57.5" height="43.5"/>
                                                                                 </imageView>
                                                                             </subviews>
                                                                         </stackView>
@@ -499,30 +495,6 @@
                 </label>
             </objects>
             <point key="canvasLocation" x="1245.5999999999999" y="106.59670164917542"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="XAz-VE-8Ea">
-            <objects>
-                <viewController storyboardIdentifier="WeaponInfo" id="AD6-P4-nFn" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0ZP-cE-Y6u">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Stuff!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6sz-By-EoY">
-                                <rect key="frame" x="166" y="52" width="43" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="kE0-Nt-xdj"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dC9-NS-qCT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1985" y="107"/>
         </scene>
     </scenes>
     <resources>

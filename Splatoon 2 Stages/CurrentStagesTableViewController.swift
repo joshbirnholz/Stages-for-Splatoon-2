@@ -8,6 +8,8 @@
 
 import UIKit
 import WatchConnectivity
+import PINRemoteImage
+import Intents
 
 class CurrentStagesTableViewController: UITableViewController {
 	
@@ -21,7 +23,7 @@ class CurrentStagesTableViewController: UITableViewController {
 		tableView.refreshControl?.tintColor = UIColor(white: 1, alpha: 0.4)
 		
 		let refreshControl = UIRefreshControl()
-		refreshControl.addTarget(self, action: #selector(loadSchedule), for: .valueChanged)
+		refreshControl.addTarget(self, action: #selector(loadSchedule), for: UIControl.Event.valueChanged)
 		tableView.refreshControl = refreshControl
 		
 		if battleSchedule == nil {
@@ -37,13 +39,34 @@ class CurrentStagesTableViewController: UITableViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		super.viewDidAppear(animated)
 		
-//		if schedule == nil || (!(schedule!.regularEntries.first?.isCurrent ?? true)) {
-//			loadSchedule()
-//		}
-		
-		
 		tabBarController?.tabBar.tintColor = #colorLiteral(red: 0.942276895, green: 0.1737183928, blue: 0.484048605, alpha: 1)
+		
+		if #available(iOS 12.0, *) {
+			let interaction = INInteraction(intent: intent, response: nil)
+			
+			interaction.donate { error in
+				if let error = error {
+					print("Error donating interaction:", error.localizedDescription)
+				}
+			}
+		}
+		
 	}
+	
+	@available(iOS 12.0, *)
+	var intent: ViewBattleScheduleIntent {
+		let intent = ViewBattleScheduleIntent()
+		intent.mode = .unknown
+		
+		intent.suggestedInvocationPhrase = "Current stages"
+		if let data = #imageLiteral(resourceName: "Overview Shortcut").pngData() {
+			intent.setImage(INImage(imageData: data), forParameterNamed: \.mode)
+//			intent.setImage(INImage(imageData: data), forParameterNamed: "mode")
+		}
+		
+		return intent
+	}
+
 	
 	@objc func loadSchedule() {
 		getSchedule { (result) in
@@ -140,33 +163,8 @@ class CurrentStagesTableViewController: UITableViewController {
 		cell.stageANameLabel.text = entry.stageA.name
 		cell.stageBNameLabel.text = entry.stageB.name
 		
-		loadImage(withSplatNetID: entry.stageA.imageID) { image in
-			DispatchQueue.main.async { [weak self] in
-				(self?.tableView.cellForRow(at: indexPath) as? StagesCell)?.stageAImageView.image = image
-			}
-		}
-		
-		loadImage(withSplatNetID: entry.stageB.imageID) { image in
-			DispatchQueue.main.async { [weak self] in
-				(self?.tableView.cellForRow(at: indexPath) as? StagesCell)?.stageBImageView.image = image
-			}
-		}
-		
-		return cell
-	}
-	
-	func salmonRunCell(forRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let run = runSchedule?.shifts.first else {
-			return UITableViewCell()
-		}
-		
-		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonCell", for: indexPath) as! SalmonRunCell
-		cell.setNeedsLayout()
-		
-		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
-		cell.timeLabel.text = timeString
-		
-		cell.badgeLabel.text = run.currentStatus == .open ? "Open!" : "Next"
+		cell.stageAImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageA.imageID))
+		cell.stageBImageView.pin_setImage(from: remoteImageURL(forImageWithID: entry.stageB.imageID))
 		
 		return cell
 	}
@@ -174,7 +172,7 @@ class CurrentStagesTableViewController: UITableViewController {
 	@IBAction func attributionButtonPressed(_ sender: UIButton) {
 		let url = URL(string: "https://splatoon2.ink")!
 		
-		UIApplication.shared.open(url, options: [:], completionHandler: nil)
+		UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
 	}
 	
 //	override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -185,4 +183,9 @@ class CurrentStagesTableViewController: UITableViewController {
 //		return "Splatoon 2 is © 2017 Nintendo"
 //	}
 	
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }
