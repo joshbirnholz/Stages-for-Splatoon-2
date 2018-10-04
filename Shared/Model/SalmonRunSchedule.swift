@@ -18,6 +18,8 @@ struct SalmonRunSchedule: Codable {
             var special: String?
             var sub: String?
 			var imageID: String
+			
+			var isGrizzcoRandom: Bool
         }
 		
 		struct Stage: Codable {
@@ -178,15 +180,29 @@ fileprivate func decodeRuns(fromSplatNetJSON json: Data) -> SalmonRunSchedule {
         
         for detailedRun in splatNetSchedule.details {
 			
-			let weapons: [SalmonRunSchedule.Shift.Weapon?] = detailedRun.weapons.map { weaponItem in
-				guard let weapon = weaponItem?.weapon else {
+			let weapons: [SalmonRunSchedule.Shift.Weapon?] = detailedRun.weapons.compactMap { weaponItem in
+				
+				guard let weaponItem = weaponItem else {
+					return nil
+				}
+				
+				if weaponItem.id == "-2" {
+					return SalmonRunSchedule.Shift.Weapon(name: "Random",
+														  special: nil,
+														  sub: nil,
+														  imageID: "7076c8181ab5c49d2ac91e43a2d945a46a99c17d",
+														  isGrizzcoRandom: true)
+				}
+				
+				guard let weapon = weaponItem.weapon else {
 					return nil
 				}
 				
 				return SalmonRunSchedule.Shift.Weapon(name: weapon.name,
 													  special: weapon.special?.name,
 													  sub: weapon.sub?.name,
-													  imageID: weapon.image.deletingPathExtension().lastPathComponent)
+													  imageID: weapon.image.deletingPathExtension().lastPathComponent,
+													  isGrizzcoRandom: false)
 			}
 			
 			let stage = SalmonRunSchedule.Shift.Stage(name: detailedRun.stage.name, imageID: detailedRun.stage.image.deletingPathExtension().lastPathComponent)

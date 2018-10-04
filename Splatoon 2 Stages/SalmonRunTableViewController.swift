@@ -111,26 +111,31 @@ class SalmonRunTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "SalmonRunCell", for: indexPath) as! SalmonRunCell
 		
-		guard let run = runSchedule?.shifts[indexPath.row] else {
+		guard let shift = runSchedule?.shifts[indexPath.row] else {
 			return cell
 		}
 		
-		let timeString = dateFormatter.string(from: run.startTime) + " - "  + dateFormatter.string(from: run.endTime)
+		let timeString = dateFormatter.string(from: shift.startTime) + " - "  + dateFormatter.string(from: shift.endTime)
 		cell.timeLabel.text = timeString
 		
-		if let stage = run.stage {
+		if let stage = shift.stage {
 			cell.extendedInfoStackView?.isHidden = false
 			cell.stageNameLabel?.text = stage.name
 			
 			cell.stageImageView?.pin_setImage(from: remoteImageURL(forImageWithID: stage.imageID))
 			
-			for (index, weapon) in run.weapons.prefix(4).enumerated() {
+			for (index, weapon) in shift.weapons.prefix(4).enumerated() {
 				guard let weapon = weapon else {
 					cell.weaponImageViews[index].image = #imageLiteral(resourceName: "random weapon")
 					continue
 				}
 				
-				cell.weaponImageViews[index].pin_setImage(from: remoteImageURL(forImageWithID: weapon.imageID))
+				if weapon.isGrizzcoRandom {
+					cell.weaponImageViews[index].image = #imageLiteral(resourceName: "grizzco weapon")
+				} else {
+					cell.weaponImageViews[index].pin_setImage(from: remoteImageURL(forImageWithID: weapon.imageID))
+				}
+				
 			}
 		} else {
 			cell.extendedInfoStackView?.isHidden = true
@@ -151,7 +156,7 @@ class SalmonRunTableViewController: UITableViewController {
 			return
 		}
 		
-		let message = weapons.map { $0?.name ?? "?" }.joined(separator: "\n")
+		let message = weapons.map { $0?.name ?? "Random" }.joined(separator: "\n")
 		
 		let popup = PopupDialog(title: "Supplied Weapons", message: message)
 		(popup.presentationController as? PresentationController)?.overlay.blurEnabled = false
