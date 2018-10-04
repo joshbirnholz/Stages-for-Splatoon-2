@@ -164,5 +164,4 @@ class SalmonRunTableViewController: UITableViewController {
 		present(popup, animated: true, completion: nil)
 		
 	}
-	
 }
