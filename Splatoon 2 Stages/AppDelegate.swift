@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 		
 		setupAttributes()
 		
-		UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
-		
-		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
+//		UIApplication.shared.setMinimumBackgroundFetchInterval(7200)
+//		
+//		UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in
 			
-		}
+//		}
 		
 //		print("Will activate WCSession")
 //		if WCSession.isSupported() {
